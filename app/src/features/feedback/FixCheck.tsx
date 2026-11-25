@@ -41,8 +41,8 @@ export function FixCheck({ retry, feedback, retryOf, mock }: {
 
   return (
     <section className="rounded-lg bg-surface p-6 shadow-1 animate-rise" aria-labelledby="fixcheck-title">
-      <div className="flex items-baseline justify-between gap-4">
-        <h2 id="fixcheck-title" className="text-title-3 text-primary">Fix check</h2>
+      <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+        <h2 id="fixcheck-title" className="shrink-0 text-title-3 text-primary">Fix check</h2>
         <span className="text-footnote text-tertiary">Same question, same bar. The grader didn't see your first try.</span>
       </div>
       <p className="mt-1 text-body text-secondary">{summary}</p>

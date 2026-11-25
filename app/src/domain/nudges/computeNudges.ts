@@ -198,6 +198,8 @@ export function selectSlots(nudges: Nudge[], settings: Pick<Settings, 'nudges'>)
     .filter((n) => n.status === 'active' && !mutedTypes.has(n.type) && (!settings.nudges.muted || n.type === 'resume_mock'))
     .sort((a, b) => a.priority - b.priority || a.createdAt - b.createdAt)
   const nextUp = active[0] ? { ...active[0], placement: 'next_up' as const } : null
-  const banner = active[1] ? { ...active[1], placement: 'banner' as const } : null
+  // The banner adds a second, different reason to act; never two of the same kind.
+  const second = active.slice(1).find((n) => n.type !== active[0].type)
+  const banner = second ? { ...second, placement: 'banner' as const } : null
   return { nextUp, banner }
 }

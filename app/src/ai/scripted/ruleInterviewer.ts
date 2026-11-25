@@ -52,6 +52,11 @@ function focusNeedsProbe(session: MockSession): DimensionId | undefined {
   return probed ? undefined : focus
 }
 
+/** Demo mode: follow the question's authored seed order (after the retry focus probe) so prepared
+ *  ghost-fill answers always match the follow-up Meera asks. Set from settings.demo.enabled. */
+let authoringOrder = false
+export function setScriptedAuthoringOrder(on: boolean) { authoringOrder = on }
+
 export function chooseSeed(session: MockSession, question: Question, lastWords: number): FollowUpSeed {
   const used = usedSeedIds(session)
   const order = weakestDimensions(session, question)
@@ -65,6 +70,7 @@ export function chooseSeed(session: MockSession, question: Question, lastWords: 
       // focus dimension first; then triggered seeds (they react to a gap in this answer); then weakest dimension; then authoring order
       const fa = a.s.probes === focus ? 0 : 1, fb = b.s.probes === focus ? 0 : 1
       if (fa !== fb) return fa - fb
+      if (authoringOrder) return a.i - b.i
       if (a.m.triggered !== b.m.triggered) return a.m.triggered ? -1 : 1
       return rank(a.s.probes) - rank(b.s.probes) || a.i - b.i
     })
@@ -105,7 +111,10 @@ export function claimFragment(answer: string, probes?: DimensionId): string | nu
   // drop a leading "Label:" so the quote reads as speech
   const colon = frag.match(/^[A-Za-z][\w'\- ]{0,24}:\s+(.*)$/)
   if (colon && wordCount(colon[1]) >= 3) frag = colon[1]
-  frag = stripEndPunct(frag.replace(/["“”]/g, ''))
+  frag = stripEndPunct(frag.replace(/["“”]/g, '')).trim().replace(/[\s.,;:!?…]+$/, '')
+  // never end a quote on a dangling connector ("…is flat or")
+  const WEAK = /\s+(or|and|but|the|a|an|of|to|with|is|are|for|if|per|on|in|at|by|from|that|so|than|as)$/i
+  for (let i = 0; i < 4 && WEAK.test(frag); i++) frag = frag.replace(WEAK, '')
   if (wordCount(frag) < 3) return null
   if (!/^(I\b|I'|[A-Z]{2,})/.test(frag)) frag = frag[0].toLowerCase() + frag.slice(1)
   return frag

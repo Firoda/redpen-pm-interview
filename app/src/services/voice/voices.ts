@@ -25,11 +25,15 @@ export function rankVoice(v: VoiceLike, lang?: string): number {
   else if (vl === 'en-in') score = 60
   else if (v.localService) score = 40
   else score = 20
-  // Novelty and robotic voices on macOS sound wrong for an interviewer.
-  if (/\b(albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|fred|junior|ralph|kathy)\b/.test(name)) score = 1
+  if (isNoveltyVoice(v.name)) score = 1
   if (lang && vl === normLang(lang)) score += 3
   if (v.localService) score += 1
   return score
+}
+
+/** Novelty and robotic voices on macOS (and the Eloquence set) sound wrong for an interviewer. */
+export function isNoveltyVoice(name: string): boolean {
+  return /\b(albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|fred|junior|ralph|kathy|grandma|grandpa|rocko|sandy|shelley|eddy|flo|reed)\b/i.test(name)
 }
 
 export function rankVoices<T extends VoiceLike>(voices: T[], lang?: string): T[] {

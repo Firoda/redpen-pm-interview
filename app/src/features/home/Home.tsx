@@ -183,7 +183,7 @@ function WeeklyCard({ weekly, firstRun }: { weekly: HomeView['weekly']; firstRun
     ? 'Weekly goal met'
     : firstRun && reviewed === 0
       ? 'Your first reviewed mock counts here'
-      : `${plural(goal - reviewed, 'more')} to reach your goal`
+      : `${plural(goal - reviewed, 'more mock', 'more mocks')} to reach your goal`
   return (
     <Card className="p-5">
       <div className="flex items-center gap-4">
@@ -221,19 +221,19 @@ function TopicList({ v, now }: { v: HomeView; now: number }) {
           {i > 0 ? <Divider className="mx-3" /> : null}
           <button
             onClick={() => navigate(`/progress?topic=${t.topic}`)}
-            className="group grid w-full grid-cols-[minmax(0,1fr)_110px_84px_76px_116px_16px] items-center gap-3 rounded-md px-3 py-3 text-left transition-colors duration-100 hover:bg-hover"
+            className="group grid w-full grid-cols-[minmax(0,1fr)_auto] items-center gap-3 md:grid-cols-[minmax(0,1fr)_110px_84px_76px_116px_16px] rounded-md px-3 py-3 text-left transition-colors duration-100 hover:bg-hover"
           >
             <span className="flex min-w-0 items-center gap-2">
               <span className="truncate text-headline text-primary">{TOPIC_LABEL[t.topic]}</span>
               {t.isWeakest ? <Tag tone="nudge">Weakest</Tag> : null}
             </span>
-            <span className="text-footnote text-secondary">{t.countedMocks ? STATUS_WORD[t.status] : 'No mocks yet'}</span>
-            <Sparkline values={t.spark} />
+            <span className="hidden text-footnote text-secondary md:block">{t.countedMocks ? STATUS_WORD[t.status] : 'No mocks yet'}</span>
+            <span className="hidden md:block"><Sparkline values={t.spark} /></span>
             <span className="flex justify-end">
               {t.score != null ? <ScorePill value={t.score} /> : guesses[t.topic] ? <span className="text-caption text-tertiary">Your guess {guesses[t.topic]}</span> : <span className="text-footnote text-tertiary">—</span>}
             </span>
-            <span className="text-right text-footnote text-secondary">{t.lastPractisedAt ? relDay(t.lastPractisedAt, now) : ''}</span>
-            <ChevronRight size={16} className="text-tertiary opacity-0 transition-opacity duration-100 group-hover:opacity-100" />
+            <span className="hidden text-right text-footnote text-secondary md:block">{t.lastPractisedAt ? relDay(t.lastPractisedAt, now) : ''}</span>
+            <ChevronRight size={16} className="hidden text-tertiary opacity-0 md:block transition-opacity duration-100 group-hover:opacity-100" />
           </button>
         </div>
       ))}
@@ -248,7 +248,7 @@ function mockStatus(mock: MockSession, fb?: Feedback): { label: string; tone: 'n
   if (mock.status === 'error') return { label: "Couldn't score", tone: 'neutral' }
   if (!fb) return { label: 'Scoring…', tone: 'neutral' }
   if (!fb.counted) return { label: 'Practice only', tone: 'neutral' }
-  if (!fb.fixesViewedAt) return { label: 'Feedback unread', tone: 'nudge' }
+  if (!fb.fixesViewedAt) return { label: fb.openedAt ? 'Fixes not read' : 'Feedback unread', tone: 'nudge' }
   return { label: 'Reviewed', tone: 'neutral' }
 }
 

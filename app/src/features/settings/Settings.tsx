@@ -8,7 +8,7 @@ import { db, getSettings, updateSettings } from '@/services/db/db'
 import { Analytics } from '@/services/analytics'
 import { Clock } from '@/services/clock'
 import { KeyStore } from '@/services/keyStore'
-import { rankVoices } from '@/services/voice/voices'
+import { isNoveltyVoice, rankVoices } from '@/services/voice/voices'
 import { exportData, importData, resetAll, saveProfile, testAiConnection } from '@/engine/api'
 import type { NudgeType, Profile, Score, Settings as SettingsT, TopicId } from '@/domain/types'
 import { TOPICS, TOPIC_LABEL } from '@/domain/types'
@@ -214,11 +214,11 @@ function VoiceSection({ s }: { s: SettingsT }) {
 
   useEffect(() => {
     if (!hasTts) return
-    const load = () => setVoices(rankVoices(window.speechSynthesis.getVoices(), s.voice.lang))
+    const load = () => setVoices(rankVoices(window.speechSynthesis.getVoices(), s.voice.lang).filter((v) => !isNoveltyVoice(v.name) || v.voiceURI === s.voice.voiceURI))
     load()
     window.speechSynthesis.addEventListener('voiceschanged', load)
     return () => window.speechSynthesis.removeEventListener('voiceschanged', load)
-  }, [hasTts, s.voice.lang])
+  }, [hasTts, s.voice.lang, s.voice.voiceURI])
 
   const sample = () => {
     if (!hasTts) return

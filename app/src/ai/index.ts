@@ -1,3 +1,4 @@
+import { setScriptedAuthoringOrder } from './scripted/ruleInterviewer'
 /* Picks the InterviewAI for the current settings. Scripted always works; live is loaded on demand and wrapped
    with per-call fallback to scripted. */
 import type { InterviewAI } from '@/ai/types'
@@ -22,6 +23,7 @@ export function configureScriptedAI(opts: ConstructorParameters<typeof ScriptedI
 let cached: { sig: string; ai: InterviewAI } | null = null
 
 export async function getInterviewAI(settings: Settings): Promise<InterviewAI> {
+  setScriptedAuthoringOrder(!!settings.demo.enabled)
   if (settings.ai.mode !== 'live') return getScriptedAI()
   const sig = JSON.stringify([settings.ai.useProxy, settings.ai.graderQuality, settings.demo.enabled])
   if (cached?.sig === sig) return cached.ai

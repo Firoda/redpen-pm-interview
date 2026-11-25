@@ -4,7 +4,7 @@
  * ANTHROPIC_API_KEY with your key (sk-ant-…), tick Production (and Preview if you want it there), save, then
  * redeploy so the function picks it up (or run `vercel env add ANTHROPIC_API_KEY`). The key lives only on the
  * server; the browser calls POST /api/claude with a Messages API body and gets the Messages API response back.
- * In the app, turn on Settings → AI → "Use the Redpen server" (settings.ai.useProxy). This function exists only on
+ * In the app, open Settings → Interviewer and grader → Claude and turn on "Use server key" (settings.ai.useProxy). This function exists only on
  * the Vercel deployment; `vite` dev does not serve it (use `vercel dev` to try it locally).
  *
  * Guard rails: POST only, same-origin requests only, the three Redpen model ids only, max_tokens capped at 8000,

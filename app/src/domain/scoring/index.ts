@@ -109,7 +109,7 @@ export function weakestTopic(stats: TopicStat[], previous?: TopicId | null): Top
   return candidate.topic
 }
 
-export interface RecurringMistake { tag: IssueTag; label: string; count: number; of: number; latestQuote: string; dimension: DimensionId; lastMockId: string }
+export interface RecurringMistake { tag: IssueTag; label: string; count: number; of: number; latestQuote: string; latestIssue?: string; dimension: DimensionId; lastMockId: string }
 
 /** Rank-1 fix tags over counted reports in the last 30 days; count ≥ 2, max 5 (§7.6). */
 export function recurringMistakes(sessions: MockSession[], feedback: Feedback[], now: number): RecurringMistake[] {
@@ -124,7 +124,7 @@ export function recurringMistakes(sessions: MockSession[], feedback: Feedback[],
     if (!top) continue
     const cur = counts.get(top.issueTag)
     if (cur) cur.count++
-    else counts.set(top.issueTag, { tag: top.issueTag, label: tagLabel(top.issueTag), count: 1, of: N, latestQuote: top.quote, dimension: top.dimension, lastMockId: f.mockId })
+    else counts.set(top.issueTag, { tag: top.issueTag, label: tagLabel(top.issueTag), count: 1, of: N, latestQuote: top.quote, latestIssue: top.issue, dimension: top.dimension, lastMockId: f.mockId })
   }
   return [...counts.values()].filter((r) => r.count >= 2).sort((a, b) => b.count - a.count).slice(0, 5)
 }

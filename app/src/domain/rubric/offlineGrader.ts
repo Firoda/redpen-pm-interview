@@ -36,7 +36,7 @@ export function scoreDimensions(f: Features): Record<DimensionId, DimScore> {
     if (signposted) pts++; else notes.push('no_signposts')
     const framing = f.clarifications > 0 || f.assumptions || f.goalEarly || (f.topic === 'rca' && f.dataCheck) || (f.topic === 'guesstimate' && APPROACH.test(f.mainText))
     if (framing) pts++; else notes.push('no_framing')
-    const closing = (f.conclusionInLast || f.conclusion || f.recommendation) && (f.structureCoverage >= 0.5 || (f.structureCoverage === 0 && f.sentenceCount >= 5))
+    const closing = f.conclusionInLast || ((f.conclusion || f.recommendation) && (f.structureCoverage >= 0.5 || (f.structureCoverage === 0 && f.sentenceCount >= 5)))
     if (closing) pts++; else notes.push('no_closing')
     let score = Math.min(4, 1 + pts)
     if (score === 4 && f.variantAsked && f.variantAddressed && f.structureCoverage >= 0.8 && (f.clarifications > 0 || f.assumptions)) score = 5
@@ -137,7 +137,9 @@ export function pickTag(d: DimensionId, f: Features, notes: string[]): IssueTag 
       if (f.topic === 'rca' && !f.dataCheck) return 'no_data_check'
       if (!f.goalStated && f.topic !== 'guesstimate' && f.topic !== 'tech') return 'no_goal'
       if (f.clarifications === 0 && !f.assumptions && (f.topic === 'product_design' || f.topic === 'strategy' || f.topic === 'guesstimate' || f.topic === 'rca')) return 'no_clarify'
-      return 'no_summary'
+      // Only call out a missing summary when there really is none; otherwise the gap is framing.
+      if (!f.conclusionInLast && !f.recommendation) return 'no_summary'
+      return f.clarifications === 0 && !f.assumptions ? 'no_clarify' : 'no_goal'
     case 'userFocus':
       if (f.solutionBeforeUser) return 'solution_first'
       if (f.userTerms.length >= 2 && !f.segmentChoice) return 'no_segment_choice'
@@ -183,8 +185,6 @@ function lastOfLastTurn(ss: Sent[]): Sent[] {
 }
 
 /** Candidate sentences for a fix quote, most relevant first, plus the clause focus regex. */
-/** Tags whose quote rule names one specific sentence: keep it even if another fix already quotes that turn. */
-const STRICT_QUOTE_TAGS: IssueTag[] = ['no_goal', 'no_clarify', 'no_data_check', 'no_summary', 'ignored_variant', 'solution_first', 'dodged_followup']
 
 export function quoteCandidates(tag: IssueTag, session: Pick<MockSession, 'turns' | 'variant'>, f: Features): { list: Sent[]; focus?: RegExp } {
   const ss = goodSentences(session)
@@ -220,7 +220,12 @@ export function quoteCandidates(tag: IssueTag, session: Pick<MockSession, 'turns
     case 'no_metric':
       return { list: uniq(by(/\b(success|measure|know|working|worked|go(es)? up)\b/i), main.slice(-1), ss), focus: /\b(success|measure|know|working|worked|go(es)? up)\b/i }
     case 'vague_metric':
-      return { list: uniq(ss.filter((s) => /\b(north[- ]star|main metric|primary metric|key metric)\b/i.test(s.text)), ss.filter((s) => hasAny(s.text, LEX.namedMetric)), ss), focus: /\b(north[- ]star|metric|share of|rate|per)\b/i }
+    {
+      // Quote the loosest metric talk first: metric words with no named measure or window, then named metrics with no window.
+      const loose = ss.filter((s) => /\b(metric|measure|track|go(es)? up|engagement|usage|adoption|success)\b/i.test(s.text) && !hasAny(s.text, LEX.namedMetric) && !hasAny(s.text, LEX.timeWindow))
+      const noWindow = ss.filter((s) => hasAny(s.text, LEX.namedMetric) && !hasAny(s.text, LEX.timeWindow))
+      return { list: uniq(loose, noWindow, ss.filter((s) => /\b(north[- ]star|main metric|primary metric|key metric)\b/i.test(s.text)), ss.filter((s) => hasAny(s.text, LEX.namedMetric)), ss), focus: /\b(north[- ]star|metric|share of|rate|per|measure|track|go(es)? up|engagement|usage)\b/i }
+    }
     case 'no_guardrail':
       return { list: uniq(by(/\b(success|working|worked|go(es)? up|know)\b/i), main.filter((s) => hasAny(s.text, LEX.namedMetric)), main.slice(-1), ss), focus: /\b(success|working|worked|go(es)? up|know|metric)\b/i }
     case 'unstated_assumption': case 'math_error':
@@ -239,15 +244,17 @@ export function quoteCandidates(tag: IssueTag, session: Pick<MockSession, 'turns
   }
 }
 
-export function pickQuote(tag: IssueTag, session: Pick<MockSession, 'turns' | 'variant'>, f: Features, usedTurnIds: Set<string> = new Set()): { quote: string; turnId: string } | null {
+export function pickQuote(tag: IssueTag, session: Pick<MockSession, 'turns' | 'variant'>, f: Features, usedTurnIds: Set<string> = new Set()): { quote: string; turnId: string; sentence?: string } | null {
   const { list, focus } = quoteCandidates(tag, session, f)
   const pool = list.length ? list : answerSentences(session)
   if (!pool.length) {
     const t = session.turns.find((x) => x.role === 'candidate' && x.text.trim())
     return t ? { quote: stripEndPunct(trimWords(t.text, 25)), turnId: t.id } : null
   }
-  const pick = STRICT_QUOTE_TAGS.includes(tag) ? pool[0] : pool.find((s) => !usedTurnIds.has(s.turnId)) ?? pool[0]
-  return { quote: fitQuote(pick.text, focus), turnId: pick.turnId }
+  // Candidates are ordered by relevance; never quote the same sentence twice across fixes.
+  const fresh = (s: Sent) => !usedTurnIds.has('q:' + s.text)
+  const pick = pool.find(fresh) ?? pool[0]
+  return { quote: fitQuote(pick.text, focus), turnId: pick.turnId, sentence: pick.text }
 }
 
 /* ---------------- reasons, strength, verdict ---------------- */
@@ -265,7 +272,9 @@ function frag(s: string | undefined, max = 8): string {
 function sentenceMatching(f: Features, session: Pick<MockSession, 'turns'>, re: RegExp | RegExp[]): Sent | undefined {
   const ss = goodSentences(session)
   const res = Array.isArray(re) ? re : [re]
-  return ss.find((s) => res.some((r) => r.test(s.text)))
+  // Regexes are in priority order: the first pattern that matches any sentence wins.
+  for (const r of res) { const hit = ss.find((s) => r.test(s.text)); if (hit) return hit }
+  return undefined
 }
 
 export function reasonFor(d: DimensionId, score: number, notes: string[], f: Features, session: Pick<MockSession, 'turns'>): string {
@@ -378,12 +387,12 @@ export function verdictFor(overall: number, tags: IssueTag[]): string {
 
 /* ---------------- fixes ---------------- */
 
-export function offlineFix(d: DimensionId, session: Pick<MockSession, 'turns' | 'variant' | 'id'>, f: Features, notes: string[], usedTurnIds: Set<string>): RawGrade['fixes'][number] | null {
+export function offlineFix(d: DimensionId, session: Pick<MockSession, 'turns' | 'variant' | 'id'>, f: Features, notes: string[], usedTurnIds: Set<string>): (RawGrade['fixes'][number] & { sentence?: string }) | null {
   const tag = pickTag(d, f, notes)
   const q = pickQuote(tag, session, f, usedTurnIds)
   if (!q) return null
   const tpl = pickTemplate(tag, (session.id ?? '') + ':' + tag)
-  return { dimension: d, issueTag: tag, quote: q.quote, turnId: q.turnId, issue: tpl.issue, instruction: tpl.instruction, pattern: tpl.pattern }
+  return { dimension: d, issueTag: tag, quote: q.quote, turnId: q.turnId, issue: tpl.issue, instruction: tpl.instruction, pattern: tpl.pattern, sentence: q.sentence }
 }
 
 /* ---------------- entry point ---------------- */
@@ -410,7 +419,7 @@ export function offlineGradeDetailed(input: Pick<GradeInput, 'session' | 'questi
   const fixes: RawGrade['fixes'] = []
   for (const d of order) {
     const fx = offlineFix(d, session, f, notes[d], used)
-    if (fx) { fixes.push(fx); used.add(fx.turnId) }
+    if (fx) { const { sentence, ...rest } = fx; fixes.push(rest); used.add(rest.turnId); if (sentence) used.add('q:' + sentence) }
   }
   const overall = weightedOverall(session.topic, capped)
   const verdict = verdictFor(overall, fixes.map((x) => x.issueTag as IssueTag))

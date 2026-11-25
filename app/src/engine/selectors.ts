@@ -96,7 +96,7 @@ export async function getHomeView(): Promise<HomeView> {
 export interface ProgressView {
   topics: (TopicStat & { label: string; isWeakest: boolean; selfRating?: number })[]
   weakest: TopicId | null
-  recurring: { tag: IssueTag; label: string; count: number; of: number; latestQuote: string; dimension: DimensionId; lastMockId?: string }[]
+  recurring: { tag: IssueTag; label: string; count: number; of: number; latestQuote: string; latestIssue?: string; dimension: DimensionId; lastMockId?: string }[]
   heatmap: Record<TopicId, Partial<Record<DimensionId, number>>>
   totals: { counted: number; reviewed: number; retries: number; avgUplift: number | null }
   selfVsScored: { topic: TopicId; self: number; scored: number; gap: number }[]

@@ -321,7 +321,7 @@ export function MockRoom({ session, settings }: { session: MockSession; settings
         </div>
       ) : null}
       {(session.focusText && started) || resumeNote || notice ? (
-        <div className="pointer-events-none absolute inset-x-0 top-3 z-[5] flex flex-col items-center gap-2 px-6">
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-[5] flex flex-col items-center gap-2 bg-surface px-6 pb-3 pt-3 shadow-[0_1px_0_var(--border)]">
           {session.focusText && started ? <FocusChip text={session.focusText} className="pointer-events-auto shadow-[0_0_0_4px_var(--bg-surface)]" /> : null}
           {resumeNote ? <div className="pointer-events-auto rounded-full bg-subtle px-3 py-1 text-label text-secondary shadow-[0_0_0_4px_var(--bg-surface)] animate-fade" role="status">{resumeNote}</div> : null}
           {notice ? <div className="pointer-events-auto rounded-full bg-nudge-bg px-3 py-1 text-label text-nudge-text shadow-[inset_0_0_0_1px_var(--nudge-border)] animate-fade" role="status">{notice}</div> : null}

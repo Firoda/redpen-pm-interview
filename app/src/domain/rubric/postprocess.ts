@@ -65,6 +65,7 @@ export const finalizeGrade: FinalizeGrade = (raw: RawGrade, input: GradeInput, m
     for (const rf of rawFixes.filter((x) => x.dimension === d)) {
       const chk = verifyQuote(session, rf.quote ?? '', rf.turnId)
       if (chk.status === 'unverified' || wordCount(chk.quote) < 3) { quotesDropped++; continue }
+      if (fixes.some((x) => x.quote === chk.quote)) continue
       if (chk.status === 'repaired') quoteRepairs++
       const issue = lintFixText(rf.issue ?? '')
       const instruction = lintFixText(rf.instruction ?? '')

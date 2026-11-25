@@ -229,7 +229,9 @@ export function ProgressContent({ data: { v, titles } }: { data: Data }) {
                       <span className="font-normal text-secondary"> — {r.count} of your last {r.of} mocks</span>
                     </div>
                     {r.latestQuote ? <blockquote className="quote mt-1.5 text-secondary">“{r.latestQuote}”</blockquote> : null}
-                    <div className="mt-1.5 text-caption text-tertiary">{DIMENSION_LABEL[r.dimension]}</div>
+                    <div className="mt-1.5 text-caption text-tertiary">
+                      {DIMENSION_LABEL[r.dimension]}{r.latestIssue ? <span> · {r.latestIssue}</span> : null}
+                    </div>
                   </div>
                   <Button size="sm" variant="ghost" onClick={() => practise(selected)}>Practise this</Button>
                 </div>

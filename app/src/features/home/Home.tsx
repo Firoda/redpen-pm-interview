@@ -3,9 +3,9 @@
  * Spec: MASTER_PLAN §3.2 S2, §4.4; doc 01 §6.2. */
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { BellRing, ChevronRight, PlayCircle } from 'lucide-react'
+import { BellRing, ChevronRight, PlayCircle, Sparkles } from 'lucide-react'
 import { getHomeView, type HomeView } from '@/engine/selectors'
-import { dismissNudge } from '@/engine/api'
+import { dismissNudge, startOwnPractice } from '@/engine/api'
 import type { MockSession, Nudge, Feedback } from '@/domain/types'
 import { TOPIC_LABEL, TOPIC_SHORT } from '@/domain/types'
 import { Banner, Button, Card, Divider, ScorePill, SectionHeader, Skeleton, Tag, cx, toast } from '@/ui'
@@ -41,6 +41,7 @@ export function HomeContent({ v, now }: { v: HomeView; now: number }) {
 
   return (
     <div className="mx-auto w-full max-w-[1040px] px-8 pb-24 pt-12 animate-rise">
+      {v.profile?.isDemo ? <SampleBanner /> : null}
       <header className="mb-8 flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
         <div>
           <h1 className="text-title-1 text-primary">{greeting(now)}{name ? `, ${name}` : ''}</h1>
@@ -238,6 +239,28 @@ function TopicList({ v, now }: { v: HomeView; now: number }) {
         </div>
       ))}
     </div>
+  )
+}
+
+/* ---------------- Sample data ---------------- */
+
+function SampleBanner() {
+  const navigate = useNavigate()
+  const [busy, setBusy] = useState(false)
+  const start = async () => {
+    setBusy(true)
+    try { await startOwnPractice(); navigate('/welcome', { replace: true }) } finally { setBusy(false) }
+  }
+  return (
+    <Banner
+      tone="info"
+      icon={Sparkles}
+      className="mb-8"
+      title="You're looking at sample data"
+      action={<Button size="sm" onClick={start} disabled={busy}>Start my own practice</Button>}
+    >
+      This is Ishita, three weeks into PM interview prep. Open her reports, try a retry or look at Progress. When you're ready, start fresh. Nothing leaves this browser.
+    </Banner>
   )
 }
 

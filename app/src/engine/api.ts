@@ -31,13 +31,27 @@ const track = (name: EventName, props: Record<string, unknown> = {}, mockId?: st
 let bootPromise: Promise<void> | null = null
 
 /** Idempotent. Seeds curated questions, default settings, applies clock offset, expires stale mocks, evaluates nudges. */
-export function boot(): Promise<void> {
-  return (bootPromise ??= doBoot().catch((e) => { bootPromise = null; throw e }))
+export function boot(opts: { sampleData?: boolean } = {}): Promise<void> {
+  return (bootPromise ??= doBoot(opts).catch((e) => { bootPromise = null; throw e }))
 }
 
-async function doBoot(): Promise<void> {
+/** Browser flag: this visitor has already been shown the sample data (or chose to start fresh). */
+const SAMPLE_FLAG = 'redpen.sampleShown'
+function sampleShown(): boolean {
+  try { return typeof window !== 'undefined' && window.localStorage.getItem(SAMPLE_FLAG) === '1' } catch { return true }
+}
+function markSampleShown(): void {
+  try { window.localStorage.setItem(SAMPLE_FLAG, '1') } catch { /* storage blocked */ }
+}
+
+async function doBoot(opts: { sampleData?: boolean }): Promise<void> {
   await seedCuratedQuestions()
   if (!(await db.settings.get('settings'))) await db.settings.put(DEFAULT_SETTINGS)
+  // A first-time visitor lands on a lived-in app (Ishita, three weeks in) instead of an empty one.
+  if (opts.sampleData && !sampleShown() && !(await getProfile()) && (await db.mockSessions.count()) === 0) {
+    markSampleShown()
+    await loadSeed('ishita_w3')
+  }
   const settings = await getSettings()
   Clock.setOffset(settings.demo.clockOffsetMs ?? 0)
   await expireStaleMocks()
@@ -660,11 +674,17 @@ export async function resetAll(): Promise<void> {
   try {
     if (typeof window !== 'undefined') {
       for (const store of [window.localStorage, window.sessionStorage]) {
-        for (const k of Object.keys(store)) if (k.startsWith('pmc.') || k.startsWith('redpen.')) store.removeItem(k)
+        for (const k of Object.keys(store)) if ((k.startsWith('pmc.') || k.startsWith('redpen.')) && k !== SAMPLE_FLAG) store.removeItem(k)
       }
     }
   } catch { /* storage blocked */ }
   await track('data_reset', {})
+}
+
+/** Leaves the sample data: clears it and starts a fresh profile (onboarding next). */
+export async function startOwnPractice(): Promise<void> {
+  markSampleShown()
+  await loadSeed('fresh')
 }
 
 /* ---------- AI connection ---------- */

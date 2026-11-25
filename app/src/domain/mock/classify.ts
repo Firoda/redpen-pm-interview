@@ -22,6 +22,48 @@ export function questionCorpus(question: Pick<Question, 'prompt' | 'context' | '
   return parts.join(' ')
 }
 
+/* ---------------- clarifying questions ---------------- */
+
+/** Openers that mark a clarifying question even without a question mark (typed or transcribed). */
+const CLARIFY_LEAD = /^(?:(?:so|okay|ok|and|also|sure|right|alright),?\s+)*(?:(?:can|could|may|shall) (?:i|we) (?:assume|ask|check|clarify|confirm|know)\b|(?:i|we)(?:'d| would) (?:like|love|want) to (?:ask|clarify|understand|confirm|check|know)\b|(?:i'?ll|i will|let me|let'?s) (?:assume|clarify|confirm)\b.*\b(?:ok|okay|fine|alright|correct|right|work|good)\b|just to (?:confirm|clarify|check|understand)\b|(?:a |one |two |three |quick |few |couple of |some )+(?:quick |clarifying )?(?:questions?|clarifications?)\b|before i (?:start|begin|answer|dive|jump)\b)/i
+const INTERROGATIVE = /^(?:(?:so|okay|ok|and|also|sure|alright),?\s+)*(?:is|are|was|were|do|does|did|should|would|will|can|could|what|what's|whats|who|who's|whom|which|where|when|how|why|any|has|have)\b/i
+const ENDS_Q = /\?\s*["')\]]*\s*$/
+
+function splitSentences(text: string): string[] {
+  return text.split(/(?<=[.?!])\s+|\n+/).map((x) => x.trim()).filter(Boolean)
+}
+
+function isQuestionSentence(s: string): boolean {
+  if (ENDS_Q.test(s)) return true
+  if (CLARIFY_LEAD.test(s)) return true
+  // Voice transcripts carry no punctuation: a short sentence that opens like a question is one.
+  return INTERROGATIVE.test(s) && wordCount(s) <= 22 && !/[.!]\s*$/.test(s)
+}
+
+/** The individual questions inside a clarifying message, in order (lead-ins like "A few questions." dropped). */
+export function clarifyingQuestions(text: string): string[] {
+  const out: string[] = []
+  for (const s of splitSentences(text.trim())) {
+    if (!isQuestionSentence(s)) continue
+    // "Who is the user and is this India only" → two questions when the second half opens like a question.
+    const parts = s.split(/,?\s+(?:and|also|or)\s+(?=(?:is|are|do|does|did|should|would|will|can|could|what|who|which|where|when|how|why|any|has|have)\b)/i)
+    for (const p of parts) if (wordCount(p) >= 2 && !/^(?:(?:a |one |two |three |quick |few |couple of |some )+(?:quick |clarifying )?(?:questions?|clarifications?)|before i (?:start|begin|answer|dive|jump))[^?]*[.:,]?$/i.test(p.trim())) out.push(p.trim())
+  }
+  return out
+}
+
+/** A message that is mostly questions about the case (before the main answer it may carry a short lead-in). */
+export function isClarifying(text: string, mainAnswered: boolean): boolean {
+  const ss = splitSentences(text.trim())
+  if (!ss.length) return false
+  let qWords = 0
+  let sWords = 0
+  for (const s of ss) (isQuestionSentence(s) ? (qWords += wordCount(s)) : (sWords += wordCount(s)))
+  if (qWords === 0) return false
+  if (mainAnswered) return isQuestionSentence(ss[ss.length - 1]) && sWords <= 12 && qWords + sWords <= 60
+  return sWords <= 25 && qWords + sWords <= 90
+}
+
 function isIdk(text: string, words: number): boolean {
   if (words >= 25 || !LEX.idk.test(text)) return false
   const rest = text.replace(new RegExp(LEX.idk.source, 'gi'), ' ')
@@ -47,8 +89,7 @@ export function classifyCandidateTurn(text: string, ctx: ClassifyCtx): Classific
   if (words < 30 && LEX.answerRequest.test(t)) return { kind: 'answer_request', flags, words }
   if (words < 30 && LEX.hint.test(t)) return { kind: 'hint_request', flags, words }
   if (isIdk(t, words)) { flags.push('idk'); return { kind: 'idk', flags, words } }
-  const endsQ = /\?\s*["')\]]*\s*$/.test(t)
-  if (endsQ && ((!mainAnswered && words <= 40) || (mainAnswered && words <= 25))) return { kind: 'clarify', flags, words }
+  if (isClarifying(t, mainAnswered)) return { kind: 'clarify', flags, words }
 
   // Off-topic: a non-trivial answer that shares no content word with the question and uses no PM vocabulary.
   if (words >= 8) {

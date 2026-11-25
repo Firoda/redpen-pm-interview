@@ -35,6 +35,6 @@ export interface RawGrade {
 export type FinalizeGrade = (raw: RawGrade, input: GradeInput, meta: { grader: 'llm' | 'offline' | 'fixture'; model?: string; promptVersion: string; latencyMs: number; attempts: number }) => GradeResult
 
 /** Used by live AI to sanity-check interviewer lines before showing them (no praise, no teaching, ≤ 45 words). */
-export type ValidateInterviewerLine = (say: string, ctx: TurnContext) => { ok: true } | { ok: false; reason: string }
+export type ValidateInterviewerLine = (say: string, ctx: TurnContext, opts?: { maxWords?: number }) => { ok: true } | { ok: false; reason: string }
 
 export type { Question }

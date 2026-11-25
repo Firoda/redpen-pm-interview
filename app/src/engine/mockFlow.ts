@@ -10,7 +10,7 @@ import {
   type Completion, type Plan,
 } from '@/domain/mock/machine'
 import { closeLine, EXPAND_LINE, introLine, questionLine } from '@/domain/mock/templates'
-import { validateInterviewerLine } from '@/domain/rubric/validator'
+import { MAX_CLARIFY_WORDS, validateInterviewerLine } from '@/domain/rubric/validator'
 
 export const FOLLOWUPS: Record<MockLength, number> = { quick: 2, standard: 3 }
 
@@ -118,7 +118,7 @@ export async function runTurn(session: MockSession, question: Question, text: st
       decision = await deps.fallback.nextTurn(ctx, deps.signal)
     }
     let reconciled = reconcileDecision(s, plan, decision, cls.words)
-    const validated = decision.generatedBy === 'scripted' || decision.generatedBy === 'template' ? { ok: true as const } : validateInterviewerLine(decision.say, ctx)
+    const validated = decision.generatedBy === 'scripted' || decision.generatedBy === 'template' ? { ok: true as const } : validateInterviewerLine(decision.say, ctx, decision.move === 'answer_clarification' ? { maxWords: MAX_CLARIFY_WORDS } : undefined)
     if (!reconciled || !validated.ok) {
       events.push({ name: 'llm_fallback', props: { task: 'turn', reason: !reconciled ? `move_not_allowed:${decision.move}` : `validator:${(validated as { reason: string }).reason}` } })
       decision = await deps.fallback.nextTurn(ctx, deps.signal)

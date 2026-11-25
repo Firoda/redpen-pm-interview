@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { MET_101 } from '../fixtures/questions'
 import { newSession, say } from '../helpers/sim'
 import { EXPAND_LINE, HINT_USED_LINE, NO_MORE_CLARIFY_LINE, REFRAME_LINE, MOVE_ON_PREFIX } from '@/domain/mock/templates'
-import { evaluateCompletion, MIN_COUNTED_WORDS } from '@/domain/mock/machine'
+import { evaluateCompletion, MAX_CLARIFICATIONS, MIN_COUNTED_WORDS } from '@/domain/mock/machine'
 import { classifyCandidateTurn } from '@/domain/mock/classify'
 import { validateInterviewerLine } from '@/domain/rubric/validator'
 
@@ -10,15 +10,16 @@ const MAIN = "I'd start with the goal: get the payer their money back quickly. N
 const LONG = "I'd look at the settlement rate within a week as the main number, and I'd compare it with the reminder count, because a feature that needs many reminders is annoying friends even if money eventually comes back."
 
 describe('mock machine rules', () => {
-  it('answers clarifying questions from hidden facts without using a slot, max 3', async () => {
+  it('answers clarifying questions from hidden facts without using a slot, up to the cap', async () => {
     let s = newSession(MET_101)
     const r1 = await say(s, MET_101, 'What is the goal of the feature?')
     expect(r1.candidateTurn.kind).toBe('clarify_q')
     expect(r1.interviewerTurn.kind).toBe('clarify_a')
     expect(r1.interviewerTurn.text.toLowerCase()).toContain('group expenses')
     s = r1.session
-    for (const q of ['How big is the user base?', 'Is there a fee today?']) s = (await say(s, MET_101, q)).session
-    expect(s.machine.clarifications).toBe(3)
+    const more = ['How big is the user base?', 'Is there a fee today?', 'Which cities?', 'What is the timeline?', 'Any budget limit?', 'Is it Android only?', 'Do we have analytics?']
+    for (const q of more.slice(0, MAX_CLARIFICATIONS - 1)) s = (await say(s, MET_101, q)).session
+    expect(s.machine.clarifications).toBe(MAX_CLARIFICATIONS)
     const r4 = await say(s, MET_101, 'And how does it work exactly?')
     expect(r4.interviewerTurn.text).toBe(NO_MORE_CLARIFY_LINE)
     expect(r4.session.machine.slot).toEqual({ kind: 'main' })

@@ -9,7 +9,7 @@ function App() {
   const [ready, setReady] = useState(false)
   const [error, setError] = useState<string | null>(null)
   useEffect(() => {
-    boot().then(() => setReady(true)).catch((e) => { console.error(e); setError(String(e?.message ?? e)); setReady(true) })
+    boot({ sampleData: true }).then(() => setReady(true)).catch((e) => { console.error(e); setError(String(e?.message ?? e)); setReady(true) })
   }, [])
   if (!ready) return <div className="h-screen bg-canvas" />
   return (

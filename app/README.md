@@ -2,6 +2,8 @@
 
 A mock interviewer for PM interviews. Meera asks one question and a few follow-ups that quote what you said. Then you get a 1–5 score on five dimensions and three fixes, each tied to a quote from your answer. The tracker shows which topic to practise next.
 
+A first-time visitor lands on sample data: Ishita, three weeks into practice, with reports, a retry and nudges. That way the app is never empty on a first look. A strip on Home says it is sample data. **Start my own practice** clears it and opens onboarding, and the sample doesn't come back.
+
 Everything runs in the browser. Profile, mocks, scores, uploads and the event log live in IndexedDB. There is no account and no database.
 
 ## Run it locally
@@ -30,6 +32,16 @@ Use Chrome on desktop for voice mode: it needs Web Speech for transcription and 
 4. Open the deployed app → **Settings → Interviewer and grader → Claude**. Either turn on **Use server key** (step 3) or paste your own key. A pasted key stays in this browser's session storage, or local storage if you tick "Remember on this device". It is never exported.
 
 `vercel.json` sends every non-`/api` path to `index.html`, so deep links like `/feedback/…` survive a refresh.
+
+## Clarifying questions
+
+Interviews are a back-and-forth, so before answering (and between follow-ups) the candidate can ask about the case: "Who's the user? Is this India only? What's the timeline?" Meera answers up to three questions in one reply.
+- She answers from the question's hidden facts when one fits.
+- She confirms stated assumptions ("Can I assume…?" → "Yes, go with that."), unless a fact says otherwise.
+- She gives an ordinary default when the case is silent (India, mobile-first, one quarter).
+- She never hands over the root cause until the candidate narrows down to it.
+
+Questions are recognised with or without a "?", so they work in voice mode too. Clarifying is free: it doesn't use up a follow-up, and the grader credits it under Structure.
 
 ## AI modes
 

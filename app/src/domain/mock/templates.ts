@@ -6,7 +6,7 @@ export const INTERVIEWER_NAME = 'Meera'
 export function introLine(opts: { firstName?: string; length: MockLength; followups: number; isRetry: boolean; focusText?: string }): string {
   const hi = opts.firstName ? `Hi ${opts.firstName}, I'm Meera.` : "Hi, I'm Meera."
   if (opts.isRetry) return `${hi} This is a retry of a question you've seen. Same question, same bar. Take a moment, then answer when you're ready.`
-  return `${hi} I'll ask you one question, then ${opts.followups} follow-ups. Ask a clarifying question first if you need one.`
+  return `${hi} I'll ask you one question, then ${opts.followups} follow-ups. Ask me anything about the case before you answer, and I'll tell you what I know.`
 }
 
 export function questionLine(prompt: string, setup?: string): string {

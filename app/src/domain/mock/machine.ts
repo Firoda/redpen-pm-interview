@@ -6,6 +6,9 @@ import type {
 import { wordCount } from '@/domain/text'
 import { type Classification, redirectsInSlot } from './classify'
 
+/** Clarifying questions Meera answers per mock (each message can hold several questions). */
+export const MAX_CLARIFICATIONS = 8
+
 export type PlanKind = 'expand' | 'close' | 'clarify' | 'reframe' | 'hint' | 'deflect' | 'redirect' | 'followup' | 'variant'
 
 export interface Plan {
@@ -90,7 +93,7 @@ export function reconcileDecision(session: Pick<MockSession, 'machine' | 'turns'
   if (candidateWords >= 25) return null
   const m = session.machine
   const ok =
-    (decision.move === 'answer_clarification' && m.clarifications < 3) ||
+    (decision.move === 'answer_clarification' && m.clarifications < MAX_CLARIFICATIONS) ||
     (decision.move === 'give_hint' && !m.hintUsed) ||
     (decision.move === 'reframe_idk' && m.idkStreak === 0) ||
     (decision.move === 'redirect' && redirectsInSlot(session) === 0) ||
@@ -154,7 +157,7 @@ export function appendInterviewerTurn(session: MockSession, plan: Plan, line: In
   let followupIndex: number | undefined
   switch (plan.kind) {
     case 'expand': m.expandAsked = true; break
-    case 'clarify': if (m.clarifications < 3) m.clarifications += 1; break
+    case 'clarify': if (m.clarifications < MAX_CLARIFICATIONS) m.clarifications += 1; break
     case 'reframe': m.idkStreak += 1; break
     case 'hint': m.hintUsed = true; m.hintDimension = line.targetDimension ?? 'structure'; break
     case 'followup':

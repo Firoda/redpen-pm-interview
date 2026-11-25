@@ -2,13 +2,14 @@
    with the weakest heuristic evidence (retry focus first), prefixed with a short phrase the candidate actually said. */
 import type { DimensionId, FollowUpSeed, MockSession, Question, TurnContext, TurnDecision } from '@/domain/types'
 import { DIMENSIONS } from '@/domain/types'
-import { classifyCandidateTurn, currentAsk } from '@/domain/mock/classify'
-import { planTurn, type Plan } from '@/domain/mock/machine'
+import { clarifyingQuestions, classifyCandidateTurn, currentAsk } from '@/domain/mock/classify'
+import { MAX_CLARIFICATIONS, planTurn, type Plan } from '@/domain/mock/machine'
 import {
   ANSWER_REQUEST_LINE, ASSUME_LINE, closeLine, EXPAND_LINE, genericSeeds, HINT_LINES, HINT_USED_LINE, injectionLine,
   MOVE_ON_PREFIX, NO_MORE_CLARIFY_LINE, REFRAME_LINE, redirectLine, SCORE_REQUEST_LINE,
 } from '@/domain/mock/templates'
 import { extractFeatures } from '@/domain/rubric/features'
+import { MAX_CLARIFY_WORDS } from '@/domain/rubric/validator'
 import { scoreDimensions } from '@/domain/rubric/offlineGrader'
 import { fitQuote } from '@/domain/rubric/quotes'
 import { LEX } from '@/domain/rubric/lexicon'
@@ -127,16 +128,47 @@ function withQuote(fragment: string | null, text: string): string {
 }
 
 /* ---------------- clarifications ---------------- */
+/* A real interview is a back-and-forth: the candidate asks about the case and Meera answers like an interviewer
+   who knows it. Each message can hold several questions; she answers up to three, from the question's hidden facts
+   when one fits, otherwise with an ordinary default for that kind of question. The root cause is never volunteered. */
 
 const SYNONYMS: Record<string, string[]> = {
-  goal: ['objective', 'purpose', 'aim', 'why', 'success', 'trying'],
-  scale: ['users', 'many', 'size', 'big', 'mau', 'dau', 'volume', 'number'],
+  goal: ['objective', 'purpose', 'aim', 'why', 'success', 'trying', 'priority'],
+  scale: ['users', 'many', 'size', 'big', 'mau', 'dau', 'volume', 'number', 'base'],
   fee: ['charge', 'price', 'cost', 'pay', 'pricing'],
-  time: ['when', 'long', 'period', 'window', 'week', 'month', 'launched', 'launch'],
-  market: ['city', 'geography', 'region', 'country', 'where', 'india'],
-  user: ['who', 'customer', 'segment', 'persona'],
-  issue: ['problem', 'complaint', 'known', 'pain'],
+  time: ['when', 'long', 'period', 'window', 'week', 'month', 'launched', 'launch', 'timeline', 'deadline', 'quarter'],
+  market: ['city', 'cities', 'geography', 'region', 'country', 'where', 'india', 'metro', 'tier'],
+  user: ['who', 'customer', 'segment', 'persona', 'audience', 'target'],
+  issue: ['problem', 'complaint', 'known', 'pain', 'complaints'],
   work: ['how', 'flow', 'works'],
+  platform: ['android', 'ios', 'web', 'mobile', 'device', 'version', 'release'],
+  data: ['data', 'analytics', 'tracking', 'dashboard', 'experiment', 'funnel', 'definition'],
+  competitor: ['competition', 'rival', 'competitors', 'campaign'],
+  constraint: ['budget', 'team', 'resource', 'engineer', 'constraints', 'limit'],
+  revenue: ['money', 'monetise', 'monetize', 'profit', 'commission', 'business'],
+}
+
+/** Words that appear in most cases and say little about which fact is meant. */
+const GENERIC = new Set(['user', 'users', 'app', 'product', 'customer', 'feature', 'company', 'people', 'week', 'month'].map(stem))
+
+/** The candidate's own words: the stem itself and its synonym expansion. */
+interface AskedWord { raw: string; exp: Set<string> }
+function askedWords(text: string): AskedWord[] {
+  const words = contentWords(text).concat(text.toLowerCase().match(/\b(who|when|where|why|how)\b/g) ?? [])
+  return [...new Set(words)].map((w) => ({ raw: stem(w), exp: expandStems(w) }))
+}
+
+/** Exact word matches count 2, synonym-only matches 1; a clause scores once per word of the candidate's. */
+function matchScore(asked: AskedWord[], clauseText: string): { score: number; words: number } {
+  const raw = new Set(contentWords(clauseText).map(stem))
+  const exp = expandStems(clauseText)
+  let score = 0
+  let words = 0
+  for (const w of asked) {
+    if (w.raw.length >= 2 && raw.has(w.raw)) { score += GENERIC.has(w.raw) ? 1 : 2; words++ }
+    else if ([...w.exp].some((x) => x.length >= 2 && exp.has(x))) { score += 1; words++ }
+  }
+  return { score, words }
 }
 
 function expandStems(text: string): Set<string> {
@@ -148,28 +180,122 @@ function expandStems(text: string): Set<string> {
   return out
 }
 
+interface FactClause { label: string; body: string; spoken: string; gated: boolean }
+
+const META = /\s*\((?:reveal|only|if)[^)]*\)|\s+if asked\b|\s*,?\s*(?:unless|if|only if) the candidate (?:asks|narrows[^;:.]*)/gi
+
+/** Hidden facts split into labelled clauses ("Platform split if asked: …. App version if asked: …" → two). */
+export function factClauses(question: Pick<Question, 'context'>): FactClause[] {
+  const raw = [...(question.context.hiddenFacts ?? [])]
+  if (question.context.caseText) raw.push(...sentences(question.context.caseText).slice(0, 40))
+  const out: FactClause[] = []
+  for (const fact of raw) {
+    const pieces = fact.split(/(?<=\.)\s+(?=[A-Z][^.:;]{0,45}:)|(?<=;)\s+(?=[A-Za-z][^.:;]{0,45}:)/)
+    for (const piece of pieces) {
+      // Notes to the grader ("the candidate should …") are never said out loud.
+      if (/\bthe candidate (?:should|must|needs to|is expected to)\b|\b(?:ideal|strong) answer\b/i.test(piece)) continue
+      const gated = /reveal only|only if the candidate|narrows to it/i.test(piece)
+      const m = piece.match(/^([^:]{1,60}):\s*(.+)$/)
+      const label = m ? m[1].replace(META, '').trim() : ''
+      const body = (m ? m[2] : piece).trim()
+      out.push({ label, body, spoken: formatFact(piece), gated })
+    }
+  }
+  return out
+}
+
+/** A fact as Meera would say it: card-style labels and "if asked" notes removed, one sentence, capitalised. */
 export function formatFact(fact: string): string {
-  let f = fact.trim().replace(/^(.{1,40}?)\s+if asked(\s*\([^)]*\))?\s*:\s*/i, (_m, label: string, paren?: string) => `${label}${paren ?? ''}: `)
+  let f = fact.trim().replace(META, '').replace(/\s{2,}/g, ' ').replace(/\s+([:;,.])/g, '$1').trim()
+  f = f.replace(/^([^:]{1,40}):\s*/, (_m, label: string) => `${label.trim()}: `)
   f = f[0].toUpperCase() + f.slice(1)
-  if (wordCount(f) > MAX_WORDS) f = f.split(/\s+/).slice(0, MAX_WORDS).join(' ')
+  if (wordCount(f) > 30) f = f.split(/\s+/).slice(0, 30).join(' ').replace(/[,;:]$/, '')
   return /[.!?]$/.test(f) ? f : f + '.'
 }
 
-export function answerClarification(session: MockSession, question: Question, asked: string): string {
-  if (session.machine.clarifications >= 3) return NO_MORE_CLARIFY_LINE
-  const facts = [...(question.context.hiddenFacts ?? [])]
-  if (question.context.caseText) facts.push(...sentences(question.context.caseText).slice(0, 40))
-  const given = new Set(session.turns.filter((t) => t.role === 'interviewer' && t.kind === 'clarify_a').map((t) => normalise(t.text)))
-  const want = expandStems(asked)
-  let best = { fact: '', score: 0 }
-  for (const fact of facts) {
-    const have = expandStems(fact)
-    let score = 0
-    want.forEach((s) => { if (s.length >= 2 && have.has(s)) score++ })
-    if (given.has(normalise(formatFact(fact)))) score -= 2
-    if (score > best.score) best = { fact, score }
+const ASSUMPTION_RE = /\b(?:can|could|may|shall) (?:i|we) assume\b|\b(?:i'?ll|i will|let me|let'?s|i'?m going to|i am going to) assume\b|\bis it (?:ok|okay|fine|safe|reasonable) (?:to|if) (?:i |we )?assume\b|\bassuming\b|\bfair to assume\b/i
+
+const FALLBACKS: { re: RegExp; say: string | ((q: Question) => string) }[] = [
+  { re: /\b(goal|objective|purpose|aim|priority|why (?:are|do|is) we|trying to)\b/i, say: 'The goal is yours to set. Pick the one you think matters most and tell me why.' },
+  { re: /\b(how (?:many|big|large)|scale|size|volume|mau|dau|user base)\b/i, say: (q) => q.topic === 'guesstimate' ? "That's part of the estimate. Use your own number and say how you got it." : 'Assume a large consumer app in India, tens of millions of monthly users.' },
+  { re: /\b(where|india|city|cities|geograph|region|country|market|metro|tier)\b/i, say: 'India. Start with the big metros.' },
+  { re: /\b(when|timeline|deadline|how long|time ?frame|quarter|launch date)\b/i, say: 'Assume one quarter.' },
+  { re: /\b(budget|team|resource|engineer|constraint|limit)\b/i, say: 'No hard constraints. Use your judgment on team and budget.' },
+  { re: /\b(android|ios|web|mobile|platform|device|desktop)\b/i, say: 'Mobile app first, mostly Android users.' },
+  { re: /\b(data|analytics|track|dashboard|experiment|a\/b|logs?)\b/i, say: 'Assume you have the usual product analytics and can run experiments.' },
+  { re: /\b(competitor|competition|rival|market share)\b/i, say: 'Assume the usual competitors in this space, nothing unusual right now.' },
+  { re: /\b(revenue|money|monetis|monetiz|business model|profit|pricing|price|fee)\b/i, say: 'Assume the usual business model for this kind of product. State it as you go.' },
+  { re: /\b(who|user|users|customer|segment|persona|audience|target)\b/i, say: 'Your call. Pick the user group you think matters most.' },
+]
+
+const OPEN_LINES = [
+  ASSUME_LINE,
+  "That's open. Assume what you think is most likely and say it out loud.",
+  'Not specified. Pick a sensible assumption and go with it.',
+]
+
+function given(session: MockSession): Set<string> {
+  const out = new Set<string>()
+  for (const t of session.turns) if (t.role === 'interviewer' && t.kind === 'clarify_a') out.add(normalise(t.text))
+  return out
+}
+
+function answerOne(q: string, question: Question, clauses: FactClause[], said: Set<string>, used: Set<string>, nth: number): string {
+  const asked = askedWords(q)
+  // Names the candidate uses ("Bengaluru", "UPI", "Android") are strong evidence of which fact they mean.
+  const named = new Set((q.match(/\b[A-Z][A-Za-z0-9]+\b/g) ?? []).map((w) => stem(w.toLowerCase())).filter((w) => w.length >= 3))
+  const isAssumption = ASSUMPTION_RE.test(q)
+  const wasSaid = (c: FactClause) => [...said].some((x) => x.includes(normalise(c.spoken)))
+  let best: { c: FactClause; score: number } | null = null
+  let tied = false
+  for (const c of clauses) {
+    if (used.has(c.spoken)) continue
+    const label = matchScore(asked, c.label)
+    const body = matchScore(asked, c.body)
+    // The root cause comes out only when the candidate has narrowed to it in their own words.
+    if (c.gated && body.words < 3) continue
+    const raw = new Set(contentWords(`${c.label} ${c.body}`).map(stem))
+    let score = label.score * 2 + body.score + [...named].filter((n) => raw.has(n)).length * 2
+    // Once they have narrowed to the root cause, confirming it is the moment that matters.
+    if (c.gated) score += 4
+    if (wasSaid(c)) score -= 2
+    if (!best || score > best.score) { best = { c, score }; tied = false }
+    else if (score === best.score) tied = true
   }
-  return best.score >= 1 ? formatFact(best.fact) : ASSUME_LINE
+  // Two facts fit an assumption equally well: it isn't clearly about either, so confirm it.
+  if (isAssumption && tied) best = null
+  // An assumption to confirm needs a clearly related fact before Meera corrects it; otherwise she confirms.
+  if (best && best.score >= (isAssumption ? 3 : 2)) {
+    used.add(best.c.spoken)
+    const line = best.c.gated ? `Yes. ${formatFact(best.c.body)}` : best.c.spoken
+    return wasSaid(best.c) ? `As I said, ${line[0].toLowerCase()}${line.slice(1)}` : line
+  }
+  if (/\b(root cause|what(?:'s| is) (?:causing|the cause|wrong)|why (?:did|is) it (?:drop|fall))\b/i.test(q)) return "That's what I'd like you to find out."
+  if (isAssumption) return 'Yes, go with that.'
+  for (const f of FALLBACKS) if (f.re.test(q)) return typeof f.say === 'string' ? f.say : f.say(question)
+  return OPEN_LINES[nth % OPEN_LINES.length]
+}
+
+export function answerClarification(session: MockSession, question: Question, asked: string): string {
+  if (session.machine.clarifications >= MAX_CLARIFICATIONS) return NO_MORE_CLARIFY_LINE
+  const qs = clarifyingQuestions(asked)
+  const units = (qs.length ? qs : [asked]).slice(0, 3)
+  const clauses = factClauses(question)
+  const said = given(session)
+  const used = new Set<string>()
+  const parts: string[] = []
+  let open = 0
+  units.forEach((q) => {
+    const a = answerOne(q, question, clauses, said, used, session.machine.clarifications)
+    if (OPEN_LINES.includes(a)) open++
+    else if (!parts.includes(a)) parts.push(a)
+  })
+  // Questions with no answer in the case share one line instead of a stack of "make an assumption".
+  if (open) parts.push(parts.length ? (units.length - open > 0 ? 'The rest is open. Assume what you think is most likely and say it.' : OPEN_LINES[0]) : OPEN_LINES[session.machine.clarifications % OPEN_LINES.length])
+  if (qs.length > 3) parts.push("Let's start with those.")
+  let out = parts.join(' ')
+  while (wordCount(out) > MAX_CLARIFY_WORDS && parts.length > 1) { parts.pop(); out = parts.join(' ') }
+  return out
 }
 
 /* ---------------- the decision ---------------- */

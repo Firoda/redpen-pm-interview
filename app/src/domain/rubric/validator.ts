@@ -5,6 +5,8 @@ import { bigramJaccard, wordCount } from '@/domain/text'
 import { isCandidateQuote } from './quotes'
 
 export const MAX_INTERVIEWER_WORDS = 45
+/** Answering several clarifying questions in one reply needs a little more room. */
+export const MAX_CLARIFY_WORDS = 75
 
 const PRAISE = /\b(great|good point|good answer|good job|good thinking|excellent|nice|well done|impressive|correct|exactly right|that'?s right|not right|wrong|weak|strong answer|perfect|brilliant|awesome|love (that|this)|spot on|fantastic|amazing)\b/i
 const TEACHING = /\b(a better answer|you should|you could have|consider using|the framework|for example,? you might|typically candidates|candidates usually|the right answer|the answer is|a good answer would|ideally you|circles|rice|heart|aarrr|mece)\b/i
@@ -20,10 +22,11 @@ export function quotedPhrases(say: string): string[] {
   return out
 }
 
-export const validateInterviewerLine: ValidateInterviewerLine = (say: string, ctx: TurnContext) => {
+export const validateInterviewerLine: ValidateInterviewerLine = (say: string, ctx: TurnContext, opts) => {
   const text = (say ?? '').trim()
+  const max = opts?.maxWords ?? MAX_INTERVIEWER_WORDS
   if (!text) return { ok: false, reason: 'empty' }
-  if (wordCount(text) > MAX_INTERVIEWER_WORDS) return { ok: false, reason: `too long (${wordCount(text)} words, max ${MAX_INTERVIEWER_WORDS})` }
+  if (wordCount(text) > max) return { ok: false, reason: `too long (${wordCount(text)} words, max ${max})` }
   if ((text.match(/\?/g) ?? []).length > 1) return { ok: false, reason: 'more than one question' }
   // Praise / teaching / scores are judged on the interviewer's own words, not on quoted candidate text.
   const own = text.replace(/"[^"]*"|“[^”]*”|‘[^’]*’/g, ' ')

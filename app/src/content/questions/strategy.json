@@ -1,0 +1,1299 @@
+[
+  {
+    "id": "str-001",
+    "topic": "strategy",
+    "subtype": "market_entry",
+    "difficulty": "medium",
+    "timeboxMin": 15,
+    "prompt": "Should a 10-minute grocery delivery company launch in Tier-2 cities like Indore and Coimbatore? How would you decide?",
+    "context": {
+      "hiddenFacts": [
+        "Company goal if asked: reach profitability in 18 months; currently profitable in 4 of 7 metros.",
+        "Tier-2 differences if asked: lower order density, lower AOV, cheaper rent and labour, strong local kirana loyalty."
+      ]
+    },
+    "coverage": [
+      "company_goal",
+      "market_customer",
+      "competition",
+      "options",
+      "recommendation"
+    ],
+    "expectedStructure": [
+      "Clarify the objective (growth versus profitability) and decision criteria",
+      "Unit economics: order density, AOV, cost per order",
+      "Customer: need for 10-minute delivery in Tier-2",
+      "Competition: kiranas and other platforms",
+      "Options (launch, pilot one city, adapt to 30 minutes), recommendation, risks, pilot metrics"
+    ],
+    "rubricHints": {
+      "structure": "Objective, then criteria, then options, then recommendation.",
+      "userFocus": "Questions whether Tier-2 customers need 10 minutes.",
+      "prioritisation": "Makes a call (for example pilot one city) with explicit criteria.",
+      "metrics": "Pilot success metrics like orders per store per day and contribution margin per order by month 3.",
+      "communication": "Commits and summarises."
+    },
+    "commonPitfalls": [
+      "Pure framework recital with no decision",
+      "Ignores unit economics"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "str-001-f1",
+        "probes": "prioritisation",
+        "text": "Bottom line: launch, don't, or something else? Commit to one.",
+        "triggerIf": {
+          "missingAny": [
+            "recommend",
+            "i would",
+            "pilot",
+            "decision"
+          ]
+        }
+      },
+      {
+        "id": "str-001-f2",
+        "probes": "metrics",
+        "text": "If you pilot, what numbers at month 3 make you expand or shut it down?"
+      },
+      {
+        "id": "str-001-f3",
+        "probes": "userFocus",
+        "text": "Does a family in Indore actually need groceries in 10 minutes? What's your evidence?"
+      },
+      {
+        "id": "str-001-f4",
+        "probes": "structure",
+        "text": "New fact: {variant}. Does your recommendation change?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the company must cut cash burn by 40% this year"
+      ],
+      "market": [
+        "the target is Dhaka, not Indian Tier-2 cities"
+      ],
+      "user": [
+        "a competitor already launched in both cities 6 months ago"
+      ]
+    },
+    "tags": [
+      "india",
+      "quick-commerce",
+      "expansion"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "str-002",
+    "topic": "strategy",
+    "subtype": "market_entry",
+    "difficulty": "medium",
+    "timeboxMin": 15,
+    "prompt": "Should a UPI app launch credit products for college students?",
+    "context": {
+      "setup": "You're the head of lending at a large UPI app.",
+      "hiddenFacts": [
+        "Company goal if asked: grow credit revenue without raising defaults beyond 3%.",
+        "About 4 crore students in India; most have no credit history and rely on parents' money.",
+        "A partner NBFC would bear the credit risk but takes most of the margin.",
+        "Regulation requires clear consent and limits on marketing to minors; many students are under 21."
+      ]
+    },
+    "coverage": [
+      "company_goal",
+      "market_customer",
+      "competition",
+      "options",
+      "recommendation"
+    ],
+    "expectedStructure": [
+      "Clarify the objective and the risk appetite",
+      "Customer: why students would borrow and what for",
+      "Economics: ticket size, repayment, default, cost to acquire",
+      "Options: launch, pilot with parent co-sign, partner with colleges, skip",
+      "Recommendation with criteria; risks and regulation"
+    ],
+    "rubricHints": {
+      "structure": "Frames a decision rather than a market overview.",
+      "userFocus": "Distinguishes students who need small emergency credit from those chasing consumption.",
+      "prioritisation": "Chooses an option and says what is not done.",
+      "metrics": "Default rate by cohort, repayment on time, cost of acquisition per active borrower.",
+      "communication": "Clear conclusion."
+    },
+    "commonPitfalls": [
+      "Says yes without default economics",
+      "Ignores regulation on minors",
+      "No pilot design"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "str-002-f1",
+        "probes": "prioritisation",
+        "text": "Pick one: launch, pilot, or skip. Why?"
+      },
+      {
+        "id": "str-002-f2",
+        "probes": "metrics",
+        "text": "What default rate would make you stop the pilot?"
+      },
+      {
+        "id": "str-002-f3",
+        "probes": "userFocus",
+        "text": "Who is the student who benefits here, and who could be harmed?"
+      },
+      {
+        "id": "str-002-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. Does your recommendation change?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the partner NBFC will only lend to students with a parent co-signer"
+      ],
+      "market": [
+        "the segment is young working professionals instead of students"
+      ]
+    },
+    "tags": [
+      "india",
+      "fintech",
+      "lending"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "str-003",
+    "topic": "strategy",
+    "subtype": "market_entry",
+    "difficulty": "easy",
+    "timeboxMin": 15,
+    "prompt": "Should a Bengaluru-based pharmacy delivery startup expand to Hyderabad next?",
+    "context": {
+      "setup": "You're the head of strategy at the startup.",
+      "hiddenFacts": [
+        "Company goal if asked: reach 3x orders in 12 months while keeping delivery under 45 minutes.",
+        "Bengaluru runs 120 stores; Hyderabad has one large competitor and many local chemists.",
+        "Prescription handling and licences vary by state.",
+        "Hyderabad's chronic-care customer share is believed to be high."
+      ]
+    },
+    "coverage": [
+      "company_goal",
+      "market_customer",
+      "competition",
+      "options",
+      "recommendation"
+    ],
+    "expectedStructure": [
+      "Clarify the goal and criteria",
+      "Compare markets on demand, competition, regulation",
+      "Options: enter, pilot, partner with chemists, defer",
+      "Recommendation and risks",
+      "Success measures"
+    ],
+    "rubricHints": {
+      "structure": "Criteria first, then options.",
+      "userFocus": "Differentiates chronic-care repeat users from emergency buyers.",
+      "prioritisation": "Commits to an option.",
+      "metrics": "Orders per store, repeat rate and delivery time targets.",
+      "communication": "Concise."
+    },
+    "commonPitfalls": [
+      "Generic expansion framework",
+      "Ignores licensing"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "str-003-f1",
+        "probes": "prioritisation",
+        "text": "Decide: enter, pilot or wait?"
+      },
+      {
+        "id": "str-003-f2",
+        "probes": "metrics",
+        "text": "What numbers after 90 days tell you to continue?"
+      },
+      {
+        "id": "str-003-f3",
+        "probes": "userFocus",
+        "text": "Which customers will you win first?"
+      },
+      {
+        "id": "str-003-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "licences take 6 months to obtain"
+      ],
+      "market": [
+        "the target city is Pune, with no strong rival"
+      ]
+    },
+    "tags": [
+      "india",
+      "healthtech",
+      "expansion"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "str-004",
+    "topic": "strategy",
+    "subtype": "market_entry",
+    "difficulty": "hard",
+    "timeboxMin": 15,
+    "prompt": "Should an Indian ride-hailing company enter intercity bus ticketing?",
+    "context": {
+      "setup": "You're the head of new businesses at a ride-hailing company.",
+      "hiddenFacts": [
+        "Company goal if asked: increase revenue per active user with high-frequency products.",
+        "Intercity travel is less frequent; incumbents have strong bus operator supply.",
+        "Operator commissions are around 8 to 12% (illustrative).",
+        "Your app has 50 million users who commute within cities."
+      ]
+    },
+    "coverage": [
+      "company_goal",
+      "market_customer",
+      "competition",
+      "options",
+      "recommendation"
+    ],
+    "expectedStructure": [
+      "Clarify objective and strategic fit",
+      "Customer need: travel from a city's edge to a bus stop",
+      "Competition and supplier dynamics",
+      "Options: full entry, bundle with rides, partner with an aggregator",
+      "Recommendation, sequencing, risks"
+    ],
+    "rubricHints": {
+      "structure": "Fit, market, options, recommendation.",
+      "userFocus": "Sees the first mile and last mile as the entry point.",
+      "prioritisation": "Chooses a partnership first and says why.",
+      "metrics": "Cross-sell rate, repeat bookings and margin per ticket.",
+      "communication": "Commits."
+    },
+    "commonPitfalls": [
+      "Enters head-on against incumbents",
+      "Ignores supply side"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "str-004-f1",
+        "probes": "prioritisation",
+        "text": "What's the smallest version of this you would launch?"
+      },
+      {
+        "id": "str-004-f2",
+        "probes": "metrics",
+        "text": "How would you measure that it works before investing more?"
+      },
+      {
+        "id": "str-004-f3",
+        "probes": "structure",
+        "text": "Why will you win with operators who already have partners?"
+      },
+      {
+        "id": "str-004-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "you cannot hold inventory or negotiate with operators for 6 months"
+      ],
+      "market": [
+        "the same plan in Nairobi"
+      ]
+    },
+    "tags": [
+      "india",
+      "mobility",
+      "expansion"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "str-005",
+    "topic": "strategy",
+    "subtype": "competitive_response",
+    "difficulty": "hard",
+    "timeboxMin": 15,
+    "prompt": "Assume you lead product at the number two UPI app, and the number one app's share keeps growing. What do you do?",
+    "context": {
+      "hiddenFacts": [
+        "If asked: UPI P2P and P2M transactions earn almost no direct revenue; money comes from adjacent services (credit, insurance, ads, merchant tools).",
+        "If asked: a market-share cap regulation has been discussed but not enforced.",
+        "Your company's strength: a large search and ads business and strong Android distribution."
+      ]
+    },
+    "coverage": [
+      "company_goal",
+      "market_customer",
+      "competition",
+      "options",
+      "recommendation"
+    ],
+    "expectedStructure": [
+      "Clarify the real objective: share for its own sake or monetisable engagement",
+      "Diagnose why number one is winning (merchant QR network, habits, features)",
+      "Options: compete head-on, differentiate on adjacent value, merchant play, partnerships",
+      "Recommend with a sequenced plan",
+      "Metrics and risks including regulation"
+    ],
+    "rubricHints": {
+      "structure": "Diagnosis before options; options before recommendation.",
+      "userFocus": "Understands both consumer habit and merchant acceptance.",
+      "prioritisation": "Picks a focused bet and says what not to do.",
+      "metrics": "Metrics beyond share: monthly transacting users, merchant activations, adjacent revenue per user.",
+      "communication": "Clear plan."
+    },
+    "commonPitfalls": [
+      "Cashback wars as the main answer",
+      "No diagnosis of why number one wins"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "str-005-f1",
+        "probes": "prioritisation",
+        "text": "Is market share even the right goal here, given UPI itself makes little money?"
+      },
+      {
+        "id": "str-005-f2",
+        "probes": "structure",
+        "text": "Before solutions: why is the number one app winning?",
+        "triggerIf": {
+          "missingAny": [
+            "merchant",
+            "why",
+            "winning",
+            "reason",
+            "diagnos"
+          ]
+        }
+      },
+      {
+        "id": "str-005-f3",
+        "probes": "metrics",
+        "text": "In 12 months, which three numbers prove your strategy is working?"
+      },
+      {
+        "id": "str-005-f4",
+        "probes": "structure",
+        "text": "Now assume {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the 30% market-share cap will be enforced in 6 months"
+      ],
+      "market": [
+        "the same situation in Indonesia's QRIS ecosystem"
+      ]
+    },
+    "tags": [
+      "india",
+      "fintech",
+      "competition"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "str-006",
+    "topic": "strategy",
+    "subtype": "competitive_response",
+    "difficulty": "medium",
+    "timeboxMin": 15,
+    "prompt": "A rival quick-commerce app offers free delivery on every order for the next six months. How do you respond?",
+    "context": {
+      "setup": "You're the head of growth at a quick-commerce company with 30% share in your metro.",
+      "hiddenFacts": [
+        "Your delivery fee brings in about ₹15 per order, ₹10 of which offsets delivery cost.",
+        "The rival is funded and burning cash; it is strong with young shoppers.",
+        "Your repeat shoppers rate reliability and range highly.",
+        "Price-sensitive new users switch easily."
+      ]
+    },
+    "coverage": [
+      "company_goal",
+      "market_customer",
+      "competition",
+      "options",
+      "recommendation"
+    ],
+    "expectedStructure": [
+      "Clarify objective: share versus profit",
+      "Understand who is at risk",
+      "Options: match, target, differentiate, ignore",
+      "Recommendation with a trigger to adjust",
+      "Metrics and risks"
+    ],
+    "rubricHints": {
+      "structure": "Diagnoses exposure before reacting.",
+      "userFocus": "Segments loyal repeaters from price switchers.",
+      "prioritisation": "Chooses selective response over matching everywhere.",
+      "metrics": "Retention of at-risk cohorts, contribution margin per order.",
+      "communication": "Clear call."
+    },
+    "commonPitfalls": [
+      "Matches blindly",
+      "No segmentation"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "str-006-f1",
+        "probes": "prioritisation",
+        "text": "Match, differentiate or ignore? Pick one and defend it."
+      },
+      {
+        "id": "str-006-f2",
+        "probes": "metrics",
+        "text": "What number would trigger a change in your response?"
+      },
+      {
+        "id": "str-006-f3",
+        "probes": "userFocus",
+        "text": "Which customers do you protect first?"
+      },
+      {
+        "id": "str-006-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the company must cut burn this quarter"
+      ],
+      "user": [
+        "most of your customers are subscription members"
+      ]
+    },
+    "tags": [
+      "india",
+      "quick-commerce",
+      "competition"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "str-007",
+    "topic": "strategy",
+    "subtype": "competitive_response",
+    "difficulty": "easy",
+    "timeboxMin": 15,
+    "prompt": "A rival launches a cheaper, ad-supported plan for a video streaming service. How should the leader respond?",
+    "context": {
+      "setup": "You're the PM for plans at an Indian video-streaming service.",
+      "hiddenFacts": [
+        "Your service has 30 million paying subscribers on a ₹149/month plan (illustrative).",
+        "Rival's plan is ₹49 with ads.",
+        "Most of your subscribers are on mobile; regional content is your strength.",
+        "Churn is currently 4% a month."
+      ]
+    },
+    "coverage": [
+      "company_goal",
+      "market_customer",
+      "competition",
+      "options",
+      "recommendation"
+    ],
+    "expectedStructure": [
+      "Clarify the goal",
+      "Understand who might switch",
+      "Options: price cut, ad tier, bundling, ignore",
+      "Recommend with reasoning",
+      "Metrics"
+    ],
+    "rubricHints": {
+      "structure": "Goal, customers, options.",
+      "userFocus": "Segments mobile-only and TV households.",
+      "prioritisation": "Picks one option and says why.",
+      "metrics": "Churn by segment, ARPU, ad revenue per user.",
+      "communication": "Short."
+    },
+    "commonPitfalls": [
+      "Just cut price",
+      "No segmentation"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "str-007-f1",
+        "probes": "prioritisation",
+        "text": "Which one response do you choose and why?"
+      },
+      {
+        "id": "str-007-f2",
+        "probes": "metrics",
+        "text": "What would you track after the response?"
+      },
+      {
+        "id": "str-007-f3",
+        "probes": "userFocus",
+        "text": "Who is most likely to switch?"
+      },
+      {
+        "id": "str-007-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. Does your response change?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "content licensing costs prevent a lower price"
+      ],
+      "market": [
+        "the same fight in Brazil"
+      ]
+    },
+    "tags": [
+      "india",
+      "ott",
+      "competition"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "str-008",
+    "topic": "strategy",
+    "subtype": "competitive_response",
+    "difficulty": "medium",
+    "timeboxMin": 15,
+    "prompt": "A global giant launches same-day delivery in your city. You run a regional grocery chain with 60 stores. What do you do?",
+    "context": {
+      "setup": "You're the CEO's chief of staff at the chain.",
+      "hiddenFacts": [
+        "Your stores are strong in your state, with loyal middle-class shoppers.",
+        "You have a basic app and take about 5% of orders online.",
+        "The entrant offers deep discounts and a larger range.",
+        "Your margins are thin, about 3% (illustrative)."
+      ]
+    },
+    "coverage": [
+      "company_goal",
+      "market_customer",
+      "competition",
+      "options",
+      "recommendation"
+    ],
+    "expectedStructure": [
+      "Clarify the goal: survive, grow or sell",
+      "Customer: what they value",
+      "Your right to win (stores, trust, freshness)",
+      "Options and recommendation",
+      "Metrics and risks"
+    ],
+    "rubricHints": {
+      "structure": "Frames strengths and weaknesses before options.",
+      "userFocus": "Identifies who values freshness and credit relationships.",
+      "prioritisation": "Picks one focused response, such as store-based fulfilment.",
+      "metrics": "Online order share and margin per order.",
+      "communication": "Commits."
+    },
+    "commonPitfalls": [
+      "Tries to match everything",
+      "Ignores right to win"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "str-008-f1",
+        "probes": "prioritisation",
+        "text": "What will you not do?"
+      },
+      {
+        "id": "str-008-f2",
+        "probes": "metrics",
+        "text": "What metrics show your response is working?"
+      },
+      {
+        "id": "str-008-f3",
+        "probes": "structure",
+        "text": "What is your right to win here?"
+      },
+      {
+        "id": "str-008-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "you cannot afford to match delivery prices"
+      ],
+      "market": [
+        "you operate in a smaller town"
+      ]
+    },
+    "tags": [
+      "india",
+      "retail",
+      "competition"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "str-009",
+    "topic": "strategy",
+    "subtype": "monetisation_pricing",
+    "difficulty": "medium",
+    "timeboxMin": 15,
+    "prompt": "A food-delivery app is choosing between a monthly membership and a flat per-order platform fee. Which would you recommend?",
+    "context": {
+      "hiddenFacts": [
+        "If asked: 20% of users place 60% of orders; median user orders 3 times a month.",
+        "Goal: improve contribution margin without losing frequent users."
+      ]
+    },
+    "coverage": [
+      "company_goal",
+      "market_customer",
+      "competition",
+      "options",
+      "recommendation"
+    ],
+    "expectedStructure": [
+      "Clarify the goal and segments by frequency",
+      "Model each option per segment",
+      "Competitor and perception effects",
+      "Recommend (possibly hybrid), with a test plan and guardrails"
+    ],
+    "rubricHints": {
+      "structure": "Goal, segments, options, test.",
+      "userFocus": "Segments by frequency and price sensitivity.",
+      "prioritisation": "Clear recommendation with the condition under which it flips.",
+      "metrics": "Contribution margin per order, order frequency, churn of heavy users.",
+      "communication": "Concise."
+    },
+    "commonPitfalls": [
+      "No segmentation",
+      "No test plan"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "str-009-f1",
+        "probes": "userFocus",
+        "text": "Your heaviest and occasional users will react differently. Walk me through both.",
+        "triggerIf": {
+          "missingAny": [
+            "frequent",
+            "heavy",
+            "segment",
+            "occasional"
+          ]
+        }
+      },
+      {
+        "id": "str-009-f2",
+        "probes": "metrics",
+        "text": "How would you test this before rolling it out to everyone?"
+      },
+      {
+        "id": "str-009-f3",
+        "probes": "prioritisation",
+        "text": "Which segment do you protect if the two goals conflict?"
+      },
+      {
+        "id": "str-009-f4",
+        "probes": "prioritisation",
+        "text": "Suppose {variant}. Same recommendation?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the regulator caps platform fees at ₹5 per order"
+      ],
+      "market": [
+        "the market is the UAE, where AOV is three times higher"
+      ]
+    },
+    "tags": [
+      "pricing",
+      "india"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "str-010",
+    "topic": "strategy",
+    "subtype": "monetisation_pricing",
+    "difficulty": "easy",
+    "timeboxMin": 15,
+    "prompt": "How should an online learning platform price a new bundle of three courses?",
+    "context": {
+      "setup": "You're the PM for pricing at an online learning platform.",
+      "hiddenFacts": [
+        "Single courses sell for ₹2,999 each; bundles are untested.",
+        "Most buyers buy one course, and 12% buy a second within 30 days.",
+        "Marginal cost per course is close to zero; marketing costs are high.",
+        "Refund rate is about 8%."
+      ]
+    },
+    "coverage": [
+      "company_goal",
+      "market_customer",
+      "competition",
+      "options",
+      "recommendation"
+    ],
+    "expectedStructure": [
+      "Goal: revenue or customer lifetime value",
+      "Understand buyer segments",
+      "Pricing options: discount levels, tiers",
+      "Recommend and test",
+      "Metrics"
+    ],
+    "rubricHints": {
+      "structure": "Goal, customers, options.",
+      "userFocus": "Segments single-course and multi-course buyers.",
+      "prioritisation": "Chooses one price and explains trade-offs.",
+      "metrics": "Attach rate, revenue per buyer, refund rate.",
+      "communication": "Clear."
+    },
+    "commonPitfalls": [
+      "Picks a price without logic",
+      "No test"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "str-010-f1",
+        "probes": "prioritisation",
+        "text": "Which discount level do you choose and why?"
+      },
+      {
+        "id": "str-010-f2",
+        "probes": "metrics",
+        "text": "How would you test it?"
+      },
+      {
+        "id": "str-010-f3",
+        "probes": "userFocus",
+        "text": "Who buys a bundle?"
+      },
+      {
+        "id": "str-010-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "you can't offer more than 15% discount"
+      ],
+      "user": [
+        "the buyers are companies buying for employees"
+      ]
+    },
+    "tags": [
+      "india",
+      "edtech",
+      "pricing"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "str-011",
+    "topic": "strategy",
+    "subtype": "monetisation_pricing",
+    "difficulty": "hard",
+    "timeboxMin": 15,
+    "prompt": "Should a UPI app start charging merchants a small fee on payments?",
+    "context": {
+      "setup": "You're the head of merchant products at a large UPI app.",
+      "hiddenFacts": [
+        "UPI merchant payments carry zero MDR by regulation today; discussions about charging are ongoing.",
+        "Merchants are mostly small shops; 70% have thin margins.",
+        "Competitors may not charge.",
+        "You offer paid add-ons (soundbox, loans) that depend on merchant engagement."
+      ]
+    },
+    "coverage": [
+      "company_goal",
+      "market_customer",
+      "competition",
+      "options",
+      "recommendation"
+    ],
+    "expectedStructure": [
+      "Clarify regulation and objective",
+      "Merchant segments and willingness to pay",
+      "Options: charge, value-added fee, keep free",
+      "Recommendation with sequencing",
+      "Risks and metrics"
+    ],
+    "rubricHints": {
+      "structure": "Regulation, merchants, options.",
+      "userFocus": "Segments by size and margin.",
+      "prioritisation": "Chooses to monetise through add-ons instead of fees, with reasons.",
+      "metrics": "Merchant retention, add-on attach rate, revenue per merchant.",
+      "communication": "Commits."
+    },
+    "commonPitfalls": [
+      "Ignores regulation",
+      "Charges everyone"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "str-011-f1",
+        "probes": "prioritisation",
+        "text": "Fee or add-ons? Commit to one."
+      },
+      {
+        "id": "str-011-f2",
+        "probes": "metrics",
+        "text": "What metric would tell you merchants are leaving?"
+      },
+      {
+        "id": "str-011-f3",
+        "probes": "userFocus",
+        "text": "Which merchants will you charge first, if any?"
+      },
+      {
+        "id": "str-011-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "regulation allows only 0.3% fee"
+      ],
+      "market": [
+        "the same question for a Brazilian Pix provider"
+      ]
+    },
+    "tags": [
+      "india",
+      "fintech",
+      "pricing"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "str-012",
+    "topic": "strategy",
+    "subtype": "monetisation_pricing",
+    "difficulty": "medium",
+    "timeboxMin": 15,
+    "prompt": "Price a billing app for kirana stores: should it be free, ₹299 a month, or a per-bill fee?",
+    "context": {
+      "setup": "You're the founder-PM of a billing and inventory app for neighbourhood stores.",
+      "hiddenFacts": [
+        "Stores issue 40 to 200 bills a day; most use paper or a basic app.",
+        "Free competitors exist with ads.",
+        "Willingness to pay is around ₹200 to ₹400 a month for stores with 100+ bills (illustrative).",
+        "Churn is high in the first 60 days."
+      ]
+    },
+    "coverage": [
+      "company_goal",
+      "market_customer",
+      "competition",
+      "options",
+      "recommendation"
+    ],
+    "expectedStructure": [
+      "Goal: adoption or revenue",
+      "Segment stores by bill volume",
+      "Options and trade-offs",
+      "Recommend, test",
+      "Metrics"
+    ],
+    "rubricHints": {
+      "structure": "Goal, segments, options.",
+      "userFocus": "Segments by bills per day.",
+      "prioritisation": "Chooses one model with a flip condition.",
+      "metrics": "Paid conversion, churn, bills per store.",
+      "communication": "Clear."
+    },
+    "commonPitfalls": [
+      "Ignores free competitors",
+      "One price for all"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "str-012-f1",
+        "probes": "userFocus",
+        "text": "Does a small store behave like a busy one here?"
+      },
+      {
+        "id": "str-012-f2",
+        "probes": "metrics",
+        "text": "How would you test pricing?"
+      },
+      {
+        "id": "str-012-f3",
+        "probes": "prioritisation",
+        "text": "What would make you switch to per-bill fees?"
+      },
+      {
+        "id": "str-012-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "a large competitor offers the app free for a year"
+      ],
+      "market": [
+        "the same app sold to pharmacies"
+      ]
+    },
+    "tags": [
+      "india",
+      "b2b",
+      "pricing"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "str-013",
+    "topic": "strategy",
+    "subtype": "build_buy_partner",
+    "difficulty": "easy",
+    "timeboxMin": 15,
+    "prompt": "Should a food-delivery company build its own mapping and routing, or use a third-party maps API?",
+    "context": {
+      "setup": "You're the PM for logistics at a food-delivery company.",
+      "hiddenFacts": [
+        "Maps API costs about ₹0.40 per order (illustrative); you handle 50 lakh orders a day.",
+        "Third-party maps struggle with new colonies and building entrances.",
+        "Building needs a team of about 30 engineers and 18 months.",
+        "ETA accuracy directly affects customer satisfaction."
+      ]
+    },
+    "coverage": [
+      "company_goal",
+      "market_customer",
+      "options",
+      "recommendation",
+      "risks"
+    ],
+    "expectedStructure": [
+      "Clarify objectives: cost, quality, speed",
+      "Compare options on criteria",
+      "Hybrid options: use API with own data layer",
+      "Recommend with reasoning",
+      "Risks and metrics"
+    ],
+    "rubricHints": {
+      "structure": "Criteria first, then options.",
+      "userFocus": "Considers the rider and customer impact.",
+      "prioritisation": "Chooses an option and sequences it.",
+      "metrics": "ETA accuracy, cost per order.",
+      "communication": "Clear."
+    },
+    "commonPitfalls": [
+      "Chooses build without costing",
+      "No criteria"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "str-013-f1",
+        "probes": "prioritisation",
+        "text": "What criteria matter most, and what's your pick?"
+      },
+      {
+        "id": "str-013-f2",
+        "probes": "metrics",
+        "text": "Which metrics tell you the choice was right?"
+      },
+      {
+        "id": "str-013-f3",
+        "probes": "structure",
+        "text": "What would make you switch your decision?"
+      },
+      {
+        "id": "str-013-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. Does your decision change?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "API price doubles next year"
+      ],
+      "market": [
+        "the company operates in 10 countries"
+      ]
+    },
+    "tags": [
+      "india",
+      "build-vs-buy",
+      "logistics"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "str-014",
+    "topic": "strategy",
+    "subtype": "build_buy_partner",
+    "difficulty": "medium",
+    "timeboxMin": 15,
+    "prompt": "Should a fintech app build its own KYC verification or buy it from a vendor?",
+    "context": {
+      "setup": "You're the PM for onboarding at a digital lender.",
+      "hiddenFacts": [
+        "Vendor charges ₹12 per verification; you do 2 lakh a month (illustrative).",
+        "In-house build needs 8 engineers for 9 months and compliance work.",
+        "Vendor success rate is 85%; drop-offs come from failed verifications.",
+        "Regulators require audit trails and data stored in India."
+      ]
+    },
+    "coverage": [
+      "company_goal",
+      "market_customer",
+      "options",
+      "recommendation",
+      "risks"
+    ],
+    "expectedStructure": [
+      "Clarify the goal",
+      "Cost, quality, control, compliance",
+      "Options: buy, build, hybrid",
+      "Recommend with sequencing",
+      "Risks and metrics"
+    ],
+    "rubricHints": {
+      "structure": "Criteria and options.",
+      "userFocus": "Considers onboarding drop-off.",
+      "prioritisation": "Names the criterion that decides.",
+      "metrics": "Verification success rate, cost per verified user.",
+      "communication": "Clear."
+    },
+    "commonPitfalls": [
+      "No numbers",
+      "Ignores compliance"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "str-014-f1",
+        "probes": "prioritisation",
+        "text": "Which criterion decides this?"
+      },
+      {
+        "id": "str-014-f2",
+        "probes": "metrics",
+        "text": "What numbers would make you build?"
+      },
+      {
+        "id": "str-014-f3",
+        "probes": "userFocus",
+        "text": "How does your choice affect the new user?"
+      },
+      {
+        "id": "str-014-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the vendor is unreliable at peak times"
+      ],
+      "market": [
+        "you plan to expand to three more countries"
+      ]
+    },
+    "tags": [
+      "india",
+      "fintech",
+      "build-vs-buy"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "str-015",
+    "topic": "strategy",
+    "subtype": "build_buy_partner",
+    "difficulty": "hard",
+    "timeboxMin": 15,
+    "prompt": "Should an Indian e-commerce company build its own logistics network or rely on courier partners?",
+    "context": {
+      "setup": "You're the chief strategy officer of a mid-sized e-commerce company.",
+      "hiddenFacts": [
+        "You ship 8 lakh orders a day; courier costs are ₹55 per parcel (illustrative).",
+        "Own network could cut this to ₹40 at scale but needs heavy capex.",
+        "Courier partners deliver 92% on time; customers complain in peak season.",
+        "The company aims for profitability in 2 years."
+      ]
+    },
+    "coverage": [
+      "company_goal",
+      "market_customer",
+      "competition",
+      "options",
+      "recommendation"
+    ],
+    "expectedStructure": [
+      "Clarify objectives: cost, control, speed",
+      "Quantify economics and capex",
+      "Options: build, partner, hybrid, acquire",
+      "Recommend with sequencing",
+      "Risks and metrics"
+    ],
+    "rubricHints": {
+      "structure": "Economics, options, recommendation.",
+      "userFocus": "Considers customers' delivery expectations.",
+      "prioritisation": "Chooses a hybrid with conditions.",
+      "metrics": "Cost per parcel, on-time rate, capital efficiency.",
+      "communication": "Commits."
+    },
+    "commonPitfalls": [
+      "Builds because competitors did",
+      "Ignores capex payback"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "str-015-f1",
+        "probes": "prioritisation",
+        "text": "Pick one: build, partner, or hybrid. What's the condition that changes it?"
+      },
+      {
+        "id": "str-015-f2",
+        "probes": "metrics",
+        "text": "How long to pay back the build?"
+      },
+      {
+        "id": "str-015-f3",
+        "probes": "structure",
+        "text": "What would you pilot first?"
+      },
+      {
+        "id": "str-015-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "capital is limited this year"
+      ],
+      "market": [
+        "the company expands to Tier-3 towns"
+      ]
+    },
+    "tags": [
+      "india",
+      "e-commerce",
+      "build-vs-buy"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "str-016",
+    "topic": "strategy",
+    "subtype": "build_buy_partner",
+    "difficulty": "easy",
+    "timeboxMin": 15,
+    "prompt": "Should a small ed-tech startup build its own payment gateway or integrate an existing one?",
+    "context": {
+      "setup": "You're the first PM at an ed-tech startup.",
+      "hiddenFacts": [
+        "Gateway fees are about 2% of revenue; monthly revenue is ₹40 lakh (illustrative).",
+        "Building needs compliance and security expertise the team lacks.",
+        "Payment failures during peak sales are a worry.",
+        "The team has six engineers."
+      ]
+    },
+    "coverage": [
+      "company_goal",
+      "market_customer",
+      "options",
+      "recommendation"
+    ],
+    "expectedStructure": [
+      "Clarify objective and constraints",
+      "Compare options",
+      "Recommend",
+      "Metrics and revisit trigger"
+    ],
+    "rubricHints": {
+      "structure": "Criteria then recommendation.",
+      "userFocus": "Considers payment failures at checkout.",
+      "prioritisation": "Chooses integration with a reason.",
+      "metrics": "Payment success rate, effective fee.",
+      "communication": "Short."
+    },
+    "commonPitfalls": [
+      "Chooses build for control",
+      "No revisit trigger"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "str-016-f1",
+        "probes": "prioritisation",
+        "text": "What would make you change your mind later?"
+      },
+      {
+        "id": "str-016-f2",
+        "probes": "metrics",
+        "text": "Which metric would you track on the chosen option?"
+      },
+      {
+        "id": "str-016-f3",
+        "probes": "structure",
+        "text": "What risks remain?"
+      },
+      {
+        "id": "str-016-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the gateway's failure rate spikes during sales"
+      ],
+      "market": [
+        "you expand to Southeast Asia"
+      ]
+    },
+    "tags": [
+      "india",
+      "build-vs-buy",
+      "startup"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  }
+]

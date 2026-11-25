@@ -12,6 +12,10 @@ export type EventName =
   | 'nudge_dismissed' | 'wtp_shown' | 'wtp_answered' | 'upload_completed' | 'upload_failed'
   | 'library_viewed' | 'jd_fake_door_clicked' | 'llm_call' | 'llm_fallback' | 'voice_error'
   | 'settings_changed' | 'data_exported' | 'data_reset' | 'demo_seed_loaded'
+  // engine additions (MASTER_PLAN §9.2 supporting events)
+  | 'followup_asked' | 'clarification_asked' | 'feedback_generated' | 'feedback_failed' | 'nudge_resolved'
+  | 'upload_deleted' | 'data_imported' | 'demo_clock_changed' | 'provider_tested' | 'mock_resumed'
+  | 'tracker_cta_clicked' | 'metrics_viewed' | 'events_exported' | 'nudge_muted'
 
 type Listener = (e: { name: EventName; props: Record<string, unknown>; ts: number }) => void
 const listeners = new Set<Listener>()

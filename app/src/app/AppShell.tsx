@@ -51,7 +51,8 @@ function NavItem({ to, label, icon: Icon, end }: { to: string; label: string; ic
 export default function AppShell() {
   const navigate = useNavigate()
   const loc = useLocation()
-  const profile = useLiveQuery(() => db.profile.get('me'), [], undefined as any)
+  // undefined = loading, null = no profile yet (both the gate and the user chip need the difference)
+  const profile = useLiveQuery(async () => (await db.profile.get('me')) ?? null, [])
 
   // Onboarding gate
   useEffect(() => {
@@ -71,7 +72,7 @@ export default function AppShell() {
   }, [navigate])
 
   return (
-    <div className="flex h-full min-h-screen bg-canvas">
+    <div className="flex min-h-screen bg-canvas">
       <aside className="sticky top-0 hidden h-screen w-[240px] shrink-0 flex-col border-r border-border px-3 pb-4 pt-5 min-[840px]:flex max-[1199px]:w-[64px] max-[1199px]:px-2">
         <div className="mb-6 flex items-center gap-2.5 px-2 max-[1199px]:justify-center max-[1199px]:px-0">
           <BrandMark />
@@ -89,6 +90,20 @@ export default function AppShell() {
         <nav className="flex flex-col gap-0.5">{NAV.map((n) => <NavItem key={n.to} {...n} />)}</nav>
         <div className="flex-1" />
         <nav className="flex flex-col gap-0.5">{NAV_BOTTOM.map((n) => <NavItem key={n.to} {...n} />)}</nav>
+        {profile?.firstName ? (
+          <div className="mt-3 border-t border-border pt-3">
+            <NavLink
+              to="/settings#profile"
+              title={profile.firstName}
+              className="flex h-9 items-center gap-2.5 rounded-md px-2 text-[14px] text-secondary transition-colors duration-100 hover:bg-hover hover:text-primary max-[1199px]:justify-center max-[1199px]:px-0"
+            >
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-subtle text-caption font-semibold text-primary">
+                {profile.firstName.slice(0, 1).toUpperCase()}
+              </span>
+              <span className="truncate max-[1199px]:hidden">{profile.firstName}</span>
+            </NavLink>
+          </div>
+        ) : null}
       </aside>
 
       <main className="min-w-0 flex-1 bg-surface min-[840px]:my-0" key={loc.pathname}>

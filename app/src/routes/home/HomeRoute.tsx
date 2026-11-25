@@ -1,5 +1,6 @@
-import { Page } from '@/ui'
-/** PLACEHOLDER — replaced by the owning screen agent. */
+import Home from '@/features/home/Home'
+
+/** / — Home: Next up, weekly ring, topics, recent mocks. */
 export default function HomeRoute() {
-  return <Page title="Home"><p className="text-secondary">Coming together…</p></Page>
+  return <Home />
 }

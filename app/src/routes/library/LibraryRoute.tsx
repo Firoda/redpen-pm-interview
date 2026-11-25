@@ -1,5 +1,6 @@
-import { Page } from '@/ui'
-/** PLACEHOLDER — replaced by the owning screen agent. */
+import Library from '@/features/library/Library'
+
+/** /library — curated questions, own uploads (?tab=mine), JD fake door. */
 export default function LibraryRoute() {
-  return <Page title="Library"><p className="text-secondary">Coming together…</p></Page>
+  return <Library />
 }

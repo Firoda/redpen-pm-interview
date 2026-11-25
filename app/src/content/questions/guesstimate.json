@@ -1,0 +1,1398 @@
+[
+  {
+    "id": "gst-001",
+    "topic": "guesstimate",
+    "subtype": "count_estimate",
+    "difficulty": "easy",
+    "timeboxMin": 10,
+    "prompt": "How many cups of tea are sold by roadside tea stalls in Bengaluru on a typical weekday?",
+    "context": {
+      "hiddenFacts": [
+        "If asked, the interviewer accepts any reasonable city population; suggests about 1.3 to 1.4 crore if the candidate asks.",
+        "Clarification: sold by stalls only, not homes or office pantries."
+      ],
+      "referenceAnswer": {
+        "low": 3000000,
+        "high": 15000000,
+        "unit": "cups/day",
+        "note": "Illustrative range for sanity-checking method; grade the method, not the number."
+      }
+    },
+    "coverage": [
+      "scope_units",
+      "approach",
+      "assumptions",
+      "arithmetic",
+      "sanity_check"
+    ],
+    "expectedStructure": [
+      "Clarify scope (stalls only, weekday, which cups)",
+      "Choose an approach: demand side (people times cups) or supply side (stalls times cups per stall), ideally both",
+      "Segment the population (working adults, students, others) with drinking rates",
+      "Do the arithmetic cleanly and round sensibly",
+      "Sanity-check against the other approach"
+    ],
+    "rubricHints": {
+      "structure": "Picks an approach, states it, segments where rates differ.",
+      "userFocus": "Segments commuters, students and workers by stall use.",
+      "prioritisation": "Spends effort on the largest segment.",
+      "metrics": "States each assumption with a number; arithmetic correct; units consistent; sanity check.",
+      "communication": "Narrates the steps; summarises with a range."
+    },
+    "commonPitfalls": [
+      "Unstated assumptions",
+      "Arithmetic slips with lakh and crore",
+      "No sanity check"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "gst-001-f1",
+        "probes": "metrics",
+        "text": "How would you sanity-check that number from the supply side?",
+        "triggerIf": {
+          "missingAny": [
+            "check",
+            "cross",
+            "supply",
+            "stalls",
+            "sanity"
+          ]
+        }
+      },
+      {
+        "id": "gst-001-f2",
+        "probes": "structure",
+        "text": "Which single assumption moves your answer the most? What if it's off by half?"
+      },
+      {
+        "id": "gst-001-f3",
+        "probes": "prioritisation",
+        "text": "If you could get one real data point, which would it be and why?"
+      },
+      {
+        "id": "gst-001-f4",
+        "probes": "structure",
+        "text": "Now estimate it for {variant}. What changes in your model?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "market": [
+        "Kolkata",
+        "a mid-sized hill town in winter"
+      ],
+      "constraint": [
+        "a weekend during monsoon"
+      ]
+    },
+    "tags": [
+      "india",
+      "warm-up"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "gst-002",
+    "topic": "guesstimate",
+    "subtype": "revenue_estimate",
+    "difficulty": "easy",
+    "timeboxMin": 10,
+    "prompt": "Estimate the annual revenue of a college canteen.",
+    "context": {
+      "hiddenFacts": [
+        "College has about 3,000 students and 150 staff; the canteen is the only food outlet on campus.",
+        "The college runs about 250 working days a year.",
+        "If asked: average spend per customer ₹50 to ₹80; peak is lunch and a short evening snack window.",
+        "Clarify revenue means gross sales."
+      ],
+      "referenceAnswer": {
+        "low": 10000000,
+        "high": 40000000,
+        "unit": "₹/year",
+        "note": "Illustrative range for sanity-checking method; grade the method, not the number."
+      }
+    },
+    "coverage": [
+      "scope_units",
+      "approach",
+      "assumptions",
+      "arithmetic",
+      "sanity_check"
+    ],
+    "expectedStructure": [
+      "Clarify scope (one canteen, gross sales, working days)",
+      "Approach: customers per day times spend per customer times days",
+      "Segment: lunch, snacks, tea, staff versus students",
+      "Arithmetic in lakh and crore",
+      "Sanity-check using capacity or seats"
+    ],
+    "rubricHints": {
+      "structure": "Defines revenue, then a simple multiplication chain.",
+      "userFocus": "Segments students and staff.",
+      "prioritisation": "Focuses on lunch as the biggest driver.",
+      "metrics": "Footfall times spend times days; sanity check against seats and turns.",
+      "communication": "Clear summary with a range."
+    },
+    "commonPitfalls": [
+      "Never defines revenue",
+      "Assumes every student eats there",
+      "No sanity check"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "gst-002-f1",
+        "probes": "metrics",
+        "text": "Check your footfall against how many people the canteen can serve in an hour.",
+        "triggerIf": {
+          "missingAny": [
+            "capacity",
+            "seats",
+            "check"
+          ]
+        }
+      },
+      {
+        "id": "gst-002-f2",
+        "probes": "prioritisation",
+        "text": "Which assumption matters most, and how would you pin it down?"
+      },
+      {
+        "id": "gst-002-f3",
+        "probes": "structure",
+        "text": "How would you split lunch and snack revenue?"
+      },
+      {
+        "id": "gst-002-f4",
+        "probes": "structure",
+        "text": "Redo the key driver for {variant}.",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "market": [
+        "a large university campus with 20,000 students"
+      ],
+      "constraint": [
+        "a canteen open only 3 days a week"
+      ]
+    },
+    "tags": [
+      "india",
+      "campus"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "gst-003",
+    "topic": "guesstimate",
+    "subtype": "count_estimate",
+    "difficulty": "medium",
+    "timeboxMin": 10,
+    "prompt": "How many public EV charging points will Bengaluru need by 2030?",
+    "context": {
+      "hiddenFacts": [
+        "Scope if asked: public charging points (not home chargers); all vehicle types in the city.",
+        "Assume Bengaluru has about 1.3 crore vehicles today, with two-wheelers about 70%.",
+        "EV share by 2030 is the candidate's assumption; the interviewer accepts 15 to 25% of new sales.",
+        "About 60% of EV owners charge at home or work."
+      ],
+      "referenceAnswer": {
+        "low": 10000,
+        "high": 40000,
+        "unit": "public charging points",
+        "note": "Illustrative range for sanity-checking method; grade the method, not the number."
+      }
+    },
+    "coverage": [
+      "scope_units",
+      "approach",
+      "assumptions",
+      "arithmetic",
+      "sanity_check"
+    ],
+    "expectedStructure": [
+      "Clarify scope: public points, which vehicle types, 2030 stock",
+      "Approach: EV stock times share charging in public times vehicles per point",
+      "Segment two-wheelers, cars, autos and commercial",
+      "Arithmetic",
+      "Sanity-check against vehicles per petrol pump"
+    ],
+    "rubricHints": {
+      "structure": "Stock, then public share, then utilisation.",
+      "userFocus": "Segments two-wheelers, cars and fleets.",
+      "prioritisation": "Concentrates on the largest category.",
+      "metrics": "States EV stock, public-charging share, vehicles per point; sanity check with pumps.",
+      "communication": "Shows working aloud."
+    },
+    "commonPitfalls": [
+      "Forgets home charging",
+      "Ignores utilisation",
+      "Unit slips"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "gst-003-f1",
+        "probes": "metrics",
+        "text": "Compare your answer to the number of petrol pumps in the city.",
+        "triggerIf": {
+          "missingAny": [
+            "pump",
+            "check",
+            "compare"
+          ]
+        }
+      },
+      {
+        "id": "gst-003-f2",
+        "probes": "structure",
+        "text": "Which assumption is most uncertain, and how much does it move the answer?"
+      },
+      {
+        "id": "gst-003-f3",
+        "probes": "prioritisation",
+        "text": "Which vehicle segment would you plan chargers for first?"
+      },
+      {
+        "id": "gst-003-f4",
+        "probes": "structure",
+        "text": "Now redo it for {variant}.",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "market": [
+        "Delhi NCR",
+        "Pune"
+      ],
+      "constraint": [
+        "only fast chargers count"
+      ]
+    },
+    "tags": [
+      "india",
+      "ev",
+      "mobility"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "gst-004",
+    "topic": "guesstimate",
+    "subtype": "count_estimate",
+    "difficulty": "easy",
+    "timeboxMin": 10,
+    "prompt": "How many auto-rickshaws run in Pune on a typical day?",
+    "context": {
+      "hiddenFacts": [
+        "Scope if asked: auto-rickshaws plying for hire, not private or e-rickshaws.",
+        "Pune population is about 70 lakh (illustrative).",
+        "Typical trips per auto per day: 15 to 25 (illustrative).",
+        "Ride-hailing apps carry a small share of auto trips."
+      ],
+      "referenceAnswer": {
+        "low": 40000,
+        "high": 100000,
+        "unit": "autos",
+        "note": "Illustrative range for sanity-checking method; grade the method, not the number."
+      }
+    },
+    "coverage": [
+      "scope_units",
+      "approach",
+      "assumptions",
+      "arithmetic",
+      "sanity_check"
+    ],
+    "expectedStructure": [
+      "Clarify scope and what counts as running",
+      "Demand side: daily auto trips divided by trips per auto",
+      "Supply cross-check: autos per 1,000 residents",
+      "Arithmetic",
+      "Sanity-check using the other approach"
+    ],
+    "rubricHints": {
+      "structure": "Picks demand side or supply side and states it.",
+      "userFocus": "Segments commuters and others.",
+      "prioritisation": "Spends time on trips per day.",
+      "metrics": "Trips per auto and daily trips stated; cross-check.",
+      "communication": "Clear."
+    },
+    "commonPitfalls": [
+      "Only top-down population share",
+      "No cross-check"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "gst-004-f1",
+        "probes": "metrics",
+        "text": "How would you cross-check from the supply side?"
+      },
+      {
+        "id": "gst-004-f2",
+        "probes": "structure",
+        "text": "Which assumption would change your answer most?"
+      },
+      {
+        "id": "gst-004-f3",
+        "probes": "prioritisation",
+        "text": "What data would you ask for first?"
+      },
+      {
+        "id": "gst-004-f4",
+        "probes": "structure",
+        "text": "Redo for {variant}.",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "market": [
+        "Jaipur"
+      ],
+      "constraint": [
+        "only rides booked through apps"
+      ]
+    },
+    "tags": [
+      "india",
+      "mobility"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "gst-005",
+    "topic": "guesstimate",
+    "subtype": "count_estimate",
+    "difficulty": "hard",
+    "timeboxMin": 10,
+    "prompt": "Estimate the number of UPI transactions made at petrol pumps in India each day.",
+    "context": {
+      "hiddenFacts": [
+        "India has roughly 90,000 petrol pumps (illustrative).",
+        "Digital payments share at pumps is high but cash and cards remain.",
+        "Typical pump: 400 to 800 vehicles per day, with two-wheelers dominating.",
+        "Fleet and commercial vehicles often pay by fuel card."
+      ],
+      "referenceAnswer": {
+        "low": 8000000,
+        "high": 25000000,
+        "unit": "UPI transactions/day",
+        "note": "Illustrative range for sanity-checking method; grade the method, not the number."
+      }
+    },
+    "coverage": [
+      "scope_units",
+      "approach",
+      "assumptions",
+      "arithmetic",
+      "sanity_check"
+    ],
+    "expectedStructure": [
+      "Clarify scope: transactions, not value; consumer UPI only",
+      "Approach: pumps times vehicles per pump times UPI share",
+      "Segment urban and rural pumps, by vehicle type",
+      "Arithmetic",
+      "Sanity-check against total daily UPI volume"
+    ],
+    "rubricHints": {
+      "structure": "Pumps times vehicles times share, with segments.",
+      "userFocus": "Segments urban versus highway and rural pumps.",
+      "prioritisation": "Focuses on UPI share, the most uncertain driver.",
+      "metrics": "Careful lakh and crore conversions; compares to total UPI volume.",
+      "communication": "States range at the end."
+    },
+    "commonPitfalls": [
+      "Mixes value and count",
+      "Ignores fuel cards",
+      "Doesn't check against national UPI volume"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "gst-005-f1",
+        "probes": "metrics",
+        "text": "Compare your number against total daily UPI transactions in India.",
+        "triggerIf": {
+          "missingAny": [
+            "total",
+            "check",
+            "compare"
+          ]
+        }
+      },
+      {
+        "id": "gst-005-f2",
+        "probes": "prioritisation",
+        "text": "Which driver is the least certain?"
+      },
+      {
+        "id": "gst-005-f3",
+        "probes": "userFocus",
+        "text": "Do rural pumps behave differently from urban ones?"
+      },
+      {
+        "id": "gst-005-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. Redo the key step.",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "cash share is 40% at pumps"
+      ],
+      "market": [
+        "only highway pumps"
+      ]
+    },
+    "tags": [
+      "india",
+      "fintech",
+      "payments"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "gst-006",
+    "topic": "guesstimate",
+    "subtype": "market_size",
+    "difficulty": "medium",
+    "timeboxMin": 10,
+    "prompt": "What is the annual market size in rupees for online preparation for the CAT exam in India?",
+    "context": {
+      "hiddenFacts": [
+        "If asked: roughly 3 lakh registrations a year (illustrative).",
+        "Segments if asked: free-only users, self-study course buyers, full online coaching, mock-test-only buyers."
+      ],
+      "referenceAnswer": {
+        "low": 1500000000,
+        "high": 6000000000,
+        "unit": "₹/year",
+        "note": "Illustrative range for sanity-checking method; grade the method, not the number."
+      }
+    },
+    "coverage": [
+      "scope_units",
+      "approach",
+      "assumptions",
+      "arithmetic",
+      "sanity_check"
+    ],
+    "expectedStructure": [
+      "Define market (online only, paid, annual)",
+      "Funnel: aspirants to the share paying online to segments by product",
+      "Price per segment",
+      "Sum, sanity-check, state a range"
+    ],
+    "rubricHints": {
+      "structure": "Top-down funnel with segments at different prices.",
+      "userFocus": "Recognises repeaters, working professionals and final-year students.",
+      "prioritisation": "Concentrates on the largest revenue segment.",
+      "metrics": "Arithmetic in lakh and crore; a final range.",
+      "communication": "Clear."
+    },
+    "commonPitfalls": [
+      "Single average price",
+      "Includes offline coaching",
+      "Unit slips between lakh and crore"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "gst-006-f1",
+        "probes": "userFocus",
+        "text": "Are all aspirants the same buyer? Who pays the most and why?"
+      },
+      {
+        "id": "gst-006-f2",
+        "probes": "metrics",
+        "text": "Convert your final number into crore and sanity-check it against something you know."
+      },
+      {
+        "id": "gst-006-f3",
+        "probes": "prioritisation",
+        "text": "Which segment drives your answer most?"
+      },
+      {
+        "id": "gst-006-f4",
+        "probes": "structure",
+        "text": "Now size it for {variant}.",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "market": [
+        "GMAT preparation in India",
+        "CAT preparation in Tier-2 and Tier-3 cities only"
+      ],
+      "constraint": [
+        "only subscription revenue, excluding one-time course purchases"
+      ]
+    },
+    "tags": [
+      "india",
+      "edtech",
+      "market-sizing"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "gst-007",
+    "topic": "guesstimate",
+    "subtype": "market_size",
+    "difficulty": "medium",
+    "timeboxMin": 10,
+    "prompt": "Estimate the annual market in India for smartwatches designed for children aged 6 to 12.",
+    "context": {
+      "hiddenFacts": [
+        "Children aged 6 to 12 in India number about 18 crore (illustrative).",
+        "Target households are mainly urban, with two working parents.",
+        "Typical price ₹2,500 to ₹5,000; replacement every 2 years.",
+        "Safety and location tracking are the main reasons to buy."
+      ],
+      "referenceAnswer": {
+        "low": 1000000000,
+        "high": 6000000000,
+        "unit": "₹/year",
+        "note": "Illustrative range for sanity-checking method; grade the method, not the number."
+      }
+    },
+    "coverage": [
+      "scope_units",
+      "approach",
+      "assumptions",
+      "arithmetic",
+      "sanity_check"
+    ],
+    "expectedStructure": [
+      "Define the market and unit (annual sales value)",
+      "Funnel: children to target households to adoption rate",
+      "Price and replacement cycle",
+      "Arithmetic and sanity check",
+      "Sensitivity on adoption"
+    ],
+    "rubricHints": {
+      "structure": "Funnel from children to buyers.",
+      "userFocus": "Segments households by income and city.",
+      "prioritisation": "Concentrates on adoption rate.",
+      "metrics": "Annualises by replacement cycle; sanity check.",
+      "communication": "Clear range."
+    },
+    "commonPitfalls": [
+      "Uses all children as target",
+      "Ignores replacement cycle"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "gst-007-f1",
+        "probes": "userFocus",
+        "text": "Which households really buy this, and why?"
+      },
+      {
+        "id": "gst-007-f2",
+        "probes": "metrics",
+        "text": "Check your answer against smartwatch sales overall."
+      },
+      {
+        "id": "gst-007-f3",
+        "probes": "prioritisation",
+        "text": "What data point would change your answer most?"
+      },
+      {
+        "id": "gst-007-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. Redo your estimate.",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "only models above ₹5,000"
+      ],
+      "market": [
+        "rural India"
+      ]
+    },
+    "tags": [
+      "india",
+      "consumer",
+      "market-sizing"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "gst-008",
+    "topic": "guesstimate",
+    "subtype": "market_size",
+    "difficulty": "easy",
+    "timeboxMin": 10,
+    "prompt": "Estimate the annual rupee market for school uniforms in India.",
+    "context": {
+      "hiddenFacts": [
+        "India has about 25 crore school students (illustrative).",
+        "Typical household buys 1 to 2 sets a year; private schools cost more than government schools.",
+        "Government schools often supply uniforms free or via stipends."
+      ],
+      "referenceAnswer": {
+        "low": 150000000000,
+        "high": 300000000000,
+        "unit": "₹/year",
+        "note": "Illustrative range for sanity-checking method; grade the method, not the number."
+      }
+    },
+    "coverage": [
+      "scope_units",
+      "approach",
+      "assumptions",
+      "arithmetic",
+      "sanity_check"
+    ],
+    "expectedStructure": [
+      "Clarify scope (retail value, all students)",
+      "Students times sets per year times price",
+      "Segment government and private",
+      "Arithmetic with crores",
+      "Sanity-check per household spend"
+    ],
+    "rubricHints": {
+      "structure": "Students times sets times price.",
+      "userFocus": "Segments private and government.",
+      "prioritisation": "Focuses on private schools' larger spend.",
+      "metrics": "Correct crore arithmetic; per-household sanity check.",
+      "communication": "Clear."
+    },
+    "commonPitfalls": [
+      "Same price for all",
+      "Unit slips in crore"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "gst-008-f1",
+        "probes": "userFocus",
+        "text": "Do private and government school students differ here?"
+      },
+      {
+        "id": "gst-008-f2",
+        "probes": "metrics",
+        "text": "Does your total mean a reasonable spend per household?"
+      },
+      {
+        "id": "gst-008-f3",
+        "probes": "prioritisation",
+        "text": "Which segment matters most?"
+      },
+      {
+        "id": "gst-008-f4",
+        "probes": "structure",
+        "text": "Redo for {variant}.",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "market": [
+        "only urban private schools"
+      ],
+      "constraint": [
+        "only branded uniform sales"
+      ]
+    },
+    "tags": [
+      "india",
+      "consumer",
+      "market-sizing"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "gst-009",
+    "topic": "guesstimate",
+    "subtype": "revenue_estimate",
+    "difficulty": "medium",
+    "timeboxMin": 10,
+    "prompt": "Estimate the monthly revenue of one quick-commerce dark store in a large Indian metro.",
+    "context": {
+      "hiddenFacts": [
+        "If asked: the store serves about a 2 to 3 km radius and operates about 6 am to 1 am.",
+        "If asked: average order value roughly ₹450 to ₹600 (illustrative).",
+        "Revenue means gross order value unless the candidate defines it otherwise; either is fine if stated."
+      ],
+      "referenceAnswer": {
+        "low": 15000000,
+        "high": 45000000,
+        "unit": "₹ GOV/month",
+        "note": "Illustrative range for sanity-checking method; grade the method, not the number."
+      }
+    },
+    "coverage": [
+      "scope_units",
+      "approach",
+      "assumptions",
+      "arithmetic",
+      "sanity_check"
+    ],
+    "expectedStructure": [
+      "Clarify revenue definition (GOV versus take)",
+      "Orders per day times AOV times days, with orders from demand or capacity",
+      "Peak versus off-peak hours",
+      "Arithmetic",
+      "Sanity-check against capacity"
+    ],
+    "rubricHints": {
+      "structure": "Defines revenue first; picks demand or capacity side and cross-checks.",
+      "userFocus": "Notes household density in the catchment.",
+      "prioritisation": "Focuses on orders per day.",
+      "metrics": "Clean multiplication; orders per hour by time band.",
+      "communication": "Clear."
+    },
+    "commonPitfalls": [
+      "Never defines revenue",
+      "Uses population of the whole city"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "gst-009-f1",
+        "probes": "structure",
+        "text": "When you say revenue, do you mean what customers pay or what the company keeps?",
+        "triggerIf": {
+          "missingAny": [
+            "gov",
+            "gross",
+            "take rate",
+            "commission",
+            "net"
+          ]
+        }
+      },
+      {
+        "id": "gst-009-f2",
+        "probes": "metrics",
+        "text": "Check your orders per day against what the store can physically pick and dispatch."
+      },
+      {
+        "id": "gst-009-f3",
+        "probes": "prioritisation",
+        "text": "If you had one more data point, which would you ask for and why?"
+      },
+      {
+        "id": "gst-009-f4",
+        "probes": "structure",
+        "text": "Redo the key driver for {variant}.",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "market": [
+        "a Tier-2 city like Indore"
+      ],
+      "constraint": [
+        "the store operates only 8 am to 10 pm"
+      ]
+    },
+    "tags": [
+      "india",
+      "quick-commerce"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "gst-010",
+    "topic": "guesstimate",
+    "subtype": "revenue_estimate",
+    "difficulty": "medium",
+    "timeboxMin": 10,
+    "prompt": "Estimate the monthly revenue of a typical neighbourhood kirana store in an Indian city.",
+    "context": {
+      "hiddenFacts": [
+        "The store serves a lane or a few lanes in a residential colony, with about 600 households nearby.",
+        "Typical basket ₹150 to ₹250; some customers buy daily, most weekly.",
+        "Competes with a supermarket and quick-commerce apps."
+      ],
+      "referenceAnswer": {
+        "low": 400000,
+        "high": 1500000,
+        "unit": "₹/month",
+        "note": "Illustrative range for sanity-checking method; grade the method, not the number."
+      }
+    },
+    "coverage": [
+      "scope_units",
+      "approach",
+      "assumptions",
+      "arithmetic",
+      "sanity_check"
+    ],
+    "expectedStructure": [
+      "Clarify store size and revenue definition",
+      "Demand side: households times purchase frequency times basket",
+      "Supply cross-check: customers per hour and opening hours",
+      "Arithmetic",
+      "Sanity-check"
+    ],
+    "rubricHints": {
+      "structure": "Picks demand or footfall approach.",
+      "userFocus": "Segments daily versus weekly buyers.",
+      "prioritisation": "Spends effort on frequency.",
+      "metrics": "Households, share served, frequency, basket stated.",
+      "communication": "Clear."
+    },
+    "commonPitfalls": [
+      "Assumes every household buys from the store",
+      "No cross-check"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "gst-010-f1",
+        "probes": "metrics",
+        "text": "Cross-check from customers per hour and opening hours."
+      },
+      {
+        "id": "gst-010-f2",
+        "probes": "prioritisation",
+        "text": "Which assumption matters most?"
+      },
+      {
+        "id": "gst-010-f3",
+        "probes": "userFocus",
+        "text": "Do all households use the store equally?"
+      },
+      {
+        "id": "gst-010-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "a quick-commerce store opens in the same lane"
+      ],
+      "market": [
+        "a village store"
+      ]
+    },
+    "tags": [
+      "india",
+      "retail"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "gst-011",
+    "topic": "guesstimate",
+    "subtype": "revenue_estimate",
+    "difficulty": "hard",
+    "timeboxMin": 10,
+    "prompt": "Estimate the annual gross booking value of airport cab rides in Bengaluru.",
+    "context": {
+      "hiddenFacts": [
+        "The airport handles about 40 million passengers a year (illustrative); about 1.2 lakh people a day count arrivals and departures.",
+        "Many passengers travel in groups of 1 to 3.",
+        "Alternatives: private cars, airport buses, and prepaid taxis.",
+        "Average one-way fare ₹1,200 to ₹1,500 (illustrative)."
+      ],
+      "referenceAnswer": {
+        "low": 5000000000,
+        "high": 15000000000,
+        "unit": "₹/year",
+        "note": "Illustrative range for sanity-checking method; grade the method, not the number."
+      }
+    },
+    "coverage": [
+      "scope_units",
+      "approach",
+      "assumptions",
+      "arithmetic",
+      "sanity_check"
+    ],
+    "expectedStructure": [
+      "Clarify definitions: app cab rides, one-way trips, gross value",
+      "Passengers per day to share using cabs to rides after group size",
+      "Fare per ride",
+      "Annualise and sanity-check",
+      "Sensitivity on mode share"
+    ],
+    "rubricHints": {
+      "structure": "Passengers to mode share to rides to value.",
+      "userFocus": "Segments business and leisure travellers.",
+      "prioritisation": "Focuses on mode share.",
+      "metrics": "Handles pax versus rides and annualisation.",
+      "communication": "Clear."
+    },
+    "commonPitfalls": [
+      "Counts passengers as rides",
+      "Forgets two-way trips",
+      "No mode share"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "gst-011-f1",
+        "probes": "structure",
+        "text": "Are you counting passengers or rides? Show me the conversion."
+      },
+      {
+        "id": "gst-011-f2",
+        "probes": "metrics",
+        "text": "How would you sanity-check the final number?"
+      },
+      {
+        "id": "gst-011-f3",
+        "probes": "prioritisation",
+        "text": "Which assumption would you validate first?"
+      },
+      {
+        "id": "gst-011-f4",
+        "probes": "structure",
+        "text": "Redo for {variant}.",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "market": [
+        "Mumbai airport"
+      ],
+      "constraint": [
+        "only rides booked via one app with 40% share"
+      ]
+    },
+    "tags": [
+      "india",
+      "mobility"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "gst-012",
+    "topic": "guesstimate",
+    "subtype": "market_size",
+    "difficulty": "hard",
+    "timeboxMin": 10,
+    "prompt": "Estimate the annual market size in rupees for online tutoring for school students in India.",
+    "context": {
+      "hiddenFacts": [
+        "India has about 25 crore school students (illustrative).",
+        "Online paid tutoring is concentrated in urban and affluent families.",
+        "Segments: one-to-one tutors, recorded courses, doubt-solving, test-prep.",
+        "Price ranges from ₹3,000 to ₹60,000 a year."
+      ],
+      "referenceAnswer": {
+        "low": 100000000000,
+        "high": 250000000000,
+        "unit": "₹/year",
+        "note": "Illustrative range for sanity-checking method; grade the method, not the number."
+      }
+    },
+    "coverage": [
+      "scope_units",
+      "approach",
+      "assumptions",
+      "arithmetic",
+      "sanity_check"
+    ],
+    "expectedStructure": [
+      "Define the market: paid, online, school students",
+      "Funnel: students to households that pay to segments",
+      "Price per segment",
+      "Sum and sanity-check",
+      "Sensitivity on penetration"
+    ],
+    "rubricHints": {
+      "structure": "Funnel with segments of different price.",
+      "userFocus": "Segments by income and class.",
+      "prioritisation": "Focuses on the highest-value segment.",
+      "metrics": "Careful crore conversions; range.",
+      "communication": "Clear."
+    },
+    "commonPitfalls": [
+      "Single price",
+      "Ignores free substitutes",
+      "Unit slips"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "gst-012-f1",
+        "probes": "userFocus",
+        "text": "Who is the paying customer and who is the user?"
+      },
+      {
+        "id": "gst-012-f2",
+        "probes": "metrics",
+        "text": "Convert to crore and compare with a known company's revenue."
+      },
+      {
+        "id": "gst-012-f3",
+        "probes": "prioritisation",
+        "text": "Which segment drives the number?"
+      },
+      {
+        "id": "gst-012-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. Redo.",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "only classes 9 to 12"
+      ],
+      "market": [
+        "Tier-2 and Tier-3 cities only"
+      ]
+    },
+    "tags": [
+      "india",
+      "edtech",
+      "market-sizing"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "gst-013",
+    "topic": "guesstimate",
+    "subtype": "capacity_ops",
+    "difficulty": "easy",
+    "timeboxMin": 10,
+    "prompt": "How many orders can a small cloud kitchen with three cooks prepare in an hour?",
+    "context": {
+      "hiddenFacts": [
+        "The kitchen makes one cuisine; each cook can work on two dishes at once.",
+        "Average dish takes about 10 minutes of cook time; orders have 1.5 dishes on average.",
+        "Packing takes 1 minute per order, by a separate helper.",
+        "Peak lunch hour is the limiting hour."
+      ],
+      "referenceAnswer": {
+        "low": 15,
+        "high": 40,
+        "unit": "orders/hour",
+        "note": "Illustrative range for sanity-checking method; grade the method, not the number."
+      }
+    },
+    "coverage": [
+      "scope_units",
+      "approach",
+      "assumptions",
+      "arithmetic",
+      "sanity_check"
+    ],
+    "expectedStructure": [
+      "Clarify scope and bottleneck",
+      "Capacity per cook: dishes per hour",
+      "Convert dishes to orders",
+      "Check other constraints (packing, equipment)",
+      "Sanity-check"
+    ],
+    "rubricHints": {
+      "structure": "Finds the bottleneck first.",
+      "userFocus": "Notes order mix.",
+      "prioritisation": "Focuses on the real constraint.",
+      "metrics": "Dishes per hour to orders per hour; cross-check.",
+      "communication": "Clear."
+    },
+    "commonPitfalls": [
+      "Ignores parallel work",
+      "Forgets packing"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "gst-013-f1",
+        "probes": "metrics",
+        "text": "What other step could limit the kitchen?"
+      },
+      {
+        "id": "gst-013-f2",
+        "probes": "prioritisation",
+        "text": "How would you raise capacity cheaply?"
+      },
+      {
+        "id": "gst-013-f3",
+        "probes": "structure",
+        "text": "How sure are you about cook time?"
+      },
+      {
+        "id": "gst-013-f4",
+        "probes": "structure",
+        "text": "Redo for {variant}.",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "one cook is absent"
+      ],
+      "market": [
+        "a biryani-only kitchen"
+      ]
+    },
+    "tags": [
+      "india",
+      "food",
+      "ops"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "gst-014",
+    "topic": "guesstimate",
+    "subtype": "capacity_ops",
+    "difficulty": "medium",
+    "timeboxMin": 10,
+    "prompt": "How many delivery riders does a dark store need at its evening peak?",
+    "context": {
+      "hiddenFacts": [
+        "Peak is about 120 orders per hour between 7 and 9 pm (illustrative).",
+        "Round trip per order takes about 20 minutes including handover.",
+        "Riders can carry one order at a time; there is no batching.",
+        "Riders work 8-hour shifts, with breaks."
+      ],
+      "referenceAnswer": {
+        "low": 25,
+        "high": 60,
+        "unit": "riders",
+        "note": "Illustrative range for sanity-checking method; grade the method, not the number."
+      }
+    },
+    "coverage": [
+      "scope_units",
+      "approach",
+      "assumptions",
+      "arithmetic",
+      "sanity_check"
+    ],
+    "expectedStructure": [
+      "Clarify peak demand and delivery model",
+      "Orders per hour times trip time",
+      "Add buffers for idle time and breaks",
+      "Sanity-check utilisation",
+      "Sensitivity on trip time"
+    ],
+    "rubricHints": {
+      "structure": "Capacity equals demand times time.",
+      "userFocus": "Notes rider shift patterns.",
+      "prioritisation": "Focuses on trip time.",
+      "metrics": "Little's-law style arithmetic; utilisation check.",
+      "communication": "Clear."
+    },
+    "commonPitfalls": [
+      "Ignores utilisation",
+      "Uses daily rather than peak orders"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "gst-014-f1",
+        "probes": "metrics",
+        "text": "What utilisation would you target, and why?"
+      },
+      {
+        "id": "gst-014-f2",
+        "probes": "prioritisation",
+        "text": "Which assumption moves the number most?"
+      },
+      {
+        "id": "gst-014-f3",
+        "probes": "structure",
+        "text": "How does batching change your answer?"
+      },
+      {
+        "id": "gst-014-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. Redo.",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "each rider can batch two orders"
+      ],
+      "market": [
+        "a hilly city with slower trips"
+      ]
+    },
+    "tags": [
+      "india",
+      "quick-commerce",
+      "ops"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "gst-015",
+    "topic": "guesstimate",
+    "subtype": "capacity_ops",
+    "difficulty": "hard",
+    "timeboxMin": 10,
+    "prompt": "Estimate the peak payment requests per second a UPI app needs to handle on a Diwali evening.",
+    "context": {
+      "hiddenFacts": [
+        "The app has about 40 million daily active users (illustrative).",
+        "A user makes 2 to 3 payments on an average day; festivals roughly double that.",
+        "Peak hour carries 8 to 12% of daily traffic; each payment triggers several backend calls.",
+        "Success rate must remain above 98%."
+      ],
+      "referenceAnswer": {
+        "low": 3000,
+        "high": 8000,
+        "unit": "payments/second at peak",
+        "note": "Illustrative range for sanity-checking method; grade the method, not the number."
+      }
+    },
+    "coverage": [
+      "scope_units",
+      "approach",
+      "assumptions",
+      "arithmetic",
+      "sanity_check"
+    ],
+    "expectedStructure": [
+      "Clarify what counts: payment attempts versus API calls",
+      "Daily payments to peak hour to per second",
+      "Festival multiplier and headroom",
+      "Arithmetic",
+      "Sanity-check and sensitivity"
+    ],
+    "rubricHints": {
+      "structure": "Daily to peak hour to per second.",
+      "userFocus": "Notes festival behaviour.",
+      "prioritisation": "Focuses on peak share.",
+      "metrics": "Correct division by 3,600; headroom stated.",
+      "communication": "Clear."
+    },
+    "commonPitfalls": [
+      "Divides by 86,400 for peak",
+      "Forgets festival uplift",
+      "Ignores headroom"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "gst-015-f1",
+        "probes": "metrics",
+        "text": "How would you convert this into backend calls per second?"
+      },
+      {
+        "id": "gst-015-f2",
+        "probes": "prioritisation",
+        "text": "What headroom would you plan for and why?"
+      },
+      {
+        "id": "gst-015-f3",
+        "probes": "structure",
+        "text": "Which assumption is least certain?"
+      },
+      {
+        "id": "gst-015-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "a cashback campaign doubles traffic for an hour"
+      ],
+      "market": [
+        "a smaller app with 5 million users"
+      ]
+    },
+    "tags": [
+      "india",
+      "fintech",
+      "scale"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "gst-016",
+    "topic": "guesstimate",
+    "subtype": "capacity_ops",
+    "difficulty": "medium",
+    "timeboxMin": 10,
+    "prompt": "How many check-in counters does an airport terminal handling 40,000 passengers a day need at its morning peak?",
+    "context": {
+      "hiddenFacts": [
+        "Peak hour carries about 8% of daily passengers (illustrative).",
+        "Roughly 60% of passengers need to drop bags or check in at a counter; the rest use web check-in and kiosks.",
+        "Each passenger takes about 3 minutes at a counter.",
+        "Counters are staffed continuously during peak."
+      ],
+      "referenceAnswer": {
+        "low": 50,
+        "high": 130,
+        "unit": "counters",
+        "note": "Illustrative range for sanity-checking method; grade the method, not the number."
+      }
+    },
+    "coverage": [
+      "scope_units",
+      "approach",
+      "assumptions",
+      "arithmetic",
+      "sanity_check"
+    ],
+    "expectedStructure": [
+      "Clarify scope and peak definition",
+      "Peak passengers times share at counters",
+      "Counters from service time",
+      "Add buffers for queues",
+      "Sanity-check"
+    ],
+    "rubricHints": {
+      "structure": "Passengers to counter load to counters.",
+      "userFocus": "Segments by check-in mode.",
+      "prioritisation": "Focuses on peak share.",
+      "metrics": "Service rate per counter; buffer.",
+      "communication": "Clear."
+    },
+    "commonPitfalls": [
+      "Uses daily total",
+      "Ignores web check-in"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "gst-016-f1",
+        "probes": "metrics",
+        "text": "How do queue times change with fewer counters?"
+      },
+      {
+        "id": "gst-016-f2",
+        "probes": "prioritisation",
+        "text": "What would you do before building more counters?"
+      },
+      {
+        "id": "gst-016-f3",
+        "probes": "structure",
+        "text": "Which input matters most?"
+      },
+      {
+        "id": "gst-016-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. Redo.",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "web check-in rises to 70%"
+      ],
+      "market": [
+        "a smaller airport with 8,000 passengers a day"
+      ]
+    },
+    "tags": [
+      "india",
+      "ops",
+      "travel"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  }
+]

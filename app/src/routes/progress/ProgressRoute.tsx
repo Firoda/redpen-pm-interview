@@ -1,5 +1,6 @@
-import { Page } from '@/ui'
-/** PLACEHOLDER — replaced by the owning screen agent. */
+import Progress from '@/features/tracker/Progress'
+
+/** /progress — tracker: topics, trend, dimensions, recurring mistakes, heatmap. */
 export default function ProgressRoute() {
-  return <Page title="Progress"><p className="text-secondary">Coming together…</p></Page>
+  return <Progress />
 }

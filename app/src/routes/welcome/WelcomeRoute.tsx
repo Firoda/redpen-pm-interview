@@ -1,5 +1,6 @@
-import { Page } from '@/ui'
-/** PLACEHOLDER — replaced by the owning screen agent. */
+import Onboarding from '@/features/onboarding/Onboarding'
+
+/** /welcome — full-screen onboarding, no shell. */
 export default function WelcomeRoute() {
-  return <Page title="Welcome"><p className="text-secondary">Coming together…</p></Page>
+  return <Onboarding />
 }

@@ -1,0 +1,1275 @@
+[
+  {
+    "id": "tec-001",
+    "topic": "tech",
+    "subtype": "explain_concept",
+    "difficulty": "easy",
+    "timeboxMin": 10,
+    "prompt": "Explain to a non-technical marketing head what an API is, and why our team wants to offer a public API to partners.",
+    "context": {
+      "hiddenFacts": [
+        "Company: a travel-booking platform; partners are corporate travel desks and small travel agents.",
+        "Marketing head's worry if asked: partners will bypass our app and we lose the brand relationship."
+      ]
+    },
+    "coverage": [
+      "plain_explanation",
+      "components",
+      "tradeoffs",
+      "pm_decision"
+    ],
+    "expectedStructure": [
+      "Simple analogy, then a precise one-line definition",
+      "Concrete example in this business",
+      "Why partners and we benefit (distribution, revenue)",
+      "Risks and trade-offs (brand, support, security) and how we'd handle them"
+    ],
+    "rubricHints": {
+      "structure": "Analogy, definition, example, benefit, risk.",
+      "userFocus": "Speaks to the marketing head's concerns about brand and customers.",
+      "prioritisation": "Names the one or two partner use cases that matter most.",
+      "metrics": "Mentions partner-sourced bookings or revenue share as the measure.",
+      "communication": "Analogy and plain definition; no jargon left unexplained; checks understanding."
+    },
+    "commonPitfalls": [
+      "Jargon (endpoints, REST) without explanation",
+      "Ignores the stakeholder's concern"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "tec-001-f1",
+        "probes": "userFocus",
+        "text": "She says: 'So partners will just bypass our app?' How do you respond?"
+      },
+      {
+        "id": "tec-001-f2",
+        "probes": "communication",
+        "text": "Explain rate limits to her in one sentence."
+      },
+      {
+        "id": "tec-001-f3",
+        "probes": "metrics",
+        "text": "How would we know the API is worth the effort a year from now?"
+      },
+      {
+        "id": "tec-001-f4",
+        "probes": "prioritisation",
+        "text": "Now explain it to {variant}.",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "user": [
+        "the CFO, who only cares about cost and revenue",
+        "a new engineer from a non-web background"
+      ],
+      "constraint": [
+        "you have 60 seconds in an elevator"
+      ]
+    },
+    "tags": [
+      "communication",
+      "apis",
+      "india"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "tec-002",
+    "topic": "tech",
+    "subtype": "how_it_works",
+    "difficulty": "medium",
+    "timeboxMin": 10,
+    "prompt": "Walk me through what happens, technically, when I scan a shop's UPI QR code and pay ₹200.",
+    "context": {
+      "hiddenFacts": [
+        "Expected components: payer app (PSP), the QR payload (payee VPA, name, amount), NPCI's UPI switch, payer's bank (debit), payee's bank (credit), UPI PIN authentication, response back to both apps, merchant notification.",
+        "Follow-up material: pending and timeout states, reversals, idempotency, why some payments show 'pending'."
+      ]
+    },
+    "coverage": [
+      "components",
+      "tradeoffs",
+      "scale",
+      "pm_decision"
+    ],
+    "expectedStructure": [
+      "Actors first (apps, NPCI, banks)",
+      "Sequence: scan, resolve, authenticate, debit, credit, confirm",
+      "Failure modes (timeouts, pending, reversals)",
+      "Why it matters for a PM (success rate, latency, support tickets)"
+    ],
+    "rubricHints": {
+      "structure": "Names actors, then a clear ordered sequence.",
+      "userFocus": "Explains it so a shop owner and a customer could follow.",
+      "prioritisation": "Spends time on the failure modes that matter.",
+      "metrics": "Mentions success rate, latency or pending rate as product metrics.",
+      "communication": "Right altitude: correct without drowning in protocol detail."
+    },
+    "commonPitfalls": [
+      "Skips NPCI and banks",
+      "No failure modes"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "tec-002-f1",
+        "probes": "structure",
+        "text": "Money left my account but the shop didn't get it. What happened, and what does the system do?",
+        "triggerIf": {
+          "missingAny": [
+            "pending",
+            "timeout",
+            "fail",
+            "reversal"
+          ]
+        }
+      },
+      {
+        "id": "tec-002-f2",
+        "probes": "metrics",
+        "text": "As the PM of this app, which technical metric would you watch daily, and why?"
+      },
+      {
+        "id": "tec-002-f3",
+        "probes": "prioritisation",
+        "text": "Which failure would you fix first, and why?"
+      },
+      {
+        "id": "tec-002-f4",
+        "probes": "communication",
+        "text": "Now explain the same flow for {variant}.",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "a payment made on a feature phone with no internet"
+      ],
+      "market": [
+        "a card payment on a POS machine, to compare"
+      ]
+    },
+    "tags": [
+      "india",
+      "fintech",
+      "systems"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "tec-003",
+    "topic": "tech",
+    "subtype": "ai_ml_product",
+    "difficulty": "hard",
+    "timeboxMin": 10,
+    "prompt": "We want an LLM-powered support assistant in our food-delivery app. What are the key technical trade-offs, and would you build or buy?",
+    "context": {
+      "hiddenFacts": [
+        "If asked: 1.5 lakh support chats a day; 60% are 'where is my order' and refunds.",
+        "Constraints if asked: refunds above ₹500 need human approval; data must stay in India."
+      ]
+    },
+    "coverage": [
+      "components",
+      "tradeoffs",
+      "scale",
+      "pm_decision"
+    ],
+    "expectedStructure": [
+      "Scope: which intents to automate first",
+      "Architecture: retrieval over order data and policies, actions (refund API) with guardrails",
+      "Trade-offs: latency, cost per chat, accuracy and hallucination, privacy, escalation",
+      "Build versus buy criteria (data residency, customisation, time to market, cost)",
+      "Evaluation and launch plan (offline eval set, shadow mode, metrics)"
+    ],
+    "rubricHints": {
+      "structure": "Scope, architecture, trade-offs, decision, rollout.",
+      "userFocus": "Thinks about the customer in a failed order.",
+      "prioritisation": "Starts with the top intents and keeps risky actions behind human approval.",
+      "metrics": "Containment or resolution rate, CSAT, wrong-refund rate, cost per resolved chat.",
+      "communication": "Explains without jargon."
+    },
+    "commonPitfalls": [
+      "'Just use ChatGPT' with no guardrails",
+      "No evaluation plan",
+      "Ignores data residency"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "tec-003-f1",
+        "probes": "metrics",
+        "text": "How would you know the assistant is good enough to launch?",
+        "triggerIf": {
+          "missingAny": [
+            "eval",
+            "accuracy",
+            "resolution",
+            "containment",
+            "csat"
+          ]
+        }
+      },
+      {
+        "id": "tec-003-f2",
+        "probes": "prioritisation",
+        "text": "Which actions would you never let the model take on its own, and why?"
+      },
+      {
+        "id": "tec-003-f3",
+        "probes": "structure",
+        "text": "What breaks first when traffic doubles?"
+      },
+      {
+        "id": "tec-003-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. Does build versus buy change?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the budget is capped at ₹1 per chat",
+        "launch must happen in 4 weeks"
+      ],
+      "market": [
+        "the app operates across 5 Indian languages"
+      ]
+    },
+    "tags": [
+      "ai",
+      "llm",
+      "support"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "tec-004",
+    "topic": "tech",
+    "subtype": "explain_concept",
+    "difficulty": "easy",
+    "timeboxMin": 10,
+    "prompt": "Explain caching to a non-technical operations head who asks why the app sometimes shows an old price.",
+    "context": {
+      "setup": "You're the PM for catalogue at a grocery delivery app.",
+      "hiddenFacts": [
+        "Prices for 40,000 items change several times a day; the app caches product pages for 15 minutes.",
+        "Operations head is worried that customers are charged a different price from what they saw.",
+        "Caching reduces server load and keeps pages loading in under a second.",
+        "The checkout always re-validates price from the source."
+      ]
+    },
+    "coverage": [
+      "plain_explanation",
+      "components",
+      "tradeoffs",
+      "pm_decision"
+    ],
+    "expectedStructure": [
+      "Simple analogy and one-line definition",
+      "Why it exists (speed, cost)",
+      "Why prices can be stale and what protects the customer at checkout",
+      "Trade-off and options (shorter cache, push updates)",
+      "What the PM will do"
+    ],
+    "rubricHints": {
+      "structure": "Analogy, why, problem, options.",
+      "userFocus": "Speaks to the operations head's concern about customer trust.",
+      "prioritisation": "Picks one fix and defends it.",
+      "metrics": "Stale-price complaints and page load time.",
+      "communication": "Plain language; no jargon."
+    },
+    "commonPitfalls": [
+      "Jargon like TTL without explanation",
+      "Treats staleness as a bug only"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "tec-004-f1",
+        "probes": "userFocus",
+        "text": "A customer says the price changed at checkout. What do you tell them?"
+      },
+      {
+        "id": "tec-004-f2",
+        "probes": "prioritisation",
+        "text": "Which price changes are worth refreshing instantly, and which can wait?"
+      },
+      {
+        "id": "tec-004-f3",
+        "probes": "metrics",
+        "text": "What number would you watch to see the trade-off is right?"
+      },
+      {
+        "id": "tec-004-f4",
+        "probes": "communication",
+        "text": "Now explain it to {variant}.",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "user": [
+        "a store manager who only knows shelves and stock"
+      ],
+      "constraint": [
+        "you have 30 seconds"
+      ]
+    },
+    "tags": [
+      "india",
+      "grocery",
+      "communication"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "tec-005",
+    "topic": "tech",
+    "subtype": "explain_concept",
+    "difficulty": "medium",
+    "timeboxMin": 10,
+    "prompt": "Explain feature flags to a founder, and why releasing a new feature to 5% of users first is wise.",
+    "context": {
+      "setup": "You're a PM at an early-stage consumer startup.",
+      "hiddenFacts": [
+        "The founder wants to ship a redesigned home screen to everyone on Friday.",
+        "The last redesign increased crashes on low-end phones.",
+        "Flags are managed through a tool; rollbacks take minutes.",
+        "The company has no experimentation platform yet."
+      ]
+    },
+    "coverage": [
+      "plain_explanation",
+      "components",
+      "tradeoffs",
+      "pm_decision"
+    ],
+    "expectedStructure": [
+      "Analogy and definition",
+      "Example from the product",
+      "Benefits: safe rollout, quick rollback, experiments",
+      "Costs: complexity, flag clean-up, partial experiences",
+      "Recommendation for this launch"
+    ],
+    "rubricHints": {
+      "structure": "Analogy, definition, benefit, cost, decision.",
+      "userFocus": "Addresses the founder's urgency and risk.",
+      "prioritisation": "Chooses the rollout steps and thresholds.",
+      "metrics": "Crash rate, key funnel conversion; rollback threshold.",
+      "communication": "No jargon."
+    },
+    "commonPitfalls": [
+      "Describes tooling instead of value",
+      "No rollback criterion"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "tec-005-f1",
+        "probes": "prioritisation",
+        "text": "What would make you stop the rollout?"
+      },
+      {
+        "id": "tec-005-f2",
+        "probes": "metrics",
+        "text": "Which two numbers do you watch at 5%?"
+      },
+      {
+        "id": "tec-005-f3",
+        "probes": "userFocus",
+        "text": "Which users do you pick for the first 5%?"
+      },
+      {
+        "id": "tec-005-f4",
+        "probes": "communication",
+        "text": "Now explain it to {variant}.",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "user": [
+        "the head of sales"
+      ],
+      "constraint": [
+        "there is no analytics for the new screen"
+      ]
+    },
+    "tags": [
+      "communication",
+      "experimentation"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "tec-006",
+    "topic": "tech",
+    "subtype": "explain_concept",
+    "difficulty": "hard",
+    "timeboxMin": 10,
+    "prompt": "A user sees an old wallet balance for a few seconds after paying. Explain eventual consistency to a business head, and say whether it's acceptable.",
+    "context": {
+      "setup": "You're the PM for wallets at a payments company.",
+      "hiddenFacts": [
+        "The wallet is served from replicas that lag the primary by up to 3 seconds.",
+        "Complaints about balance mismatches are 0.3% of sessions (illustrative).",
+        "Double-spend is prevented at the primary.",
+        "A business head fears customer panic and support load."
+      ]
+    },
+    "coverage": [
+      "plain_explanation",
+      "components",
+      "tradeoffs",
+      "scale",
+      "pm_decision"
+    ],
+    "expectedStructure": [
+      "Analogy and definition",
+      "How this system produces the lag",
+      "Where it is acceptable and where it is not",
+      "Options: read from primary for balance, UI cues, caching",
+      "Recommendation and metrics"
+    ],
+    "rubricHints": {
+      "structure": "Analogy, system, where it matters, options.",
+      "userFocus": "Considers user panic and trust.",
+      "prioritisation": "Picks where to pay for strong consistency.",
+      "metrics": "Mismatch complaints, latency, cost of reading from primary.",
+      "communication": "Plain language."
+    },
+    "commonPitfalls": [
+      "Says it is a bug",
+      "No cost trade-off"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "tec-006-f1",
+        "probes": "prioritisation",
+        "text": "Where would you insist on strong consistency?"
+      },
+      {
+        "id": "tec-006-f2",
+        "probes": "metrics",
+        "text": "What metric would convince you the lag is acceptable?"
+      },
+      {
+        "id": "tec-006-f3",
+        "probes": "structure",
+        "text": "What happens at 10x traffic?"
+      },
+      {
+        "id": "tec-006-f4",
+        "probes": "communication",
+        "text": "Now explain it to {variant}.",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "user": [
+        "a regulator's auditor"
+      ],
+      "constraint": [
+        "reading from the primary doubles database cost"
+      ]
+    },
+    "tags": [
+      "india",
+      "fintech",
+      "systems"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "tec-007",
+    "topic": "tech",
+    "subtype": "how_it_works",
+    "difficulty": "easy",
+    "timeboxMin": 10,
+    "prompt": "How does a food-delivery app estimate the delivery time it shows you?",
+    "context": {
+      "setup": "You're a PM for ordering at a food-delivery app.",
+      "hiddenFacts": [
+        "ETA combines restaurant prep time, rider assignment time and travel time.",
+        "Prep time is learned from past orders by restaurant and time of day.",
+        "Traffic and weather change travel time.",
+        "Customers cancel more when the ETA grows beyond 45 minutes."
+      ]
+    },
+    "coverage": [
+      "components",
+      "tradeoffs",
+      "scale",
+      "pm_decision"
+    ],
+    "expectedStructure": [
+      "Name the parts of ETA",
+      "How each part is estimated",
+      "Why it goes wrong (busy kitchens, rider shortage)",
+      "How a PM would use or evaluate it"
+    ],
+    "rubricHints": {
+      "structure": "Components, then how they combine.",
+      "userFocus": "Notes how ETA affects the customer's decision to order.",
+      "prioritisation": "Names the biggest source of error.",
+      "metrics": "ETA error and cancellation rate.",
+      "communication": "Right altitude."
+    },
+    "commonPitfalls": [
+      "Only mentions maps",
+      "No error discussion"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "tec-007-f1",
+        "probes": "metrics",
+        "text": "How would you measure whether the ETA is good?"
+      },
+      {
+        "id": "tec-007-f2",
+        "probes": "prioritisation",
+        "text": "Would you show a range or one number? Why?"
+      },
+      {
+        "id": "tec-007-f3",
+        "probes": "structure",
+        "text": "What happens in heavy rain?"
+      },
+      {
+        "id": "tec-007-f4",
+        "probes": "communication",
+        "text": "Now explain it for {variant}.",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "restaurants don't share prep times"
+      ],
+      "market": [
+        "a hill town with unpredictable roads"
+      ]
+    },
+    "tags": [
+      "india",
+      "food-delivery",
+      "systems"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "tec-008",
+    "topic": "tech",
+    "subtype": "how_it_works",
+    "difficulty": "medium",
+    "timeboxMin": 10,
+    "prompt": "What happens technically when a million users try to book Tatkal train tickets at 10 am sharp?",
+    "context": {
+      "setup": "You're a PM at a ticket-booking platform.",
+      "hiddenFacts": [
+        "Traffic spikes 50x for a few minutes.",
+        "Seat inventory is held by the railway's reservation system, which limits requests per second.",
+        "Booking involves login, search, passenger details, payment and confirmation.",
+        "Many users retry repeatedly."
+      ]
+    },
+    "coverage": [
+      "components",
+      "tradeoffs",
+      "scale",
+      "pm_decision"
+    ],
+    "expectedStructure": [
+      "Describe the flow and the shared bottleneck",
+      "Queues, rate limits, caches, retries",
+      "Failure modes and fairness",
+      "Trade-offs and PM decisions (virtual waiting room, fewer steps)",
+      "Metrics"
+    ],
+    "rubricHints": {
+      "structure": "Flow, bottleneck, mitigations.",
+      "userFocus": "Considers frustrated users who retry.",
+      "prioritisation": "Picks the highest-value mitigation.",
+      "metrics": "Booking success rate, time to confirm.",
+      "communication": "Right altitude."
+    },
+    "commonPitfalls": [
+      "Says 'add more servers'",
+      "Ignores the upstream limit"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "tec-008-f1",
+        "probes": "prioritisation",
+        "text": "You can ship one change before next month. Which?"
+      },
+      {
+        "id": "tec-008-f2",
+        "probes": "metrics",
+        "text": "What would you measure on the day?"
+      },
+      {
+        "id": "tec-008-f3",
+        "probes": "userFocus",
+        "text": "How do you keep it fair?"
+      },
+      {
+        "id": "tec-008-f4",
+        "probes": "communication",
+        "text": "Now explain the same for {variant}.",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the railway system limit cannot be raised"
+      ],
+      "market": [
+        "a flash sale on an e-commerce site instead"
+      ]
+    },
+    "tags": [
+      "india",
+      "travel",
+      "scale"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "tec-009",
+    "topic": "tech",
+    "subtype": "how_it_works",
+    "difficulty": "hard",
+    "timeboxMin": 10,
+    "prompt": "How does a UPI AutoPay mandate get created and then executed every month?",
+    "context": {
+      "setup": "You're the PM for recurring payments at a UPI app.",
+      "hiddenFacts": [
+        "Mandates are created with customer approval, with a cap amount and frequency.",
+        "Pre-debit notifications are sent before each debit; users can pause or revoke.",
+        "Banks and NPCI process each debit as a collect-style request.",
+        "Failures are caused by insufficient balance, bank limits or revoked mandates."
+      ]
+    },
+    "coverage": [
+      "components",
+      "tradeoffs",
+      "scale",
+      "pm_decision"
+    ],
+    "expectedStructure": [
+      "Actors: user, app, merchant, NPCI, banks",
+      "Creation flow and consent",
+      "Monthly execution flow and notification",
+      "Failure modes and retries",
+      "PM implications (success rate, support)"
+    ],
+    "rubricHints": {
+      "structure": "Actors, creation, execution, failure.",
+      "userFocus": "Understands consent and fear of surprise debits.",
+      "prioritisation": "Picks the failure mode to fix first.",
+      "metrics": "Mandate success rate, debit success rate, revocations.",
+      "communication": "Right altitude."
+    },
+    "commonPitfalls": [
+      "Mixes with one-time payments",
+      "No failure modes"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "tec-009-f1",
+        "probes": "metrics",
+        "text": "Which metric would you watch for a recurring-payment product?"
+      },
+      {
+        "id": "tec-009-f2",
+        "probes": "prioritisation",
+        "text": "Debits fail due to low balance. What do you do?"
+      },
+      {
+        "id": "tec-009-f3",
+        "probes": "userFocus",
+        "text": "How do you keep users from feeling surprised?"
+      },
+      {
+        "id": "tec-009-f4",
+        "probes": "communication",
+        "text": "Now explain it for {variant}.",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the bank doesn't support pre-debit notifications"
+      ],
+      "user": [
+        "the user is an elderly person paying insurance premiums"
+      ]
+    },
+    "tags": [
+      "india",
+      "fintech",
+      "systems"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "tec-010",
+    "topic": "tech",
+    "subtype": "ai_ml_product",
+    "difficulty": "medium",
+    "timeboxMin": 10,
+    "prompt": "How would a recommendation system for a short-video app work, and what would you ask the ML team?",
+    "context": {
+      "setup": "You're the PM for the feed at a short-video app.",
+      "hiddenFacts": [
+        "Signals: watch time, likes, shares, skips, follows, content metadata.",
+        "A candidate-generation stage then a ranking stage then re-ranking for diversity.",
+        "New users and new creators lack data (cold start).",
+        "The company wants to increase retention without increasing harmful content."
+      ]
+    },
+    "coverage": [
+      "plain_explanation",
+      "components",
+      "tradeoffs",
+      "scale",
+      "pm_decision"
+    ],
+    "expectedStructure": [
+      "Plain explanation of the stages",
+      "Signals and objectives",
+      "Trade-offs: engagement versus diversity, safety, cold start",
+      "Evaluation: offline, A/B tests",
+      "Questions for the ML team"
+    ],
+    "rubricHints": {
+      "structure": "Stages then trade-offs.",
+      "userFocus": "Considers creators as well as viewers.",
+      "prioritisation": "Chooses the objective with reasoning.",
+      "metrics": "Retention, watch time per user with diversity and reports as guardrails.",
+      "communication": "Jargon explained."
+    },
+    "commonPitfalls": [
+      "Says 'AI picks videos'",
+      "Only engagement"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "tec-010-f1",
+        "probes": "metrics",
+        "text": "Which guardrail would you set on the model's objective?"
+      },
+      {
+        "id": "tec-010-f2",
+        "probes": "prioritisation",
+        "text": "Which objective would you optimise first?"
+      },
+      {
+        "id": "tec-010-f3",
+        "probes": "userFocus",
+        "text": "How do new users get a good feed?"
+      },
+      {
+        "id": "tec-010-f4",
+        "probes": "communication",
+        "text": "Suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "you cannot use watch time as a signal"
+      ],
+      "market": [
+        "the app is used in 10 languages"
+      ]
+    },
+    "tags": [
+      "ai",
+      "recommendation",
+      "india"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "tec-011",
+    "topic": "tech",
+    "subtype": "ai_ml_product",
+    "difficulty": "easy",
+    "timeboxMin": 10,
+    "prompt": "Explain hallucination in AI chatbots to a customer-care head, and what risk it poses to a bank's chat assistant.",
+    "context": {
+      "setup": "You're the PM for a bank's chat assistant.",
+      "hiddenFacts": [
+        "The assistant answers questions about cards, fees and disputes.",
+        "It occasionally invents policy details when documents are missing.",
+        "Customers act on wrong fee information and complain.",
+        "Human agents handle the 20% of chats the bot escalates."
+      ]
+    },
+    "coverage": [
+      "plain_explanation",
+      "components",
+      "tradeoffs",
+      "pm_decision"
+    ],
+    "expectedStructure": [
+      "Plain definition and analogy",
+      "Why it happens",
+      "Risks in this setting",
+      "Mitigations: grounded answers, citations, escalation",
+      "How to measure"
+    ],
+    "rubricHints": {
+      "structure": "Definition, cause, risk, mitigation.",
+      "userFocus": "Considers customers who act on wrong info.",
+      "prioritisation": "Picks the highest-risk topics to restrict first.",
+      "metrics": "Wrong-answer rate on an eval set, escalation rate.",
+      "communication": "No jargon."
+    },
+    "commonPitfalls": [
+      "Says the model 'lies'",
+      "No mitigation"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "tec-011-f1",
+        "probes": "prioritisation",
+        "text": "Which topics would the bot never answer on its own?"
+      },
+      {
+        "id": "tec-011-f2",
+        "probes": "metrics",
+        "text": "How would you measure wrong answers?"
+      },
+      {
+        "id": "tec-011-f3",
+        "probes": "userFocus",
+        "text": "What does the customer see when the bot isn't sure?"
+      },
+      {
+        "id": "tec-011-f4",
+        "probes": "communication",
+        "text": "Now explain it to {variant}.",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "user": [
+        "a regulator"
+      ],
+      "constraint": [
+        "you cannot store customer chats"
+      ]
+    },
+    "tags": [
+      "ai",
+      "llm",
+      "fintech"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "tec-012",
+    "topic": "tech",
+    "subtype": "ai_ml_product",
+    "difficulty": "medium",
+    "timeboxMin": 10,
+    "prompt": "We want an ML model to predict which borrowers will default. What would you ask before building it?",
+    "context": {
+      "setup": "You're the PM for credit risk at a digital lender.",
+      "hiddenFacts": [
+        "You have 3 years of repayment history on 8 lakh borrowers; thin-file customers are 40%.",
+        "Default is defined as 90 days past due; data labels lag by 3 months.",
+        "The model would decide approval and limits; fairness and explainability are required.",
+        "Previous rule-based approach rejects 30% of applicants."
+      ]
+    },
+    "coverage": [
+      "plain_explanation",
+      "components",
+      "tradeoffs",
+      "scale",
+      "pm_decision"
+    ],
+    "expectedStructure": [
+      "Define the decision and the target label",
+      "Data quality, leakage, bias",
+      "Trade-offs: accuracy versus explainability, approval versus default",
+      "Evaluation: precision, recall at thresholds, monitoring",
+      "Rollout plan"
+    ],
+    "rubricHints": {
+      "structure": "Decision, data, trade-offs, rollout.",
+      "userFocus": "Considers thin-file customers and fairness.",
+      "prioritisation": "Picks the threshold trade-off.",
+      "metrics": "Default rate at approval rate; monitoring drift.",
+      "communication": "Explains to non-technical."
+    },
+    "commonPitfalls": [
+      "Focuses on algorithms only",
+      "Ignores label delay"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "tec-012-f1",
+        "probes": "metrics",
+        "text": "How would you pick a decision threshold?"
+      },
+      {
+        "id": "tec-012-f2",
+        "probes": "prioritisation",
+        "text": "Which customers does the model hurt first?"
+      },
+      {
+        "id": "tec-012-f3",
+        "probes": "structure",
+        "text": "How would you roll it out safely?"
+      },
+      {
+        "id": "tec-012-f4",
+        "probes": "communication",
+        "text": "Suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "regulation requires a reason for each rejection"
+      ],
+      "market": [
+        "you expand to a country with no credit bureau"
+      ]
+    },
+    "tags": [
+      "ai",
+      "ml",
+      "fintech",
+      "india"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "tec-013",
+    "topic": "tech",
+    "subtype": "tech_tradeoff",
+    "difficulty": "hard",
+    "timeboxMin": 10,
+    "prompt": "Our app is slow on low-end Android phones. Engineering says a native rewrite will take nine months. Do we do it?",
+    "context": {
+      "setup": "You're the PM for a consumer app with 60% of users on low-end Android.",
+      "hiddenFacts": [
+        "The app is a hybrid app; cold start takes 6 seconds on low-end phones.",
+        "A rewrite needs 12 engineers for 9 months; incremental optimisation could cut start to 4 seconds in 6 weeks.",
+        "Slow starts correlate with lower day-7 retention.",
+        "The roadmap has two revenue features waiting."
+      ]
+    },
+    "coverage": [
+      "components",
+      "tradeoffs",
+      "scale",
+      "pm_decision"
+    ],
+    "expectedStructure": [
+      "Quantify the problem and impact on retention",
+      "Options: rewrite, optimise, hybrid, lite app",
+      "Cost, time, risk and opportunity cost",
+      "Recommendation with sequencing",
+      "Metrics and review point"
+    ],
+    "rubricHints": {
+      "structure": "Impact, options, decision.",
+      "userFocus": "Considers low-end users.",
+      "prioritisation": "Picks the cheapest effective option first.",
+      "metrics": "Cold start time, day-7 retention by device.",
+      "communication": "Explains trade-offs clearly."
+    },
+    "commonPitfalls": [
+      "Chooses rewrite without cost",
+      "Ignores opportunity cost"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "tec-013-f1",
+        "probes": "metrics",
+        "text": "How would you prove slow starts cause lower retention?"
+      },
+      {
+        "id": "tec-013-f2",
+        "probes": "prioritisation",
+        "text": "What would make you commit to the rewrite later?"
+      },
+      {
+        "id": "tec-013-f3",
+        "probes": "structure",
+        "text": "What's the cheapest test you can run in two weeks?"
+      },
+      {
+        "id": "tec-013-f4",
+        "probes": "prioritisation",
+        "text": "Suppose {variant}. What do you decide?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "no extra engineers are available"
+      ],
+      "market": [
+        "50% of users are on 2G"
+      ]
+    },
+    "tags": [
+      "india",
+      "performance",
+      "tradeoffs"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "tec-014",
+    "topic": "tech",
+    "subtype": "tech_tradeoff",
+    "difficulty": "medium",
+    "timeboxMin": 10,
+    "prompt": "For a flash sale, should payments be processed synchronously or asynchronously? What are the trade-offs?",
+    "context": {
+      "setup": "You're the PM for checkout at an e-commerce company.",
+      "hiddenFacts": [
+        "Flash sale traffic is 20x normal for 10 minutes.",
+        "Synchronous payment holds the user on a spinner; asynchronous confirms later with a notification.",
+        "Inventory must not be oversold.",
+        "Payment gateway timeouts occur at high load."
+      ]
+    },
+    "coverage": [
+      "components",
+      "tradeoffs",
+      "scale",
+      "pm_decision"
+    ],
+    "expectedStructure": [
+      "Define both options in plain words",
+      "User experience for each",
+      "Consistency: inventory and double charges",
+      "Failure handling",
+      "Recommendation and metrics"
+    ],
+    "rubricHints": {
+      "structure": "Define, compare, recommend.",
+      "userFocus": "Considers the shopper who waits.",
+      "prioritisation": "Chooses with a criterion.",
+      "metrics": "Payment success rate, time to confirmation, oversell rate.",
+      "communication": "Plain language."
+    },
+    "commonPitfalls": [
+      "Says one is always better",
+      "Ignores failures"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "tec-014-f1",
+        "probes": "prioritisation",
+        "text": "Which one do you pick for a sale, and what is the condition?"
+      },
+      {
+        "id": "tec-014-f2",
+        "probes": "metrics",
+        "text": "What do you monitor in the first 10 minutes?"
+      },
+      {
+        "id": "tec-014-f3",
+        "probes": "userFocus",
+        "text": "What does the customer see if payment is pending?"
+      },
+      {
+        "id": "tec-014-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. Does your choice change?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "inventory is very limited (100 units)"
+      ],
+      "market": [
+        "customers mostly pay by cash on delivery"
+      ]
+    },
+    "tags": [
+      "india",
+      "e-commerce",
+      "tradeoffs"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "tec-015",
+    "topic": "tech",
+    "subtype": "tech_tradeoff",
+    "difficulty": "easy",
+    "timeboxMin": 10,
+    "prompt": "Engineering says they need two weeks to cut the app size from 80 MB to 40 MB. Is it worth it?",
+    "context": {
+      "setup": "You're the PM for a consumer app growing in Tier-2 and Tier-3 towns.",
+      "hiddenFacts": [
+        "Install conversion on low-storage phones is lower for large apps.",
+        "About 35% of target users have under 2 GB free storage (illustrative).",
+        "Two weeks of work delays one small feature.",
+        "Uninstalls due to storage are a common reason."
+      ]
+    },
+    "coverage": [
+      "components",
+      "tradeoffs",
+      "pm_decision"
+    ],
+    "expectedStructure": [
+      "Explain why app size matters",
+      "Estimate benefit",
+      "Cost and opportunity cost",
+      "Decision and metric"
+    ],
+    "rubricHints": {
+      "structure": "Benefit, cost, decision.",
+      "userFocus": "Notes the target low-storage user.",
+      "prioritisation": "Compares against the delayed feature.",
+      "metrics": "Install conversion and uninstall rate.",
+      "communication": "Concise."
+    },
+    "commonPitfalls": [
+      "No quantification",
+      "Rejects without reasoning"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "tec-015-f1",
+        "probes": "prioritisation",
+        "text": "What is the feature you'd delay, and is it worth it?"
+      },
+      {
+        "id": "tec-015-f2",
+        "probes": "metrics",
+        "text": "How would you measure the benefit?"
+      },
+      {
+        "id": "tec-015-f3",
+        "probes": "userFocus",
+        "text": "Who benefits most from the smaller app?"
+      },
+      {
+        "id": "tec-015-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What do you decide?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the reduction would need removing a popular feature"
+      ],
+      "market": [
+        "the target market has fast data and large storage"
+      ]
+    },
+    "tags": [
+      "india",
+      "performance",
+      "tradeoffs"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "tec-016",
+    "topic": "tech",
+    "subtype": "tech_tradeoff",
+    "difficulty": "medium",
+    "timeboxMin": 10,
+    "prompt": "Should a field-sales app for rural distributors be offline-first or online-only?",
+    "context": {
+      "setup": "You're the PM for a field-sales app used by 5,000 sales reps.",
+      "hiddenFacts": [
+        "Connectivity is poor in 40% of routes; reps visit 30 shops a day.",
+        "Offline-first needs sync, conflict handling and more testing.",
+        "Orders must be accurate against live stock and pricing.",
+        "Online-only is cheaper to build but stalls reps without a network."
+      ]
+    },
+    "coverage": [
+      "components",
+      "tradeoffs",
+      "scale",
+      "pm_decision"
+    ],
+    "expectedStructure": [
+      "Clarify the field reality and users",
+      "Define both options",
+      "Trade-offs: reliability, consistency, cost",
+      "Recommendation with scope",
+      "Metrics"
+    ],
+    "rubricHints": {
+      "structure": "Users, options, trade-offs, decision.",
+      "userFocus": "Understands the rep's day.",
+      "prioritisation": "Chooses offline for core tasks only, with reasons.",
+      "metrics": "Orders per rep per day, sync failures.",
+      "communication": "Clear."
+    },
+    "commonPitfalls": [
+      "All-or-nothing answer",
+      "Ignores conflicts"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "tec-016-f1",
+        "probes": "prioritisation",
+        "text": "Which features must work offline and which can wait?"
+      },
+      {
+        "id": "tec-016-f2",
+        "probes": "metrics",
+        "text": "What metric shows offline is worth it?"
+      },
+      {
+        "id": "tec-016-f3",
+        "probes": "structure",
+        "text": "How do you handle a price change that happened offline?"
+      },
+      {
+        "id": "tec-016-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the team has only four engineers"
+      ],
+      "user": [
+        "the users are shopkeepers placing their own orders"
+      ]
+    },
+    "tags": [
+      "india",
+      "b2b",
+      "tradeoffs"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  }
+]

@@ -1,0 +1,1428 @@
+[
+  {
+    "id": "pd-001",
+    "topic": "product_design",
+    "subtype": "design_for_segment",
+    "difficulty": "medium",
+    "timeboxMin": 15,
+    "prompt": "Design a grocery-ordering experience for elderly people who live alone in Indian metros.",
+    "context": {
+      "setup": "You're a PM at a quick-commerce company.",
+      "hiddenFacts": [
+        "Goal if asked: grow repeat orders from customers aged 60+; it's a new segment for the company.",
+        "Many 60+ customers' orders are placed by children living in another city who pay by UPI.",
+        "Top complaints from 60+ customers: small text, substitutions without asking, delivery staff leaving at the gate.",
+        "No hard constraint unless the candidate asks; timeline if asked: one quarter."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "segments",
+      "pain_points",
+      "criterion",
+      "metric_guardrail"
+    ],
+    "expectedStructure": [
+      "Clarify the goal (adoption, repeat or safety) and business context",
+      "Segment: the elderly user versus the remote child or caregiver; pick one with a reason",
+      "Pain points along the journey: discover, order, pay, receive, get help",
+      "Three to five solutions mapped to pains",
+      "Prioritise with an explicit criterion (impact on goal against effort or risk)",
+      "Success metric, guardrail and key risks"
+    ],
+    "rubricHints": {
+      "structure": "Signposts the steps up front and follows them.",
+      "userFocus": "Distinguishes the person ordering from the person paying; names concrete pains (vision, trust, doorstep handover), not 'easy UI'.",
+      "prioritisation": "Chooses one segment and one hero feature with a stated criterion; says what is not built.",
+      "metrics": "Repeat order rate among 60+ in 30 days plus a guardrail such as substitution complaints or delivery time.",
+      "communication": "Concise, summarises the recommendation at the end."
+    },
+    "commonPitfalls": [
+      "Jumps to features before choosing a user",
+      "Generic 'big fonts' answer with no journey",
+      "No metric"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "pd-001-f1",
+        "probes": "userFocus",
+        "text": "Who is actually placing and paying for these orders? Does that change who you design for?",
+        "triggerIf": {
+          "missingAny": [
+            "children",
+            "son",
+            "daughter",
+            "caregiver",
+            "family",
+            "pays"
+          ]
+        }
+      },
+      {
+        "id": "pd-001-f2",
+        "probes": "prioritisation",
+        "text": "You've listed several ideas. Engineering can ship one this quarter. Which, and why that one?"
+      },
+      {
+        "id": "pd-001-f3",
+        "probes": "metrics",
+        "text": "Eight weeks after launch, what number tells you this worked, and what would tell you it hurt something?",
+        "triggerIf": {
+          "missingAny": [
+            "metric",
+            "measure",
+            "rate",
+            "%",
+            "retention",
+            "repeat"
+          ]
+        }
+      },
+      {
+        "id": "pd-001-f4",
+        "probes": "structure",
+        "text": "What's the riskiest assumption in your design, and how would you test it cheaply?"
+      },
+      {
+        "id": "pd-001-f5",
+        "probes": "userFocus",
+        "text": "Let's change one thing: {variant}. What changes in your design?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "user": [
+        "the users are caregivers ordering remotely for their parents",
+        "the users are first-time smartphone users in Tier-3 towns"
+      ],
+      "market": [
+        "the market is Jakarta instead of Indian metros",
+        "the market is rural Uttar Pradesh with 2-day delivery"
+      ],
+      "constraint": [
+        "there is no app, it must work entirely on WhatsApp",
+        "you must launch in 6 weeks with two engineers"
+      ]
+    },
+    "tags": [
+      "india",
+      "quick-commerce",
+      "accessibility"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "pd-002",
+    "topic": "product_design",
+    "subtype": "improve_existing",
+    "difficulty": "easy",
+    "timeboxMin": 12,
+    "prompt": "How would you improve Google Maps for two-wheeler riders in India?",
+    "context": {
+      "hiddenFacts": [
+        "Goal if asked: increase weekly active two-wheeler navigation sessions.",
+        "Riders can't look at the phone while riding; many use a phone mount or earphones only.",
+        "Pain points heard in research: narrow-lane routing, parking at destination, rain and flooding, voice prompts drowned by traffic."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "segments",
+      "pain_points",
+      "criterion",
+      "metric_guardrail"
+    ],
+    "expectedStructure": [
+      "Clarify goal and which riders (commuters, delivery partners, weekend riders)",
+      "Pick a segment with a reason",
+      "Map the ride: plan, ride, arrive and park",
+      "Pains to solutions",
+      "Prioritise and pick one",
+      "Metric plus a safety guardrail"
+    ],
+    "rubricHints": {
+      "structure": "Walks the ride journey in order.",
+      "userFocus": "Picks a segment (gig delivery riders versus daily commuters) and designs for eyes-free use.",
+      "prioritisation": "Uses impact against effort or similar and explicitly deprioritises a tempting idea.",
+      "metrics": "Session completion, reroute rate or weekly active two-wheeler users with a safety guardrail (no added screen interaction while moving).",
+      "communication": "Short and signposted."
+    },
+    "commonPitfalls": [
+      "Ignores safety and the eyes-free constraint",
+      "Lists ten features without choosing",
+      "No metric"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "pd-002-f1",
+        "probes": "userFocus",
+        "text": "Which riders exactly? A delivery partner and an office commuter want different things.",
+        "triggerIf": {
+          "missingAny": [
+            "delivery",
+            "commuter",
+            "segment",
+            "gig"
+          ]
+        }
+      },
+      {
+        "id": "pd-002-f2",
+        "probes": "prioritisation",
+        "text": "Of your ideas, which would you ship first and what would you cut?"
+      },
+      {
+        "id": "pd-002-f3",
+        "probes": "metrics",
+        "text": "How would you know your top idea is working without making riding less safe?"
+      },
+      {
+        "id": "pd-002-f4",
+        "probes": "userFocus",
+        "text": "Now suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "user": [
+        "the riders are women commuting after 9 pm",
+        "the riders are food-delivery partners paid per order"
+      ],
+      "market": [
+        "the market is Ho Chi Minh City",
+        "the market is hill towns with poor connectivity"
+      ],
+      "constraint": [
+        "the solution cannot use the screen while the vehicle is moving",
+        "offline-first: no data for 30% of the ride"
+      ]
+    },
+    "tags": [
+      "india",
+      "maps",
+      "mobility"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "pd-003",
+    "topic": "product_design",
+    "subtype": "design_new",
+    "difficulty": "hard",
+    "timeboxMin": 15,
+    "prompt": "Design a feature for a UPI payments app that protects first-time digital payers from fraud.",
+    "context": {
+      "hiddenFacts": [
+        "Most frequent scams if asked: collect-request scams (user approves a request thinking they receive money), fake customer-care numbers, screen-sharing apps.",
+        "Constraint if asked: payment success time cannot rise by more than 1 second for normal payments.",
+        "The regulator expects any new friction to be explainable to the user."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "segments",
+      "pain_points",
+      "criterion",
+      "metric_guardrail"
+    ],
+    "expectedStructure": [
+      "Clarify fraud types and users (first-time, low digital literacy, vernacular)",
+      "Understand the fraud journey and the moment of harm",
+      "Solutions at the moment of harm (collect-request warnings, cooling-off for new payees)",
+      "Trade-off: friction against protection; who bears the friction",
+      "Prioritise one; metrics (fraud loss rate, false-positive friction)"
+    ],
+    "rubricHints": {
+      "structure": "Maps the scam journey before solutions.",
+      "userFocus": "Knows the victim usually authorises the payment themselves; designs for vernacular, low-literacy moments.",
+      "prioritisation": "Targets friction only at risky moments (new payee, collect request, high amount).",
+      "metrics": "Fraud-reported transactions per lakh plus a guardrail on success rate and latency; mentions false positives.",
+      "communication": "Explains the intervention in plain words."
+    },
+    "commonPitfalls": [
+      "Adds OTP everywhere",
+      "Only education campaigns",
+      "Ignores the 1-second constraint once told"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "pd-003-f1",
+        "probes": "prioritisation",
+        "text": "Your idea adds friction. Who pays that cost, and how do you keep it off normal payments?"
+      },
+      {
+        "id": "pd-003-f2",
+        "probes": "metrics",
+        "text": "How would you know you're not blocking good payments while stopping bad ones?",
+        "triggerIf": {
+          "missingAny": [
+            "false positive",
+            "success rate",
+            "conversion",
+            "latency"
+          ]
+        }
+      },
+      {
+        "id": "pd-003-f3",
+        "probes": "userFocus",
+        "text": "Walk me through the exact moment a victim gets scammed. Where does your feature intervene?"
+      },
+      {
+        "id": "pd-003-f4",
+        "probes": "structure",
+        "text": "Let's change one thing: {variant}. Does your approach still hold?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "user": [
+        "the users are small shopkeepers receiving payments, not consumers",
+        "the users are senior citizens on feature phones using UPI 123PAY"
+      ],
+      "market": [
+        "the market is Brazil's Pix instead of UPI"
+      ],
+      "constraint": [
+        "you cannot add any extra screen to the payment flow",
+        "you have no access to bank-side fraud data"
+      ]
+    },
+    "tags": [
+      "india",
+      "fintech",
+      "trust-safety"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "pd-004",
+    "topic": "product_design",
+    "subtype": "design_new",
+    "difficulty": "medium",
+    "timeboxMin": 15,
+    "prompt": "Design a product for first-time air travellers in India.",
+    "context": {
+      "setup": "You're a PM at an online travel company.",
+      "hiddenFacts": [
+        "Goal if asked: grow first-time flyers who later book a second trip with us.",
+        "Many first-timers are older relatives or people from Tier-2 towns travelling with family.",
+        "Top anxieties in research: baggage rules, security and check-in steps, missing the gate, English-only announcements.",
+        "No hard constraint unless asked; assume mobile app and WhatsApp are both available."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "segments",
+      "criterion",
+      "solutions",
+      "metric_guardrail"
+    ],
+    "expectedStructure": [
+      "Clarify goal and which first-timers (self-booking youth, family of elders, business)",
+      "Pick one segment with a reason",
+      "Journey: book, pack, reach airport, check-in, security, board, arrive",
+      "Pains to ideas",
+      "Prioritise with a criterion and pick one",
+      "Metric (second booking in 6 months) and guardrail"
+    ],
+    "rubricHints": {
+      "structure": "Walks the airport journey in order before ideas.",
+      "userFocus": "Picks a specific first-timer, names concrete anxieties tied to a moment, not 'nervous travellers'.",
+      "prioritisation": "Picks one moment (check-in or security) and says what is dropped.",
+      "metrics": "Second booking rate within six months with a guardrail such as support contacts per trip.",
+      "communication": "Ends with a one-line recommendation."
+    },
+    "commonPitfalls": [
+      "Jumps to a checklist app before choosing a user",
+      "Generic 'travel guide' idea",
+      "No metric"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "pd-004-f1",
+        "probes": "userFocus",
+        "text": "Which first-time flyer are you designing for, and what scares them most?"
+      },
+      {
+        "id": "pd-004-f2",
+        "probes": "prioritisation",
+        "text": "You have five ideas. Which one do you build first and what do you drop?"
+      },
+      {
+        "id": "pd-004-f3",
+        "probes": "metrics",
+        "text": "How would you know it worked six months from now?"
+      },
+      {
+        "id": "pd-004-f4",
+        "probes": "structure",
+        "text": "What is the riskiest assumption in your idea, and how would you test it cheaply?"
+      },
+      {
+        "id": "pd-004-f5",
+        "probes": "userFocus",
+        "text": "Suppose {variant}. What changes in your design?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "user": [
+        "the travellers are elderly parents flying alone to meet their children",
+        "the travellers are migrant workers flying home for a festival"
+      ],
+      "constraint": [
+        "you cannot build anything inside the airline's own app",
+        "you have two weeks and one engineer"
+      ],
+      "market": [
+        "the market is rail travel instead of flights"
+      ]
+    },
+    "tags": [
+      "india",
+      "travel",
+      "onboarding"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "pd-005",
+    "topic": "product_design",
+    "subtype": "improve_existing",
+    "difficulty": "medium",
+    "timeboxMin": 15,
+    "prompt": "Improve onboarding for a mutual-fund investing app.",
+    "context": {
+      "setup": "You're the PM for growth at a mutual-fund app with a 12-minute KYC-and-first-investment flow.",
+      "hiddenFacts": [
+        "Goal if asked: raise the share of sign-ups who make a first investment within 7 days.",
+        "Funnel if asked (illustrative): 100 sign-ups, 55 complete KYC, 30 link a bank account, 18 invest.",
+        "Biggest drop-offs in research: PAN and Aadhaar mismatch errors, not knowing which fund to pick, and fear of losing money.",
+        "Many users are first-time investors aged 24 to 32 in Tier-1 and Tier-2 cities."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "segments",
+      "pain_points",
+      "criterion",
+      "metric_guardrail"
+    ],
+    "expectedStructure": [
+      "Clarify goal and funnel stage with the biggest loss",
+      "Segment first-time investors; pick one",
+      "Pains per stage (KYC errors, choice overload, fear)",
+      "Solutions mapped to the worst stage",
+      "Prioritise with impact against effort",
+      "Metric plus guardrail (early redemptions, support contacts)"
+    ],
+    "rubricHints": {
+      "structure": "Starts from the funnel, not from features.",
+      "userFocus": "Differentiates nervous first-timers from those who know funds; picks one.",
+      "prioritisation": "Fixes the largest drop-off first and names what waits.",
+      "metrics": "Sign-up to first investment within 7 days, with early-redemption or wrong-fund complaints as guardrail.",
+      "communication": "Concise and closes with a recommendation."
+    },
+    "commonPitfalls": [
+      "Adds a tutorial for everything",
+      "Ignores the funnel data",
+      "No guardrail on investor suitability"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "pd-005-f1",
+        "probes": "structure",
+        "text": "Where in the funnel would you start, and why there?"
+      },
+      {
+        "id": "pd-005-f2",
+        "probes": "prioritisation",
+        "text": "You can ship one change this quarter. Which one?"
+      },
+      {
+        "id": "pd-005-f3",
+        "probes": "metrics",
+        "text": "Which number do you watch to know it worked, and what would show you hurt investors?",
+        "triggerIf": {
+          "missingAny": [
+            "guardrail",
+            "redemption",
+            "complaint",
+            "counter"
+          ]
+        }
+      },
+      {
+        "id": "pd-005-f4",
+        "probes": "userFocus",
+        "text": "Is a nervous first-timer the same user as someone switching from another app?"
+      },
+      {
+        "id": "pd-005-f5",
+        "probes": "userFocus",
+        "text": "Let's change one thing: {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "KYC rules cannot be changed or shortened",
+        "you can only change copy, not screens"
+      ],
+      "user": [
+        "the users are parents investing for a child's education"
+      ],
+      "market": [
+        "the market is Tier-3 towns with vernacular-first users"
+      ]
+    },
+    "tags": [
+      "india",
+      "fintech",
+      "onboarding",
+      "funnel"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "pd-006",
+    "topic": "product_design",
+    "subtype": "design_for_segment",
+    "difficulty": "easy",
+    "timeboxMin": 15,
+    "prompt": "Help hostel students split grocery runs and cook together more cheaply.",
+    "context": {
+      "setup": "You're a PM at a student-focused consumer app.",
+      "hiddenFacts": [
+        "Goal if asked: build a habit product among college students, measured by weekly active groups.",
+        "Typical group is 3 to 6 students sharing a kitchenette; one person usually shops and fronts the money.",
+        "Pain points if asked: unequal contributions, chasing money, wasted vegetables, no common list.",
+        "Students pay by UPI and live on monthly allowances of ₹6,000 to ₹10,000 (illustrative)."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "segments",
+      "criterion",
+      "solutions",
+      "metric_guardrail"
+    ],
+    "expectedStructure": [
+      "Clarify goal and the student group",
+      "Pick the user: the shopper who fronts money or the freeloading flatmates",
+      "Pains: lists, money, waste",
+      "Ideas mapped to pains",
+      "Prioritise one",
+      "Metric and guardrail"
+    ],
+    "rubricHints": {
+      "structure": "Simple journey: plan, buy, cook, settle.",
+      "userFocus": "Distinguishes the organiser from members and designs for the one who fronts money.",
+      "prioritisation": "Picks one core loop (shared list plus settle-up) and drops cooking features.",
+      "metrics": "Weekly active groups completing a shared purchase with settle-up within 3 days; guardrail on dropped members.",
+      "communication": "Clear and short."
+    },
+    "commonPitfalls": [
+      "Builds a recipe app",
+      "Ignores the money-chasing pain",
+      "No metric"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "pd-006-f1",
+        "probes": "userFocus",
+        "text": "In a group of five, who is your main user and why?"
+      },
+      {
+        "id": "pd-006-f2",
+        "probes": "prioritisation",
+        "text": "Which one feature do you ship first and what do you leave out?"
+      },
+      {
+        "id": "pd-006-f3",
+        "probes": "metrics",
+        "text": "How would you measure that groups keep using it?"
+      },
+      {
+        "id": "pd-006-f4",
+        "probes": "userFocus",
+        "text": "Now suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "user": [
+        "the group is young working professionals sharing a flat",
+        "the group is students in a hostel mess with no kitchen"
+      ],
+      "constraint": [
+        "there is no payments integration, only chat"
+      ],
+      "market": [
+        "the market is a Tier-2 college town"
+      ]
+    },
+    "tags": [
+      "india",
+      "students",
+      "social"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "pd-007",
+    "topic": "product_design",
+    "subtype": "design_new",
+    "difficulty": "easy",
+    "timeboxMin": 15,
+    "prompt": "Design a smart alarm for college students.",
+    "context": {
+      "setup": "You're a PM at a consumer app startup.",
+      "hiddenFacts": [
+        "Goal if asked: daily active use and a paid tier later.",
+        "Students sleep late, have irregular timetables and share rooms.",
+        "Pain points if asked: snoozing, roommates disturbed, missing 8 am classes, no link to the timetable.",
+        "Phone is the only device; no wearable assumed."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "segments",
+      "pain_points",
+      "solutions",
+      "metric_guardrail"
+    ],
+    "expectedStructure": [
+      "Clarify goal and which students",
+      "Pick a segment with a reason",
+      "Pains: oversleep, disturbance, irregular schedule",
+      "Ideas mapped to pains",
+      "Prioritise one",
+      "Metric and guardrail"
+    ],
+    "rubricHints": {
+      "structure": "States the user and the problem before features.",
+      "userFocus": "Picks one student type and names a specific pain, not 'busy students'.",
+      "prioritisation": "Chooses one hero feature with a criterion.",
+      "metrics": "Wake-on-time rate or on-time class attendance with a guardrail like alarms disabled.",
+      "communication": "Plain and concise."
+    },
+    "commonPitfalls": [
+      "Lists gadget ideas",
+      "Generic user",
+      "No metric"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "pd-007-f1",
+        "probes": "userFocus",
+        "text": "Which students are you designing for, and what goes wrong for them today?"
+      },
+      {
+        "id": "pd-007-f2",
+        "probes": "prioritisation",
+        "text": "Pick one feature to ship. What do you cut?"
+      },
+      {
+        "id": "pd-007-f3",
+        "probes": "metrics",
+        "text": "How will you know people wake up on time because of it?"
+      },
+      {
+        "id": "pd-007-f4",
+        "probes": "userFocus",
+        "text": "Suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "user": [
+        "the users are night-shift hospital interns",
+        "the users are Class 12 students on board-exam schedules"
+      ],
+      "constraint": [
+        "no access to calendar data"
+      ],
+      "market": [
+        "the market is shared dorm rooms in a Tier-2 city"
+      ]
+    },
+    "tags": [
+      "india",
+      "students",
+      "habits"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "pd-008",
+    "topic": "product_design",
+    "subtype": "favourite_product",
+    "difficulty": "easy",
+    "timeboxMin": 15,
+    "prompt": "Pick a consumer app you love. What would you change about it, and why?",
+    "context": {
+      "hiddenFacts": [
+        "Candidate chooses the product; the interviewer accepts any real app.",
+        "Goal if asked: pick whatever business goal the candidate picks, as long as it is stated.",
+        "Expect a named user and one concrete improvement, not a long list."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "segments",
+      "criterion",
+      "solutions",
+      "metric_guardrail"
+    ],
+    "expectedStructure": [
+      "Say what the product is and why it works for its users",
+      "Name the user and the goal",
+      "Find one real pain",
+      "Propose a change tied to the pain",
+      "Say why this over alternatives",
+      "Success measure"
+    ],
+    "rubricHints": {
+      "structure": "Short story: why it is great, then one change.",
+      "userFocus": "Names a specific user and a real moment of friction.",
+      "prioritisation": "Chooses one change over a list and justifies it.",
+      "metrics": "A relevant measure tied to the goal plus one guardrail.",
+      "communication": "Concise and passionate without rambling."
+    },
+    "commonPitfalls": [
+      "Only praises the product",
+      "Changes five things at once",
+      "Picks a product with no stated user"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "pd-008-f1",
+        "probes": "userFocus",
+        "text": "Who is the user you had in mind, and when do they feel the friction?"
+      },
+      {
+        "id": "pd-008-f2",
+        "probes": "prioritisation",
+        "text": "If you could change only one thing, which and what do you leave alone?"
+      },
+      {
+        "id": "pd-008-f3",
+        "probes": "metrics",
+        "text": "How would you tell your change worked?"
+      },
+      {
+        "id": "pd-008-f4",
+        "probes": "userFocus",
+        "text": "Let's change one thing: {variant}. Does your change still make sense?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "user": [
+        "the users are over 55 and new to smartphones"
+      ],
+      "market": [
+        "the app has to work in a market with slow 2G connections"
+      ],
+      "constraint": [
+        "the team can ship only one small change in two weeks"
+      ]
+    },
+    "tags": [
+      "india",
+      "favourite-product",
+      "warm-up"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "pd-009",
+    "topic": "product_design",
+    "subtype": "favourite_product",
+    "difficulty": "medium",
+    "timeboxMin": 15,
+    "prompt": "Which product do you think is best designed for Indian users, and what would you improve in it?",
+    "context": {
+      "hiddenFacts": [
+        "Candidate chooses the product; common picks are UPI apps, WhatsApp, YouTube, quick-commerce apps.",
+        "Look for specifically Indian context: vernacular, low-end devices, trust, cash habits.",
+        "If asked: improvement should serve a stated goal, such as retention or reach."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "segments",
+      "criterion",
+      "solutions",
+      "metric_guardrail"
+    ],
+    "expectedStructure": [
+      "Pick the product and say what Indian insight it nails",
+      "State the goal for improving it",
+      "Pick a user segment it underserves",
+      "Pain and solution",
+      "Prioritise and trade-offs",
+      "Metric and guardrail"
+    ],
+    "rubricHints": {
+      "structure": "Argument first (why it fits India), then improvement.",
+      "userFocus": "Names an underserved segment and a specific Indian context pain.",
+      "prioritisation": "One improvement chosen over others with a criterion.",
+      "metrics": "A measure for the underserved segment and a guardrail for the main base.",
+      "communication": "Crisp opinion, no hedging."
+    },
+    "commonPitfalls": [
+      "Generic 'simple UI' praise",
+      "No Indian-specific insight",
+      "No metric"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "pd-009-f1",
+        "probes": "userFocus",
+        "text": "What exactly about Indian users makes your product work? Give one behaviour."
+      },
+      {
+        "id": "pd-009-f2",
+        "probes": "prioritisation",
+        "text": "You said it has weaknesses. Which one do you fix first and why?"
+      },
+      {
+        "id": "pd-009-f3",
+        "probes": "metrics",
+        "text": "What would you measure so the fix doesn't hurt existing users?",
+        "triggerIf": {
+          "missingAny": [
+            "guardrail",
+            "existing",
+            "counter"
+          ]
+        }
+      },
+      {
+        "id": "pd-009-f4",
+        "probes": "userFocus",
+        "text": "Suppose {variant}. Is your pick still the best-designed product?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "market": [
+        "the market is Southeast Asia instead of India"
+      ],
+      "user": [
+        "the users are first-time internet users in rural areas"
+      ]
+    },
+    "tags": [
+      "india",
+      "favourite-product"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "pd-010",
+    "topic": "product_design",
+    "subtype": "favourite_product",
+    "difficulty": "hard",
+    "timeboxMin": 15,
+    "prompt": "Pick a product you admire whose growth in India has stalled. What would you build next?",
+    "context": {
+      "hiddenFacts": [
+        "Candidate picks the product; interviewer accepts any real product.",
+        "Goal if asked: re-accelerate growth in a way that does not depend on discounts.",
+        "The candidate should diagnose why growth stalled before proposing.",
+        "Constraint if asked: a team of ten for two quarters."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "segments",
+      "criterion",
+      "solutions",
+      "metric_guardrail"
+    ],
+    "expectedStructure": [
+      "Define 'stalled' and diagnose likely causes",
+      "Pick a segment for the next growth push",
+      "Pain or unmet need there",
+      "Two or three options and a criterion",
+      "Recommend one, say what to drop",
+      "Metrics, risks, and a sequenced plan"
+    ],
+    "rubricHints": {
+      "structure": "Diagnoses before building.",
+      "userFocus": "Finds a non-obvious unmet need in a chosen segment.",
+      "prioritisation": "Picks one bet with criteria, names what is dropped and the main risk.",
+      "metrics": "Growth metric tied to the segment plus cannibalisation guardrail.",
+      "communication": "Leads with the bet."
+    },
+    "commonPitfalls": [
+      "Proposes features without diagnosing the stall",
+      "Copies a competitor feature",
+      "No risks named"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "pd-010-f1",
+        "probes": "structure",
+        "text": "How do you know growth stalled because of the product and not the market?"
+      },
+      {
+        "id": "pd-010-f2",
+        "probes": "prioritisation",
+        "text": "You have three ideas. Which one first, and which one never?"
+      },
+      {
+        "id": "pd-010-f3",
+        "probes": "metrics",
+        "text": "What number would make you stop investing in this bet?"
+      },
+      {
+        "id": "pd-010-f4",
+        "probes": "userFocus",
+        "text": "Which user segment is the bet really for?"
+      },
+      {
+        "id": "pd-010-f5",
+        "probes": "structure",
+        "text": "Suppose {variant}. Does your bet change?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "you cannot offer any discounts or cashback"
+      ],
+      "market": [
+        "the main competitor has just launched a free version"
+      ],
+      "user": [
+        "growth must come from Tier-3 towns"
+      ]
+    },
+    "tags": [
+      "india",
+      "growth",
+      "favourite-product"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "pd-011",
+    "topic": "product_design",
+    "subtype": "favourite_product",
+    "difficulty": "easy",
+    "timeboxMin": 15,
+    "prompt": "Pick a feature in a payments app you use. What problem does it solve, and for whom?",
+    "context": {
+      "hiddenFacts": [
+        "Candidate picks the feature; examples: payment reminders, scan and pay, autopay, split bills.",
+        "Look for a specific user and moment, not a feature tour.",
+        "Goal if asked: any stated, as long as the answer connects to it."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "segments",
+      "pain_points",
+      "metric_guardrail"
+    ],
+    "expectedStructure": [
+      "Name the feature and the moment it appears",
+      "Name the user and the pain before it existed",
+      "Explain how it solves it better than the alternative",
+      "How you'd tell it works",
+      "One improvement"
+    ],
+    "rubricHints": {
+      "structure": "Moment, user, pain, solution in order.",
+      "userFocus": "A specific person in a specific moment.",
+      "prioritisation": "Names one improvement and why that one.",
+      "metrics": "Usage tied to the pain solved plus a guardrail.",
+      "communication": "Short and easy to follow."
+    },
+    "commonPitfalls": [
+      "Describes features instead of problems",
+      "Generic user",
+      "No metric"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "pd-011-f1",
+        "probes": "userFocus",
+        "text": "Who is the person most helped by this feature, and when?"
+      },
+      {
+        "id": "pd-011-f2",
+        "probes": "prioritisation",
+        "text": "If you could improve one part of it, which and why?"
+      },
+      {
+        "id": "pd-011-f3",
+        "probes": "metrics",
+        "text": "How would you know this feature is working?"
+      },
+      {
+        "id": "pd-011-f4",
+        "probes": "userFocus",
+        "text": "Now suppose {variant}. Does the feature still matter?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "user": [
+        "the user has a feature phone",
+        "the user is a small shopkeeper"
+      ],
+      "constraint": [
+        "the feature may not add any extra tap"
+      ]
+    },
+    "tags": [
+      "india",
+      "fintech",
+      "favourite-product"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "pd-012",
+    "topic": "product_design",
+    "subtype": "improve_existing",
+    "difficulty": "medium",
+    "timeboxMin": 15,
+    "prompt": "Improve the cancellation and refund experience on a train-ticket booking app.",
+    "context": {
+      "setup": "You're a PM at an online train-ticket booking platform.",
+      "hiddenFacts": [
+        "Goal if asked: reduce support contacts and increase rebooking after a cancellation.",
+        "About 12% of tickets are cancelled; refund timing is the top complaint (illustrative).",
+        "Users are often unsure about charges and when money returns.",
+        "Refunds go through the payment gateway and the railway system; the app does not control timing."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "segments",
+      "pain_points",
+      "criterion",
+      "metric_guardrail"
+    ],
+    "expectedStructure": [
+      "Clarify goal and the cancellation journey",
+      "Segment (last-minute cancellers, group bookers, waitlisted)",
+      "Pain points: unclear charges, uncertainty on refund timing",
+      "Solutions: charge preview, refund tracker",
+      "Prioritise using impact and feasibility given partner dependence",
+      "Metric and guardrail"
+    ],
+    "rubricHints": {
+      "structure": "Journey ordered: decide, cancel, charge, refund.",
+      "userFocus": "Picks a segment such as waitlisted travellers and names their anxiety.",
+      "prioritisation": "Chooses what the app can control and drops what it cannot.",
+      "metrics": "Refund-related contacts per 100 cancellations with cancellation completion rate as guardrail.",
+      "communication": "Concise."
+    },
+    "commonPitfalls": [
+      "Promises faster refunds the app cannot deliver",
+      "No segmentation",
+      "No metric"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "pd-012-f1",
+        "probes": "userFocus",
+        "text": "Who feels the pain most: a waitlisted traveller or someone cancelling a confirmed ticket?"
+      },
+      {
+        "id": "pd-012-f2",
+        "probes": "prioritisation",
+        "text": "Refund time is outside your control. What do you do instead?"
+      },
+      {
+        "id": "pd-012-f3",
+        "probes": "metrics",
+        "text": "What would you measure to know support load fell without hiding the cancel button?"
+      },
+      {
+        "id": "pd-012-f4",
+        "probes": "userFocus",
+        "text": "Let's change one thing: {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "refund timing cannot be shown to users"
+      ],
+      "user": [
+        "the user is an elderly traveller cancelling by phone"
+      ]
+    },
+    "tags": [
+      "india",
+      "travel",
+      "refunds"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "pd-013",
+    "topic": "product_design",
+    "subtype": "improve_existing",
+    "difficulty": "hard",
+    "timeboxMin": 15,
+    "prompt": "Improve search on an online fashion marketplace where 40% of searches are typed in Hinglish.",
+    "context": {
+      "setup": "You're the PM for search at an Indian fashion marketplace.",
+      "hiddenFacts": [
+        "Goal if asked: raise search-to-order conversion.",
+        "Typical queries mix English and Hindi, with spelling variants ('kurti', 'kurta set', 'shaadi lehnga').",
+        "Zero-result searches are 9% today; Hinglish queries have twice that rate (illustrative).",
+        "Team has a small ML group; changes ship via A/B tests."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "segments",
+      "criterion",
+      "solutions",
+      "metric_guardrail"
+    ],
+    "expectedStructure": [
+      "Clarify goal and baseline metrics",
+      "Segment searchers (intent-heavy versus browsing, language mix)",
+      "Diagnose failure types: spelling, synonyms, intent, ranking",
+      "Solutions ordered by impact and effort",
+      "Prioritise and sequence",
+      "Metrics and guardrails, including experiment design"
+    ],
+    "rubricHints": {
+      "structure": "Diagnoses failure modes before solutions.",
+      "userFocus": "Differentiates browsing and intent-heavy searchers in Hinglish.",
+      "prioritisation": "Starts with the cheapest high-impact fix (query normalisation) and defers heavy ML.",
+      "metrics": "Zero-result rate and search-to-order conversion with a guardrail on irrelevant results or latency.",
+      "communication": "Clear and structured."
+    },
+    "commonPitfalls": [
+      "Suggests voice search only",
+      "No diagnosis of failure types",
+      "No experiment plan"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "pd-013-f1",
+        "probes": "structure",
+        "text": "How would you find out why Hinglish searches fail more?"
+      },
+      {
+        "id": "pd-013-f2",
+        "probes": "prioritisation",
+        "text": "Engineering has one sprint. What do you fix first?"
+      },
+      {
+        "id": "pd-013-f3",
+        "probes": "metrics",
+        "text": "Which metric tells you search got better, and which could mislead?"
+      },
+      {
+        "id": "pd-013-f4",
+        "probes": "userFocus",
+        "text": "Who searches in Hinglish, and does that change what you build?"
+      },
+      {
+        "id": "pd-013-f5",
+        "probes": "structure",
+        "text": "Suppose {variant}. What changes in your plan?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "you have no ML capacity this quarter"
+      ],
+      "market": [
+        "the same problem exists for Tamil and Telugu queries"
+      ],
+      "user": [
+        "most Hinglish searchers are on low-end Android phones"
+      ]
+    },
+    "tags": [
+      "india",
+      "search",
+      "fashion",
+      "ecommerce"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "pd-014",
+    "topic": "product_design",
+    "subtype": "design_new",
+    "difficulty": "medium",
+    "timeboxMin": 15,
+    "prompt": "Design a way for neighbours in a housing society to buy groceries together at a discount.",
+    "context": {
+      "setup": "You're a PM at a grocery delivery company.",
+      "hiddenFacts": [
+        "Goal if asked: increase order density per society and lower delivery cost.",
+        "Societies range from 100 to 2,000 flats; many have an active WhatsApp group and a resident welfare association.",
+        "Pain points: delivery fees per order, bulk staples needed, trust in neighbours' commitments.",
+        "Constraint if asked: delivery slots are limited to two per society per day."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "segments",
+      "criterion",
+      "solutions",
+      "metric_guardrail"
+    ],
+    "expectedStructure": [
+      "Clarify goal and the unit (society versus household)",
+      "Segment: organiser, participating households, non-participants",
+      "Pains and incentives",
+      "Solutions: group cart, society slot, pooled delivery",
+      "Prioritise one and criteria",
+      "Metric and risks"
+    ],
+    "rubricHints": {
+      "structure": "States the goal then the user then the loop.",
+      "userFocus": "Names the organiser as a distinct user and designs for her effort.",
+      "prioritisation": "Chooses a single loop (group cart) and drops loyalty extras.",
+      "metrics": "Orders per society slot and cost per order, with a guardrail on cancellations after join.",
+      "communication": "Closes with the recommendation."
+    },
+    "commonPitfalls": [
+      "Only discounts",
+      "Ignores the organiser's workload",
+      "No metric"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "pd-014-f1",
+        "probes": "userFocus",
+        "text": "Who in the society actually makes this happen, and what do they get?"
+      },
+      {
+        "id": "pd-014-f2",
+        "probes": "prioritisation",
+        "text": "Which part do you build first if you only had four weeks?"
+      },
+      {
+        "id": "pd-014-f3",
+        "probes": "metrics",
+        "text": "What number shows pooled orders are better for the business?"
+      },
+      {
+        "id": "pd-014-f4",
+        "probes": "userFocus",
+        "text": "Now suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the discount budget is zero",
+        "you can only use WhatsApp"
+      ],
+      "user": [
+        "the society is a gated community of senior citizens"
+      ]
+    },
+    "tags": [
+      "india",
+      "grocery",
+      "social-commerce"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "pd-015",
+    "topic": "product_design",
+    "subtype": "design_for_segment",
+    "difficulty": "medium",
+    "timeboxMin": 15,
+    "prompt": "Design a savings product for gig delivery workers with irregular daily income.",
+    "context": {
+      "setup": "You're a PM at a fintech startup.",
+      "hiddenFacts": [
+        "Goal if asked: get 100,000 workers saving regularly within a year.",
+        "Workers get paid daily or weekly, ₹600 to ₹1,200 per active day (illustrative), with many off-days.",
+        "Most have bank accounts and use UPI; few have savings buffers.",
+        "Pain points: emergency expenses, loan sharks, no discipline mechanism, low trust in new apps."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "segments",
+      "criterion",
+      "solutions",
+      "metric_guardrail"
+    ],
+    "expectedStructure": [
+      "Clarify goal and the worker segments (full-time, part-time)",
+      "Pick one and say why",
+      "Pains around income variability and emergencies",
+      "Solutions: round-up, auto-sweep on payout, emergency withdrawal",
+      "Prioritise",
+      "Metric and guardrail"
+    ],
+    "rubricHints": {
+      "structure": "User first, then pains, then product.",
+      "userFocus": "Understands irregular income, not just low income.",
+      "prioritisation": "Chooses one mechanic with a criterion and drops others.",
+      "metrics": "Share of workers saving in 3 of last 4 weeks with a withdrawal-regret or complaint guardrail.",
+      "communication": "Plain language."
+    },
+    "commonPitfalls": [
+      "Generic savings app",
+      "Ignores irregular income",
+      "No trust thinking"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "pd-015-f1",
+        "probes": "userFocus",
+        "text": "What does a bad week look like for this worker, and how does your product behave?"
+      },
+      {
+        "id": "pd-015-f2",
+        "probes": "prioritisation",
+        "text": "Choose one mechanic to launch with. What do you leave out?"
+      },
+      {
+        "id": "pd-015-f3",
+        "probes": "metrics",
+        "text": "What shows people are saving, not just signing up?"
+      },
+      {
+        "id": "pd-015-f4",
+        "probes": "userFocus",
+        "text": "Suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "you cannot access the platform's payout data"
+      ],
+      "user": [
+        "the workers are women delivering for a grocery platform"
+      ]
+    },
+    "tags": [
+      "india",
+      "fintech",
+      "gig-economy"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "pd-016",
+    "topic": "product_design",
+    "subtype": "design_for_segment",
+    "difficulty": "hard",
+    "timeboxMin": 15,
+    "prompt": "Design a learning app for Class 9 students in government schools who share one family phone.",
+    "context": {
+      "setup": "You're a PM at an ed-tech non-profit.",
+      "hiddenFacts": [
+        "Goal if asked: improve maths and science learning outcomes within a year.",
+        "The phone is shared; students get it for about an hour in the evening, often with a parent's supervision.",
+        "Data is limited: 1 GB a day or less; many sets are low-end Android.",
+        "Medium of instruction is regional language; teachers are overloaded."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "segments",
+      "criterion",
+      "solutions",
+      "metric_guardrail"
+    ],
+    "expectedStructure": [
+      "Clarify goal and constraints",
+      "Segment: students, parents, teachers; pick the primary user",
+      "Pains: shared device, offline time, language, motivation",
+      "Solutions mapped to constraints",
+      "Prioritise using impact on learning and feasibility",
+      "Metric (learning outcome proxy) and guardrails"
+    ],
+    "rubricHints": {
+      "structure": "Constraints up front, then the design.",
+      "userFocus": "Insight on shared-device behaviour reshapes the solution (one profile per child, short sessions).",
+      "prioritisation": "Picks one core experience and defers extras.",
+      "metrics": "Concept mastery per week with a guardrail on drop-off and data use.",
+      "communication": "Clear despite complexity."
+    },
+    "commonPitfalls": [
+      "Designs a video-heavy app for 1 GB",
+      "Ignores the shared device",
+      "No outcome metric"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "pd-016-f1",
+        "probes": "userFocus",
+        "text": "Four children use one phone. How does your design change?"
+      },
+      {
+        "id": "pd-016-f2",
+        "probes": "prioritisation",
+        "text": "With limited data, what do you ship first?"
+      },
+      {
+        "id": "pd-016-f3",
+        "probes": "metrics",
+        "text": "How would you measure learning and not just usage?"
+      },
+      {
+        "id": "pd-016-f4",
+        "probes": "userFocus",
+        "text": "What role do parents or teachers play, and does that change the design?"
+      },
+      {
+        "id": "pd-016-f5",
+        "probes": "structure",
+        "text": "Suppose {variant}. What changes in your design?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "there is no internet at all in the village",
+        "you have only a feature phone with IVR"
+      ],
+      "market": [
+        "the same product is for Class 9 in urban private schools"
+      ]
+    },
+    "tags": [
+      "india",
+      "edtech",
+      "accessibility"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  }
+]

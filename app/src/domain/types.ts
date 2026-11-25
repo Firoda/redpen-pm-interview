@@ -80,6 +80,7 @@ export interface Question {
 /* ---------------- profile & settings ---------------- */
 
 export type NudgeType = 'resume_mock' | 'unread_feedback' | 'retry_fix' | 'neglected_topic' | 'weekly_goal' | 'interview_countdown'
+  | 'recommended' // pseudo-nudge for Home's Next-up when no rule fires (never persisted)
 export type EntryPoint = 'onboarding' | 'home_next_up' | 'nudge' | 'practice' | 'library' | 'retry' | 'progress'
 
 export interface Profile {
@@ -269,7 +270,7 @@ export interface TopicStat {
   lastPractisedAt?: Epoch
   score?: number // unrounded EWMA
   dimScore: Partial<Record<DimensionId, number>>
-  history: { mockId: ULID; at: Epoch; score: number; isRetry: boolean }[]
+  history: { mockId: ULID; at: Epoch; score: number; isRetry: boolean; ewma?: number }[] // ewma = smoothed topic score after this mock
   delta14?: number
   status: TopicStatus
   updatedAt: Epoch

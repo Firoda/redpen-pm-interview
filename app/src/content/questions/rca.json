@@ -1,0 +1,1350 @@
+[
+  {
+    "id": "rca-001",
+    "topic": "rca",
+    "subtype": "metric_drop",
+    "difficulty": "medium",
+    "timeboxMin": 12,
+    "prompt": "Food-delivery orders in Bengaluru dropped 15% week over week. Find out why.",
+    "context": {
+      "setup": "You're the PM for the consumer app at a food-delivery company.",
+      "hiddenFacts": [
+        "Metric definition if asked: completed orders; placed orders also fell. Other cities: flat. Bengaluru only.",
+        "Platform split if asked: Android down 24%, iOS flat, web flat. App version if asked: Android v5.2 released Monday to 100% of users.",
+        "Funnel if asked: sessions flat, menu views flat, checkout-to-payment conversion down sharply.",
+        "Root cause (reveal only if the candidate narrows to it): a payment SDK update in v5.2 fails for one popular bank's UPI handle.",
+        "External if asked: no competitor campaign, weather normal, no holiday."
+      ]
+    },
+    "coverage": [
+      "metric_definition",
+      "data_real",
+      "scope",
+      "internal_external",
+      "hypotheses",
+      "verify"
+    ],
+    "expectedStructure": [
+      "Clarify metric definition, time window, how sudden",
+      "Check data or tracking issues first",
+      "Internal versus external factors",
+      "Segment: geo, platform, app version, cohort, restaurant side",
+      "Funnel to locate the break",
+      "Prioritise hypotheses, verify, immediate mitigation and long-term fix"
+    ],
+    "rubricHints": {
+      "structure": "Systematic narrowing: definition, data validity, internal or external, segments, funnel.",
+      "userFocus": "Asks which users are affected (platform, bank) rather than guessing about all users.",
+      "prioritisation": "Orders hypotheses by likelihood and ease of checking; checks cheap ones first.",
+      "metrics": "Uses the funnel and segment cuts as evidence, not guesses.",
+      "communication": "States the root cause, the evidence and the next action crisply."
+    },
+    "commonPitfalls": [
+      "Lists 15 hypotheses without narrowing",
+      "Never asks for platform or version split",
+      "Stops at the root cause without mitigation"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "rca-001-f1",
+        "probes": "structure",
+        "text": "You haven't split by platform or app version. What would you look at there?",
+        "triggerIf": {
+          "missingAny": [
+            "android",
+            "ios",
+            "platform",
+            "version",
+            "device"
+          ]
+        }
+      },
+      {
+        "id": "rca-001-f2",
+        "probes": "prioritisation",
+        "text": "Of the hypotheses you listed, which do you check first, and why that order?"
+      },
+      {
+        "id": "rca-001-f3",
+        "probes": "metrics",
+        "text": "Say sessions are flat but orders fell. Where in the funnel do you look, and what would you expect to see?"
+      },
+      {
+        "id": "rca-001-f4",
+        "probes": "communication",
+        "text": "You've found it. What do you tell your VP in two sentences, and what happens today?"
+      },
+      {
+        "id": "rca-001-f5",
+        "probes": "structure",
+        "text": "New information: {variant}. How does that change your investigation?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "market": [
+        "the drop is across all metros, not just Bengaluru"
+      ],
+      "constraint": [
+        "you have no access to engineering for 48 hours",
+        "your analytics pipeline was also changed last week"
+      ],
+      "user": [
+        "the drop is only among new users in their first week"
+      ]
+    },
+    "tags": [
+      "india",
+      "food-delivery",
+      "funnel"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "rca-002",
+    "topic": "rca",
+    "subtype": "metric_spike_or_anomaly",
+    "difficulty": "medium",
+    "timeboxMin": 12,
+    "prompt": "Average watch time per user on a short-video app fell 10% in a week, but daily active users went up. What's going on?",
+    "context": {
+      "hiddenFacts": [
+        "Change if asked: a new recommendation model rolled out to 50% of Indian users last Tuesday.",
+        "Treatment group: more sessions per user, shorter sessions; new-creator content share up.",
+        "A Diwali campaign brought in many new, light users the same week.",
+        "Both effects are real; the candidate should separate mix shift from per-user behaviour."
+      ]
+    },
+    "coverage": [
+      "metric_definition",
+      "scope",
+      "internal_external",
+      "hypotheses",
+      "verify"
+    ],
+    "expectedStructure": [
+      "Clarify the metric (average per DAU?) and the window",
+      "Recognise a ratio metric: numerator and denominator move separately",
+      "Mix shift (new light users) versus behaviour change (model rollout)",
+      "Segment by new versus existing users and treatment versus control",
+      "Conclude whether it's a problem and what to do"
+    ],
+    "rubricHints": {
+      "structure": "Decomposes the ratio before hypothesising.",
+      "userFocus": "Separates new light users from existing heavy users.",
+      "prioritisation": "Separates 'is this bad?' from 'why did it move?'.",
+      "metrics": "Proposes cohort-level watch time (existing users only) and treatment versus control.",
+      "communication": "Clear conclusion."
+    },
+    "commonPitfalls": [
+      "Assumes engagement dropped without checking mix",
+      "Ignores the concurrent campaign"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "rca-002-f1",
+        "probes": "metrics",
+        "text": "DAU went up. Could the average fall without any single user watching less? How would you check?",
+        "triggerIf": {
+          "missingAny": [
+            "new users",
+            "mix",
+            "cohort",
+            "denominator"
+          ]
+        }
+      },
+      {
+        "id": "rca-002-f2",
+        "probes": "structure",
+        "text": "There was also a model rollout to half of users. How do you separate the two effects?"
+      },
+      {
+        "id": "rca-002-f3",
+        "probes": "prioritisation",
+        "text": "Is a 10% drop here actually a problem? What would make you roll the model back?"
+      },
+      {
+        "id": "rca-002-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What now?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "there is no control group, the model went to 100%"
+      ],
+      "user": [
+        "the drop is concentrated in users over 35"
+      ],
+      "market": [
+        "it's happening only in Indonesia, where you launched three months ago"
+      ]
+    },
+    "tags": [
+      "ratio-metric",
+      "experimentation",
+      "india"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "rca-003",
+    "topic": "rca",
+    "subtype": "ops_quality",
+    "difficulty": "hard",
+    "timeboxMin": 12,
+    "prompt": "Late-delivery complaints for an e-commerce marketplace doubled in Hyderabad this month, but average delivery time hasn't changed. Why?",
+    "context": {
+      "hiddenFacts": [
+        "Complaints are concentrated on orders tagged 'Express'.",
+        "The promise-date algorithm was changed this month to show earlier promised dates to lift conversion.",
+        "Actual delivery times are unchanged; the share delivered after the promised date rose from 6% to 14%.",
+        "Customer-care tagging was not changed."
+      ]
+    },
+    "coverage": [
+      "metric_definition",
+      "data_real",
+      "scope",
+      "internal_external",
+      "verify"
+    ],
+    "expectedStructure": [
+      "Notice the paradox: complaints are about expectation versus actual",
+      "Define 'late' relative to the promise and check complaint tagging",
+      "Segment by order type, seller, courier, pin code",
+      "Find the promise-date change; quantify; trade-off conversion versus trust",
+      "Recommendation and guardrail (on-time-to-promise %)"
+    ],
+    "rubricHints": {
+      "structure": "Resolves the paradox by redefining 'late' relative to the promise.",
+      "userFocus": "Thinks about the customer's expectation.",
+      "prioritisation": "Weighs conversion gain against complaints, returns and trust.",
+      "metrics": "Proposes on-time-versus-promise rate and distribution, not averages.",
+      "communication": "Crisp."
+    },
+    "commonPitfalls": [
+      "Keeps investigating logistics speed",
+      "Uses only averages"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "rca-003-f1",
+        "probes": "metrics",
+        "text": "The average is flat. What other view of delivery time could still explain more complaints?",
+        "triggerIf": {
+          "missingAny": [
+            "promise",
+            "expected",
+            "distribution",
+            "percentile",
+            "on-time"
+          ]
+        }
+      },
+      {
+        "id": "rca-003-f2",
+        "probes": "structure",
+        "text": "What changed on our side this month that could affect what customers expect?"
+      },
+      {
+        "id": "rca-003-f3",
+        "probes": "prioritisation",
+        "text": "The earlier promise dates lifted conversion by 2%. Do you roll back? How do you decide?"
+      },
+      {
+        "id": "rca-003-f4",
+        "probes": "structure",
+        "text": "Assume instead that {variant}. Where do you look?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the promise-date algorithm did not change"
+      ],
+      "market": [
+        "it's all cities, but only for one courier partner"
+      ]
+    },
+    "tags": [
+      "india",
+      "e-commerce",
+      "operations"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "rca-004",
+    "topic": "rca",
+    "subtype": "metric_spike_or_anomaly",
+    "difficulty": "medium",
+    "timeboxMin": 12,
+    "prompt": "Ride-hailing cancellations rose 20% in one city over two weeks. Find out why.",
+    "context": {
+      "setup": "You're the PM for the driver app at a ride-hailing company.",
+      "hiddenFacts": [
+        "Metric definition if asked: cancellations after a driver accepts the ride, as a share of accepted rides.",
+        "Only this city shows the rise; rider-side cancellations are flat.",
+        "Platform: Android drivers mostly; versions are mixed.",
+        "Root cause (reveal only if narrowed): a pilot in this city hides the drop location until after acceptance; drivers cancel when they see short or far trips.",
+        "External if asked: no strike, fuel prices flat, weather normal."
+      ]
+    },
+    "coverage": [
+      "metric_definition",
+      "data_real",
+      "scope",
+      "internal_external",
+      "hypotheses",
+      "verify"
+    ],
+    "expectedStructure": [
+      "Clarify which cancellations (driver or rider) and time window",
+      "Check data and tagging",
+      "Internal versus external",
+      "Segment by driver cohort, trip length, time of day, app version",
+      "Order hypotheses; verify with a cut by feature flag",
+      "Mitigation and prevention"
+    ],
+    "rubricHints": {
+      "structure": "Defines cancellation type first, then narrows.",
+      "userFocus": "Splits drivers from riders and asks which driver cohort.",
+      "prioritisation": "Checks cheap, high-likelihood causes (recent release, pilot) first.",
+      "metrics": "Cuts by trip length or flag exposure as evidence.",
+      "communication": "States cause, evidence, next action."
+    },
+    "commonPitfalls": [
+      "Assumes rider behaviour changed",
+      "Ignores recent pilots or releases",
+      "No mitigation"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "rca-004-f1",
+        "probes": "structure",
+        "text": "Which cancellations rose, driver or rider? How would you check?"
+      },
+      {
+        "id": "rca-004-f2",
+        "probes": "prioritisation",
+        "text": "You have several hypotheses. Which two do you check first and why?"
+      },
+      {
+        "id": "rca-004-f3",
+        "probes": "metrics",
+        "text": "What cut of the data would separate a pilot effect from a market effect?"
+      },
+      {
+        "id": "rca-004-f4",
+        "probes": "communication",
+        "text": "You found it. What do you tell the city head in two sentences?"
+      },
+      {
+        "id": "rca-004-f5",
+        "probes": "structure",
+        "text": "New information: {variant}. How does your investigation change?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the pilot flag is not logged in analytics"
+      ],
+      "market": [
+        "the rise happens in three cities at once"
+      ],
+      "user": [
+        "the rise is concentrated among new drivers"
+      ]
+    },
+    "tags": [
+      "india",
+      "mobility",
+      "marketplace"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "rca-005",
+    "topic": "rca",
+    "subtype": "metric_drop",
+    "difficulty": "medium",
+    "timeboxMin": 12,
+    "prompt": "Weekly active learners on an ed-tech app fell 10% this month. Find out why.",
+    "context": {
+      "setup": "You're the PM for engagement at an ed-tech company.",
+      "hiddenFacts": [
+        "Metric definition if asked: users who complete at least one lesson in a week.",
+        "Drop is concentrated in learners who lapsed for more than 2 weeks and had been reactivated by reminders.",
+        "Organic and paid acquisition are flat.",
+        "Root cause (reveal only if narrowed): WhatsApp reminders were reclassified by the provider as promotional; delivery fell from 80% to 35%.",
+        "External if asked: no exams or holidays this month."
+      ]
+    },
+    "coverage": [
+      "metric_definition",
+      "data_real",
+      "scope",
+      "internal_external",
+      "hypotheses",
+      "verify"
+    ],
+    "expectedStructure": [
+      "Clarify metric and time window",
+      "Check data and tracking",
+      "Segment: new versus returning versus reactivated, platform, class",
+      "Internal versus external",
+      "Hypotheses ordered; check channel delivery",
+      "Fix and prevention"
+    ],
+    "rubricHints": {
+      "structure": "Follows definition, validity, segmentation, channel.",
+      "userFocus": "Asks which learners (reactivated) are missing.",
+      "prioritisation": "Orders checks by likelihood and effort.",
+      "metrics": "Uses cohort and channel cuts.",
+      "communication": "Concise summary."
+    },
+    "commonPitfalls": [
+      "Blames content quality without data",
+      "Never segments by lapsed users",
+      "No prevention step"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "rca-005-f1",
+        "probes": "structure",
+        "text": "Which learners account for the drop? How would you find out?"
+      },
+      {
+        "id": "rca-005-f2",
+        "probes": "prioritisation",
+        "text": "Which hypothesis do you check first, and why?"
+      },
+      {
+        "id": "rca-005-f3",
+        "probes": "metrics",
+        "text": "What would you expect to see in the reminder funnel if the channel broke?"
+      },
+      {
+        "id": "rca-005-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "you don't have channel delivery logs"
+      ],
+      "user": [
+        "the drop is only in Class 10 learners"
+      ]
+    },
+    "tags": [
+      "india",
+      "edtech",
+      "retention"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "rca-006",
+    "topic": "rca",
+    "subtype": "metric_drop",
+    "difficulty": "easy",
+    "timeboxMin": 12,
+    "prompt": "UPI payment success rate on your app fell from 97% to 95% yesterday. What do you do?",
+    "context": {
+      "setup": "You're the PM for payments at a UPI app.",
+      "hiddenFacts": [
+        "Metric: successful payments divided by attempted payments, including user-declined ones.",
+        "Failures concentrated on one issuer bank's accounts; technical decline codes show timeouts.",
+        "Your app version and traffic are unchanged.",
+        "Root cause: the bank had a partial outage for three hours."
+      ]
+    },
+    "coverage": [
+      "metric_definition",
+      "data_real",
+      "scope",
+      "internal_external",
+      "verify"
+    ],
+    "expectedStructure": [
+      "Clarify definition and whether user-driven failures count",
+      "Check data is real",
+      "Cut by bank, app version, payment type",
+      "Internal versus external",
+      "Verify and respond (alerts, routing, user messaging)"
+    ],
+    "rubricHints": {
+      "structure": "Defines the metric, cuts, then concludes.",
+      "userFocus": "Thinks about which users are impacted.",
+      "prioritisation": "Starts with the cheapest cut.",
+      "metrics": "Uses failure codes and bank cut as evidence.",
+      "communication": "States action in plain words."
+    },
+    "commonPitfalls": [
+      "Assumes your app broke",
+      "No bank cut",
+      "No user communication"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "rca-006-f1",
+        "probes": "structure",
+        "text": "Which cuts would you look at first?"
+      },
+      {
+        "id": "rca-006-f2",
+        "probes": "metrics",
+        "text": "What failure signals would separate a bank outage from your own bug?"
+      },
+      {
+        "id": "rca-006-f3",
+        "probes": "prioritisation",
+        "text": "While you investigate, what do you do for affected users?"
+      },
+      {
+        "id": "rca-006-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "failures are spread across all banks"
+      ],
+      "market": [
+        "the failures happen only on Android 14"
+      ]
+    },
+    "tags": [
+      "india",
+      "fintech",
+      "payments"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "rca-007",
+    "topic": "rca",
+    "subtype": "metric_drop",
+    "difficulty": "hard",
+    "timeboxMin": 12,
+    "prompt": "Seller sign-ups for an online marketplace dropped 30% in a month, though traffic to the sign-up page rose. Why?",
+    "context": {
+      "setup": "You're the PM for seller growth at an Indian marketplace.",
+      "hiddenFacts": [
+        "Sign-up means completing GST or PAN verification.",
+        "Page traffic is up 20% after a paid campaign; the campaign targeted small home businesses.",
+        "Verification step success fell from 60% to 38% for new sellers.",
+        "Root cause: the campaign audience mostly has no GST number; a rule requiring GST for categories was enforced from the start of the month.",
+        "Support tickets about GST are up 3x."
+      ]
+    },
+    "coverage": [
+      "metric_definition",
+      "data_real",
+      "scope",
+      "internal_external",
+      "hypotheses",
+      "verify"
+    ],
+    "expectedStructure": [
+      "Define sign-up and time window",
+      "Spot the conflict: traffic up, completion down",
+      "Funnel by step and by source",
+      "Internal changes (policy, UI) versus audience mix",
+      "Order hypotheses and verify with step data",
+      "Decision: change audience, relax rule or add pathway"
+    ],
+    "rubricHints": {
+      "structure": "Funnel first, then source cut.",
+      "userFocus": "Separates campaign audience from usual sellers.",
+      "prioritisation": "Orders by evidence, weighs policy change against growth.",
+      "metrics": "Step conversion by source.",
+      "communication": "Gives a clear recommendation."
+    },
+    "commonPitfalls": [
+      "Blames the campaign without checking funnel",
+      "Ignores policy changes",
+      "No recommendation"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "rca-007-f1",
+        "probes": "metrics",
+        "text": "Traffic is up and sign-ups are down. Which funnel cut do you do first?"
+      },
+      {
+        "id": "rca-007-f2",
+        "probes": "prioritisation",
+        "text": "The GST rule was a compliance requirement. How do you weigh growth against it?"
+      },
+      {
+        "id": "rca-007-f3",
+        "probes": "userFocus",
+        "text": "Are the new sellers from the campaign the same as the usual ones?"
+      },
+      {
+        "id": "rca-007-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What now?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the GST rule cannot be changed"
+      ],
+      "market": [
+        "the drop is only in one state"
+      ]
+    },
+    "tags": [
+      "india",
+      "marketplace",
+      "funnel"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "rca-008",
+    "topic": "rca",
+    "subtype": "metric_spike_or_anomaly",
+    "difficulty": "easy",
+    "timeboxMin": 12,
+    "prompt": "Refund requests on a quick-commerce app doubled over a weekend. What would you check?",
+    "context": {
+      "setup": "You're the PM for post-order experience at a quick-commerce company.",
+      "hiddenFacts": [
+        "Refund requests concentrated on 'missing item' reasons.",
+        "Concentrated in two dark stores in one city.",
+        "A new picking-app version was rolled to those stores on Friday.",
+        "Root cause: the new picking app skips item scan confirmation for substitutions."
+      ]
+    },
+    "coverage": [
+      "metric_definition",
+      "data_real",
+      "scope",
+      "internal_external",
+      "hypotheses",
+      "verify"
+    ],
+    "expectedStructure": [
+      "Clarify the refund reason and baseline",
+      "Check data and any policy change",
+      "Segment by store, item, reason, time",
+      "Hypotheses ordered",
+      "Verify and fix"
+    ],
+    "rubricHints": {
+      "structure": "Starts by defining refund types.",
+      "userFocus": "Asks which customers or areas.",
+      "prioritisation": "Chooses likely cause first.",
+      "metrics": "Uses store and reason cuts.",
+      "communication": "Clear action."
+    },
+    "commonPitfalls": [
+      "Assumes customer fraud",
+      "No store cut"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "rca-008-f1",
+        "probes": "structure",
+        "text": "Which refund reason rose? How would you find out?"
+      },
+      {
+        "id": "rca-008-f2",
+        "probes": "prioritisation",
+        "text": "What would you check first, and why?"
+      },
+      {
+        "id": "rca-008-f3",
+        "probes": "metrics",
+        "text": "What evidence separates fraud from a genuine operations error?"
+      },
+      {
+        "id": "rca-008-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "no store-level data is available"
+      ],
+      "user": [
+        "refunds come mostly from new customers"
+      ]
+    },
+    "tags": [
+      "india",
+      "quick-commerce",
+      "operations"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "rca-009",
+    "topic": "rca",
+    "subtype": "metric_spike_or_anomaly",
+    "difficulty": "hard",
+    "timeboxMin": 12,
+    "prompt": "A fintech app's loan approval rate rose from 35% to 52% in two weeks while defaults are not yet visible. Is this good news?",
+    "context": {
+      "setup": "You're the PM for lending at a digital lender.",
+      "hiddenFacts": [
+        "The credit model was retrained two weeks ago and rolled out to all users.",
+        "A partner NBFC changed its eligibility rules in the same week.",
+        "Applicant mix: a campaign brought salaried users with thin files.",
+        "Default data lags 60 to 90 days.",
+        "Approval is not the same as disbursement; disbursed volume rose 30%."
+      ]
+    },
+    "coverage": [
+      "metric_definition",
+      "data_real",
+      "scope",
+      "internal_external",
+      "hypotheses",
+      "verify"
+    ],
+    "expectedStructure": [
+      "Clarify the metric and the population",
+      "Decompose: model change, partner rule, mix shift",
+      "Segment approvals by risk band and source",
+      "Define leading risk indicators (early delinquency, bureau score)",
+      "Decision: hold, cap or proceed with monitoring"
+    ],
+    "rubricHints": {
+      "structure": "Treats a rise as something to explain, not celebrate.",
+      "userFocus": "Differentiates the new thin-file cohort.",
+      "prioritisation": "Prioritises the checks given lagging defaults.",
+      "metrics": "Names leading indicators and thresholds.",
+      "communication": "Clear recommendation."
+    },
+    "commonPitfalls": [
+      "Celebrates the rise",
+      "Ignores lagging defaults",
+      "No decomposition"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "rca-009-f1",
+        "probes": "structure",
+        "text": "Which three factors could explain the rise, and how would you separate them?"
+      },
+      {
+        "id": "rca-009-f2",
+        "probes": "metrics",
+        "text": "Defaults lag 90 days. What would you watch in the meantime?"
+      },
+      {
+        "id": "rca-009-f3",
+        "probes": "prioritisation",
+        "text": "What would make you cap approvals?"
+      },
+      {
+        "id": "rca-009-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What do you do?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the model change cannot be rolled back"
+      ],
+      "market": [
+        "the same pattern appears with a second partner"
+      ]
+    },
+    "tags": [
+      "india",
+      "fintech",
+      "lending"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "rca-010",
+    "topic": "rca",
+    "subtype": "funnel_or_adoption",
+    "difficulty": "easy",
+    "timeboxMin": 12,
+    "prompt": "Only 20% of users who download a food-delivery app place their first order within a week. Why might that be?",
+    "context": {
+      "setup": "You're the PM for new-user growth at a food-delivery company.",
+      "hiddenFacts": [
+        "Funnel if asked: 100 installs, 70 sign up, 45 browse restaurants, 30 add to cart, 20 order.",
+        "Biggest drop is between sign-up and browse: location permission and address entry.",
+        "Many installs come from paid channels with low intent.",
+        "First-order coupons exist but are hidden on a later screen."
+      ]
+    },
+    "coverage": [
+      "metric_definition",
+      "scope",
+      "hypotheses",
+      "verify",
+      "fix_prevention"
+    ],
+    "expectedStructure": [
+      "Clarify the metric and the window",
+      "Funnel by step",
+      "Segment by channel and platform",
+      "Hypotheses per step ordered",
+      "Verify and fix"
+    ],
+    "rubricHints": {
+      "structure": "Funnel first.",
+      "userFocus": "Segment by install source.",
+      "prioritisation": "Targets the biggest drop.",
+      "metrics": "Uses step conversion.",
+      "communication": "Short and clear."
+    },
+    "commonPitfalls": [
+      "Jumps to discounts",
+      "No funnel"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "rca-010-f1",
+        "probes": "structure",
+        "text": "Which stage would you investigate first and why?"
+      },
+      {
+        "id": "rca-010-f2",
+        "probes": "metrics",
+        "text": "What data would show whether it is intent or friction?"
+      },
+      {
+        "id": "rca-010-f3",
+        "probes": "prioritisation",
+        "text": "You can fix only one thing this sprint. What?"
+      },
+      {
+        "id": "rca-010-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "you can only change copy"
+      ],
+      "user": [
+        "most installs come from a regional-language campaign"
+      ]
+    },
+    "tags": [
+      "india",
+      "food-delivery",
+      "activation"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "rca-011",
+    "topic": "rca",
+    "subtype": "funnel_or_adoption",
+    "difficulty": "medium",
+    "timeboxMin": 12,
+    "prompt": "A new 'Autopay' feature in a UPI app has 4% adoption among eligible users after three months, against a 15% target. Why?",
+    "context": {
+      "setup": "You're the PM for recurring payments at a UPI app.",
+      "hiddenFacts": [
+        "Eligible users are those with monthly bills; 30 million eligible (illustrative).",
+        "Funnel: 40% see the entry banner, 15% tap, 8% start set-up, 4% complete.",
+        "Biggest drop is at bank-side mandate approval, which takes 2 to 3 minutes and fails for 1 in 3 users.",
+        "Users report fear of unexpected debits."
+      ]
+    },
+    "coverage": [
+      "metric_definition",
+      "scope",
+      "internal_external",
+      "hypotheses",
+      "verify"
+    ],
+    "expectedStructure": [
+      "Define adoption and the eligible base",
+      "Funnel stage by stage",
+      "Segment by bank and bill type",
+      "Hypotheses: awareness, trust, set-up friction, bank failures",
+      "Verify and prioritise the fix"
+    ],
+    "rubricHints": {
+      "structure": "Funnel with segment cuts.",
+      "userFocus": "Distinguishes trust issues from friction.",
+      "prioritisation": "Fixes the biggest drop first.",
+      "metrics": "Step rates and bank-level failure rates.",
+      "communication": "Concise."
+    },
+    "commonPitfalls": [
+      "Only more promotion",
+      "Ignores bank failures"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "rca-011-f1",
+        "probes": "metrics",
+        "text": "Which step in the funnel loses the most users, and how would you confirm it?"
+      },
+      {
+        "id": "rca-011-f2",
+        "probes": "prioritisation",
+        "text": "Marketing wants more banners. Do you agree?"
+      },
+      {
+        "id": "rca-011-f3",
+        "probes": "userFocus",
+        "text": "What worries users about autopay, and how would you check?"
+      },
+      {
+        "id": "rca-011-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "bank-side approval time cannot be changed"
+      ],
+      "user": [
+        "the eligible users are mostly salaried"
+      ]
+    },
+    "tags": [
+      "india",
+      "fintech",
+      "adoption"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "rca-012",
+    "topic": "rca",
+    "subtype": "funnel_or_adoption",
+    "difficulty": "hard",
+    "timeboxMin": 12,
+    "prompt": "Day-30 retention for a creator-video app fell from 22% to 17% after a new onboarding, though day-1 improved. What happened?",
+    "context": {
+      "setup": "You're the PM for growth at a short-video app.",
+      "hiddenFacts": [
+        "New onboarding asks users to pick interests, then shows a curated feed.",
+        "Day-1 rose from 55% to 62%.",
+        "New users saw fewer creators they follow; the feed is narrower.",
+        "Root cause: the onboarding feed funnels users into popular interest clusters, reducing discovery and long-tail content.",
+        "A campaign also brought in more users from a new city."
+      ]
+    },
+    "coverage": [
+      "metric_definition",
+      "scope",
+      "internal_external",
+      "hypotheses",
+      "verify"
+    ],
+    "expectedStructure": [
+      "Define retention and cohort",
+      "Compare cohorts by onboarding versus acquisition source",
+      "Hypotheses: mix, content, notification",
+      "Verify with holdout",
+      "Decision and fix"
+    ],
+    "rubricHints": {
+      "structure": "Cohort and source cuts first.",
+      "userFocus": "Segment by interest group.",
+      "prioritisation": "Orders hypotheses.",
+      "metrics": "Uses holdout and cohort curves.",
+      "communication": "Clear."
+    },
+    "commonPitfalls": [
+      "Celebrates day-1",
+      "Ignores acquisition mix"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "rca-012-f1",
+        "probes": "metrics",
+        "text": "Day-1 is up but day-30 is down. What does that tell you?"
+      },
+      {
+        "id": "rca-012-f2",
+        "probes": "structure",
+        "text": "How do you separate onboarding from acquisition mix?"
+      },
+      {
+        "id": "rca-012-f3",
+        "probes": "prioritisation",
+        "text": "Would you roll back? Under what conditions?"
+      },
+      {
+        "id": "rca-012-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What next?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "no holdout group was kept"
+      ],
+      "user": [
+        "the drop is only for female users"
+      ]
+    },
+    "tags": [
+      "india",
+      "retention",
+      "consumer"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "rca-013",
+    "topic": "rca",
+    "subtype": "funnel_or_adoption",
+    "difficulty": "easy",
+    "timeboxMin": 12,
+    "prompt": "Fewer shoppers are using the search bar on a grocery app after a redesign. Where would you start?",
+    "context": {
+      "setup": "You're the PM for browse and search at a grocery app.",
+      "hiddenFacts": [
+        "Search usage fell from 38% to 29% of sessions.",
+        "The redesign moved the search bar below a banner on small screens.",
+        "Orders per session are flat; category browsing rose.",
+        "Android low-end devices show the biggest drop."
+      ]
+    },
+    "coverage": [
+      "metric_definition",
+      "scope",
+      "hypotheses",
+      "verify"
+    ],
+    "expectedStructure": [
+      "Clarify the metric and window",
+      "Segment by device",
+      "Hypotheses: placement, tracking",
+      "Check outcome metrics",
+      "Decide"
+    ],
+    "rubricHints": {
+      "structure": "Starts with definition and segments.",
+      "userFocus": "Segment by device.",
+      "prioritisation": "Prioritises likely cause.",
+      "metrics": "Uses order metrics to judge impact.",
+      "communication": "Clear."
+    },
+    "commonPitfalls": [
+      "Assumes drop is bad without checking orders",
+      "No device cut"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "rca-013-f1",
+        "probes": "metrics",
+        "text": "Orders per session are flat. Is this a problem?"
+      },
+      {
+        "id": "rca-013-f2",
+        "probes": "structure",
+        "text": "What cuts would you look at first?"
+      },
+      {
+        "id": "rca-013-f3",
+        "probes": "prioritisation",
+        "text": "What would you do before reverting?"
+      },
+      {
+        "id": "rca-013-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "events for the redesign were not instrumented"
+      ],
+      "user": [
+        "the drop is among older shoppers"
+      ]
+    },
+    "tags": [
+      "india",
+      "grocery",
+      "search"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "rca-014",
+    "topic": "rca",
+    "subtype": "ops_quality",
+    "difficulty": "medium",
+    "timeboxMin": 12,
+    "prompt": "Order cancellations by restaurants rose from 3% to 7% on a food-delivery app in one week. What do you check?",
+    "context": {
+      "setup": "You're the PM for restaurant partners at a food-delivery company.",
+      "hiddenFacts": [
+        "Rise is concentrated in a few chains with a new POS integration.",
+        "Reasons shown: 'item unavailable' and 'restaurant too busy'.",
+        "Weekend demand was 15% higher than usual; rain in two cities.",
+        "Root cause: the POS integration doesn't sync stock-outs in real time."
+      ]
+    },
+    "coverage": [
+      "metric_definition",
+      "data_real",
+      "scope",
+      "internal_external",
+      "hypotheses",
+      "verify"
+    ],
+    "expectedStructure": [
+      "Clarify metric and tagging",
+      "Segment by chain, city, time, reason",
+      "Internal versus external",
+      "Hypotheses ordered",
+      "Verify; fix with the chain and platform"
+    ],
+    "rubricHints": {
+      "structure": "Cuts by partner and reason.",
+      "userFocus": "Considers partners and customers.",
+      "prioritisation": "Checks the most likely first.",
+      "metrics": "Uses reason codes and chain cuts.",
+      "communication": "Clear."
+    },
+    "commonPitfalls": [
+      "Blames weather only",
+      "No partner-level cut"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "rca-014-f1",
+        "probes": "structure",
+        "text": "Which cuts would reveal whether this is a few partners or everyone?"
+      },
+      {
+        "id": "rca-014-f2",
+        "probes": "prioritisation",
+        "text": "What do you do today for the customers whose orders were cancelled?"
+      },
+      {
+        "id": "rca-014-f3",
+        "probes": "metrics",
+        "text": "What metric would you track to confirm the fix?"
+      },
+      {
+        "id": "rca-014-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "partners refuse to share POS data"
+      ],
+      "market": [
+        "it happens in only one city"
+      ]
+    },
+    "tags": [
+      "india",
+      "food-delivery",
+      "operations"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "rca-015",
+    "topic": "rca",
+    "subtype": "ops_quality",
+    "difficulty": "easy",
+    "timeboxMin": 12,
+    "prompt": "Customer support CSAT on a banking app fell from 4.2 to 3.7 this month. What do you look at?",
+    "context": {
+      "setup": "You're the PM for support experience at a digital bank.",
+      "hiddenFacts": [
+        "CSAT is asked after chat closure on a 5-point scale.",
+        "Fall is concentrated in chats about card blocks.",
+        "A chatbot was added in front of agents; wait times rose by 4 minutes for card issues.",
+        "Response rate for the survey fell from 18% to 11%."
+      ]
+    },
+    "coverage": [
+      "metric_definition",
+      "data_real",
+      "scope",
+      "internal_external",
+      "hypotheses",
+      "verify"
+    ],
+    "expectedStructure": [
+      "Clarify metric and response rate",
+      "Check data and survey changes",
+      "Segment by issue type",
+      "Hypotheses: bot, wait time, agent quality",
+      "Verify and fix"
+    ],
+    "rubricHints": {
+      "structure": "Questions the data first.",
+      "userFocus": "Segments by issue.",
+      "prioritisation": "Checks the most likely first.",
+      "metrics": "Uses wait time and issue cut.",
+      "communication": "Clear."
+    },
+    "commonPitfalls": [
+      "Blames agents",
+      "Ignores response-rate change"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "rca-015-f1",
+        "probes": "structure",
+        "text": "How do you know the CSAT drop is real?"
+      },
+      {
+        "id": "rca-015-f2",
+        "probes": "metrics",
+        "text": "Which data cut would you start with?"
+      },
+      {
+        "id": "rca-015-f3",
+        "probes": "prioritisation",
+        "text": "How do you decide whether to remove the bot?"
+      },
+      {
+        "id": "rca-015-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What next?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "no chat transcripts are available"
+      ],
+      "user": [
+        "the drop is among senior customers"
+      ]
+    },
+    "tags": [
+      "india",
+      "fintech",
+      "support"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "rca-016",
+    "topic": "rca",
+    "subtype": "ops_quality",
+    "difficulty": "medium",
+    "timeboxMin": 12,
+    "prompt": "Damaged-product returns for an online electronics seller rose 40% in two months. Where do you start?",
+    "context": {
+      "setup": "You're the PM for logistics at an Indian e-commerce company.",
+      "hiddenFacts": [
+        "Returns are concentrated in one fulfilment centre and one courier.",
+        "Packaging material was changed to a cheaper box in that centre.",
+        "Product mix: more fragile items (mixers, monitors) due to a sale.",
+        "Courier handling scores are unchanged."
+      ]
+    },
+    "coverage": [
+      "metric_definition",
+      "data_real",
+      "scope",
+      "internal_external",
+      "hypotheses",
+      "verify"
+    ],
+    "expectedStructure": [
+      "Clarify metric and definition of damaged",
+      "Segment by FC, courier, product, route",
+      "Internal versus external",
+      "Hypotheses ordered",
+      "Verify and fix"
+    ],
+    "rubricHints": {
+      "structure": "Cuts the pipeline.",
+      "userFocus": "Segments by product.",
+      "prioritisation": "Prioritises likely causes.",
+      "metrics": "Uses FC and courier cuts.",
+      "communication": "Clear."
+    },
+    "commonPitfalls": [
+      "Blames courier without evidence",
+      "No product mix check"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "rca-016-f1",
+        "probes": "structure",
+        "text": "Which cuts would you apply first?"
+      },
+      {
+        "id": "rca-016-f2",
+        "probes": "prioritisation",
+        "text": "How would you order your hypotheses?"
+      },
+      {
+        "id": "rca-016-f3",
+        "probes": "metrics",
+        "text": "What metric tracks the fix?"
+      },
+      {
+        "id": "rca-016-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. What changes?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "no packaging data is recorded"
+      ],
+      "market": [
+        "rise only in monsoon months"
+      ]
+    },
+    "tags": [
+      "india",
+      "e-commerce",
+      "logistics"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  }
+]

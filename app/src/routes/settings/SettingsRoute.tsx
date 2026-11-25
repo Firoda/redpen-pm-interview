@@ -1,5 +1,6 @@
-import { Page } from '@/ui'
-/** PLACEHOLDER — replaced by the owning screen agent. */
+import Settings from '@/features/settings/Settings'
+
+/** /settings — profile, practice, voice, AI, nudges, appearance, data. */
 export default function SettingsRoute() {
-  return <Page title="Settings"><p className="text-secondary">Coming together…</p></Page>
+  return <Settings />
 }

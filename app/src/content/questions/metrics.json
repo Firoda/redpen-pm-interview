@@ -1,0 +1,1421 @@
+[
+  {
+    "id": "met-101",
+    "topic": "metrics",
+    "subtype": "define_success",
+    "difficulty": "medium",
+    "timeboxMin": 10,
+    "prompt": "How would you measure the success of a 'Split the bill' feature in a UPI payments app?",
+    "context": {
+      "setup": "You're the PM for payments at a large UPI app.",
+      "hiddenFacts": [
+        "Goal if asked: make group expenses easier so friends keep their shared spending inside our app.",
+        "How it works if asked: one person pays the merchant, then sends split requests to friends in the app.",
+        "Scale if asked (illustrative): 40 million monthly active users; the feature launched to 10% of them four weeks ago.",
+        "Known issue if asked: about a third of split requests are still unpaid after 7 days.",
+        "There is no fee today."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "north_star",
+      "inputs",
+      "guardrail",
+      "tradeoff"
+    ],
+    "expectedStructure": [
+      "State what the feature is for, and for whom (the payer and the friend who owes)",
+      "One north-star metric tied to that goal (for example, splits fully settled within 7 days per active user)",
+      "Two or three input metrics along the funnel (created, sent, opened, paid)",
+      "A guardrail or counter-metric (unpaid requests, reminder spam, drop in ordinary payments)",
+      "How you would read a conflict between metrics, and a target"
+    ],
+    "rubricHints": {
+      "structure": "Goal first, then metrics derived from it; not a list of metric names.",
+      "userFocus": "Separates the payer's goal (get money back) from the friend's experience (being asked to pay).",
+      "prioritisation": "Chooses one north star and says why it beats the alternatives.",
+      "metrics": "Settlement, not creation, is the outcome; names a guardrail and a time window.",
+      "communication": "Signposted and ends with a one-line summary."
+    },
+    "commonPitfalls": [
+      "Counts splits created (volume) as success",
+      "App-level NPS for a single feature",
+      "No counter-metric",
+      "Picks a metric because it is easy to move"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "met-101-f1",
+        "probes": "metrics",
+        "text": "How would you catch splits that get created but never paid back?",
+        "triggerIf": {
+          "missingAny": [
+            "settle",
+            "paid back",
+            "repay",
+            "unpaid",
+            "guardrail",
+            "counter"
+          ]
+        }
+      },
+      {
+        "id": "met-101-f2",
+        "probes": "prioritisation",
+        "text": "If you could report only one number to your CEO for this feature, which would it be, and why?"
+      },
+      {
+        "id": "met-101-f3",
+        "probes": "userFocus",
+        "text": "There are two people in every split. Whose success are you measuring?",
+        "triggerIf": {
+          "missingAny": [
+            "friend",
+            "payer",
+            "receiver",
+            "group"
+          ]
+        }
+      },
+      {
+        "id": "met-101-f4",
+        "probes": "metrics",
+        "text": "What target would you set for the first quarter, and where would it come from?"
+      },
+      {
+        "id": "met-101-f5",
+        "probes": "structure",
+        "text": "Let's change one thing: {variant}. What changes in how you measure success?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "there is now a ₹2 fee on every split",
+        "you can add only one new event to the analytics pipeline"
+      ],
+      "user": [
+        "the users are flatmates splitting rent every month, not friends splitting dinners"
+      ],
+      "market": [
+        "the feature is for small shops splitting supplier bills, not consumers"
+      ]
+    },
+    "tags": [
+      "india",
+      "fintech",
+      "upi"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "met-102",
+    "topic": "metrics",
+    "subtype": "define_success",
+    "difficulty": "medium",
+    "timeboxMin": 10,
+    "prompt": "How would you measure the success of a 'Reorder' button in a grocery delivery app?",
+    "context": {
+      "setup": "You're the PM for repeat shoppers at a grocery delivery app.",
+      "hiddenFacts": [
+        "Goal if asked: save repeat shoppers time on their regular basket.",
+        "Scale if asked (illustrative): 55% of orders already come from repeat shoppers.",
+        "The average basket has 14 items.",
+        "The category team is worried that one-tap reorder shrinks baskets and kills discovery of new products.",
+        "Reorder launches first in two cities; no fee or discount is attached."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "north_star",
+      "inputs",
+      "guardrail",
+      "tradeoff",
+      "target"
+    ],
+    "expectedStructure": [
+      "Say what Reorder is for (time saved for repeat shoppers) and who it helps most",
+      "One north-star tied to that goal, for example share of repeat orders placed through Reorder",
+      "Input metrics: Reorder taps per repeat shopper, time from app open to checkout",
+      "Counter-metrics: basket size, items per order, new-item discovery",
+      "How to read a conflict (reorders up, basket down) and a first-quarter target"
+    ],
+    "rubricHints": {
+      "structure": "States the goal before naming metrics and ends on how the numbers will be read together.",
+      "userFocus": "Separates habitual weekly shoppers from occasional ones and says who Reorder could hurt.",
+      "prioritisation": "Commits to one north star and says which other metrics are inputs rather than competing goals.",
+      "metrics": "Defines the north star with population and window; names basket size or discovery as the counter-metric with a direction.",
+      "communication": "Short, signposted, ends with the single number that decides success."
+    },
+    "commonPitfalls": [
+      "Counts Reorder taps as success",
+      "No counter-metric on basket size",
+      "Ignores discovery of new items",
+      "No target or baseline"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "met-102-f1",
+        "probes": "metrics",
+        "text": "If reorders rise 20% but basket size falls 5%, do you ship?"
+      },
+      {
+        "id": "met-102-f2",
+        "probes": "metrics",
+        "text": "How would you set the target for your north star in the first quarter?"
+      },
+      {
+        "id": "met-102-f3",
+        "probes": "prioritisation",
+        "text": "Which single number tells you Reorder is working?"
+      },
+      {
+        "id": "met-102-f4",
+        "probes": "userFocus",
+        "text": "Which shoppers is this for, and who might it hurt?"
+      },
+      {
+        "id": "met-102-f5",
+        "probes": "structure",
+        "text": "Let's change one thing: {variant}. What changes in how you measure success?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the Reorder button can show only five items"
+      ],
+      "user": [
+        "the shoppers are first-time users with one past order"
+      ]
+    },
+    "tags": [
+      "india",
+      "grocery",
+      "ecommerce"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "met-103",
+    "topic": "metrics",
+    "subtype": "define_success",
+    "difficulty": "easy",
+    "timeboxMin": 10,
+    "prompt": "You're the PM for 'Communities' in a messaging app. How would you measure its success?",
+    "context": {
+      "hiddenFacts": [
+        "Goal if asked: help organisers (schools, housing societies) reach members and keep sub-groups organised.",
+        "The feature launched six months ago; admins create a community and link existing groups.",
+        "Admins number far fewer than members; most members only read.",
+        "Announcements are the most used surface so far."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "north_star",
+      "inputs",
+      "guardrail"
+    ],
+    "expectedStructure": [
+      "Clarify the goal and the two users: admins and members",
+      "Value moments for each (admin reaches everyone; member finds what they need)",
+      "One primary metric tied to the goal",
+      "Supporting adoption and engagement metrics split by user type",
+      "Guardrails such as mutes, exits and spam reports"
+    ],
+    "rubricHints": {
+      "structure": "Goal and users first, then value moments, then metrics.",
+      "userFocus": "Separates admins from members and picks a value moment for each.",
+      "prioritisation": "Chooses one primary metric and explains why it beats DAU or group count.",
+      "metrics": "Something like weekly active communities where an announcement reached at least N members, with mute or exit rate as guardrail.",
+      "communication": "Clear, avoids listing every metric, closes with a one-line summary."
+    },
+    "commonPitfalls": [
+      "Lists DAU/MAU without tying to the goal",
+      "No guardrail",
+      "Treats admins and members as the same user",
+      "Counts communities created as success"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "met-103-f1",
+        "probes": "prioritisation",
+        "text": "If you could track only one number on a dashboard, which is it and why?"
+      },
+      {
+        "id": "met-103-f2",
+        "probes": "metrics",
+        "text": "What number would tell you Communities is hurting the rest of the app?",
+        "triggerIf": {
+          "missingAny": [
+            "guardrail",
+            "spam",
+            "mute",
+            "exit",
+            "counter"
+          ]
+        }
+      },
+      {
+        "id": "met-103-f3",
+        "probes": "userFocus",
+        "text": "Admins and members get different value. How does your metric reflect both?"
+      },
+      {
+        "id": "met-103-f4",
+        "probes": "metrics",
+        "text": "Suppose {variant}. Does your primary metric change?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "user": [
+        "the main users are small businesses broadcasting offers to customers"
+      ],
+      "constraint": [
+        "you cannot read message content and only have counts"
+      ],
+      "market": [
+        "the market is Brazil, where groups are heavily used for commerce"
+      ]
+    },
+    "tags": [
+      "messaging",
+      "success-metrics",
+      "india"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "met-104",
+    "topic": "metrics",
+    "subtype": "define_success",
+    "difficulty": "easy",
+    "timeboxMin": 10,
+    "prompt": "How would you measure the success of live order tracking on a food-delivery app?",
+    "context": {
+      "setup": "You're the PM for post-order experience at a food-delivery company.",
+      "hiddenFacts": [
+        "Goal if asked: reduce anxiety after ordering and cut 'where is my order' contacts.",
+        "About 18% of orders today generate a call or chat to support (illustrative).",
+        "Tracking shows a map with the rider's position and an ETA that refreshes every 30 seconds.",
+        "Support costs roughly ₹35 per contact (illustrative)."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "north_star",
+      "inputs",
+      "guardrail"
+    ],
+    "expectedStructure": [
+      "State the goal: less anxiety and fewer support contacts",
+      "Primary metric such as WISMO contacts per 100 orders",
+      "Inputs: tracking screen opens per order, ETA accuracy",
+      "Guardrails: order cancellations after ordering, ratings, battery or data complaints",
+      "Target and how you would test it"
+    ],
+    "rubricHints": {
+      "structure": "Ties each metric back to the stated goal.",
+      "userFocus": "Notes that anxious first-time orderers behave differently from regulars.",
+      "prioritisation": "Picks WISMO contacts per order over map opens and says why.",
+      "metrics": "Contact rate per 100 orders with ETA accuracy as input and cancellation rate as counter-metric.",
+      "communication": "Direct and concise."
+    },
+    "commonPitfalls": [
+      "Counts tracking page views as success",
+      "Ignores ETA accuracy",
+      "No counter-metric",
+      "Confuses usage with value"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "met-104-f1",
+        "probes": "metrics",
+        "text": "Map opens went up but support contacts did not move. What do you conclude?"
+      },
+      {
+        "id": "met-104-f2",
+        "probes": "prioritisation",
+        "text": "Which one of your metrics would you put in front of the head of operations?"
+      },
+      {
+        "id": "met-104-f3",
+        "probes": "metrics",
+        "text": "What would tell you the tracking screen is making things worse?",
+        "triggerIf": {
+          "missingAny": [
+            "cancel",
+            "guardrail",
+            "counter",
+            "harm"
+          ]
+        }
+      },
+      {
+        "id": "met-104-f4",
+        "probes": "userFocus",
+        "text": "Which customers benefit most from live tracking?"
+      },
+      {
+        "id": "met-104-f5",
+        "probes": "structure",
+        "text": "Let's change one thing: {variant}. How does your measurement change?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the ETA is wrong by more than 10 minutes on 30% of orders"
+      ],
+      "user": [
+        "the customers are people ordering for a family dinner party"
+      ]
+    },
+    "tags": [
+      "india",
+      "food-delivery",
+      "support"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "met-105",
+    "topic": "metrics",
+    "subtype": "north_star",
+    "difficulty": "medium",
+    "timeboxMin": 12,
+    "prompt": "Choose a North Star metric for a music-streaming service in India, and tell me what you'd guard against.",
+    "context": {
+      "hiddenFacts": [
+        "Business model if asked: ad-supported free tier plus a premium subscription; most users are free.",
+        "Goal: grow paying subscribers while keeping free users engaged for ad revenue.",
+        "A large share of listening is regional-language and film music; many users listen on mobile data.",
+        "Free-tier ads are capped at one every four songs."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "north_star",
+      "inputs",
+      "guardrail"
+    ],
+    "expectedStructure": [
+      "Clarify business model and current goal",
+      "Define the value moment for a listener",
+      "Candidate north stars and why one wins (leads revenue, reflects value, movable)",
+      "Input metrics teams can move each week",
+      "Guardrails and ways the metric could be gamed"
+    ],
+    "rubricHints": {
+      "structure": "Value moment, then north star, then inputs, then guardrails.",
+      "userFocus": "Distinguishes free and paying listeners and the moments each values.",
+      "prioritisation": "Explains why the chosen metric beats subscribers or DAU.",
+      "metrics": "Something like weekly listeners with at least N minutes of intentional listening; names skips, churn or ad load as guardrails.",
+      "communication": "Defends the choice crisply under challenge."
+    },
+    "commonPitfalls": [
+      "Picks revenue as the north star",
+      "No input metrics",
+      "Ignores the free versus paid split",
+      "Picks DAU without reasoning"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "met-105-f1",
+        "probes": "prioritisation",
+        "text": "Why not just use paid subscribers as the North Star?"
+      },
+      {
+        "id": "met-105-f2",
+        "probes": "metrics",
+        "text": "What are the two or three input metrics your teams would actually move each week?"
+      },
+      {
+        "id": "met-105-f3",
+        "probes": "metrics",
+        "text": "How could a team game your North Star in a way that hurts the business?",
+        "triggerIf": {
+          "missingAny": [
+            "guardrail",
+            "counter",
+            "skip",
+            "churn",
+            "ads"
+          ]
+        }
+      },
+      {
+        "id": "met-105-f4",
+        "probes": "structure",
+        "text": "Now {variant}. Would you change the North Star?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the company's priority this year is profitability, not growth"
+      ],
+      "user": [
+        "most users listen to podcasts, not music"
+      ],
+      "market": [
+        "the market is the US, where most users pay"
+      ]
+    },
+    "tags": [
+      "north-star",
+      "subscription",
+      "india"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "met-106",
+    "topic": "metrics",
+    "subtype": "north_star",
+    "difficulty": "easy",
+    "timeboxMin": 10,
+    "prompt": "What North Star metric would you choose for an exam-preparation app for Class 10 students?",
+    "context": {
+      "setup": "You're the PM at an ed-tech company with a freemium app.",
+      "hiddenFacts": [
+        "Business model if asked: free daily practice, paid mock tests and doubt-solving.",
+        "Students use it mostly between 6 and 10 pm; parents pay.",
+        "Goal this year: improve learning outcomes, not just time in app.",
+        "Today the team tracks DAU and minutes per user."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "north_star",
+      "inputs",
+      "guardrail"
+    ],
+    "expectedStructure": [
+      "Clarify goal: learning outcomes versus revenue",
+      "Define the value moment (a student masters a concept)",
+      "Pick a north star such as weekly students completing a practice set at a target accuracy",
+      "Name inputs: sessions, completion, doubt resolution",
+      "Guardrails: cheating, burnout, parent complaints"
+    ],
+    "rubricHints": {
+      "structure": "Starts from the learning outcome and works toward a measurable proxy.",
+      "userFocus": "Separates the student's use from the parent's payment decision.",
+      "prioritisation": "Rejects minutes in app and DAU for stated reasons.",
+      "metrics": "Defines action, population and window; adds a guardrail such as accuracy decay or refund rate.",
+      "communication": "Plain language, one clear recommendation."
+    },
+    "commonPitfalls": [
+      "Time spent as the North Star",
+      "Revenue as the North Star",
+      "Ignores parents as buyers",
+      "No outcome measure"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "met-106-f1",
+        "probes": "prioritisation",
+        "text": "Why is minutes per user a poor North Star here?"
+      },
+      {
+        "id": "met-106-f2",
+        "probes": "metrics",
+        "text": "How would you know the practice is actually improving marks?"
+      },
+      {
+        "id": "met-106-f3",
+        "probes": "userFocus",
+        "text": "The student uses it and the parent pays. Which one does your metric follow?"
+      },
+      {
+        "id": "met-106-f4",
+        "probes": "metrics",
+        "text": "Suppose {variant}. Does your North Star change?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "user": [
+        "the learners are working adults preparing for a government exam"
+      ],
+      "constraint": [
+        "you have no data on exam results, only in-app activity"
+      ]
+    },
+    "tags": [
+      "india",
+      "edtech",
+      "north-star"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "met-107",
+    "topic": "metrics",
+    "subtype": "north_star",
+    "difficulty": "medium",
+    "timeboxMin": 12,
+    "prompt": "Define the North Star metric for a B2B app that helps kirana store owners reorder stock from distributors.",
+    "context": {
+      "setup": "You're the PM at a startup serving about 80,000 neighbourhood stores.",
+      "hiddenFacts": [
+        "Revenue comes from a small margin on orders placed through the app.",
+        "Typical store reorders every 4 to 7 days, many by phone call to the distributor's sales rep today.",
+        "Stores often have 2 or 3 distributor relationships and compare prices.",
+        "Credit (pay in 7 days) is offered to about a third of stores."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "north_star",
+      "inputs",
+      "guardrail",
+      "tradeoff"
+    ],
+    "expectedStructure": [
+      "Clarify the goal (retention of stores versus GMV versus margin)",
+      "Value moment: store restocks faster or cheaper without a phone call",
+      "North star such as weekly stores placing at least one order, or share of a store's restocking done in-app",
+      "Inputs: catalogue availability, price competitiveness, delivery reliability",
+      "Guardrails: credit defaults, order fill rate, margin"
+    ],
+    "rubricHints": {
+      "structure": "Chooses the north star from the value moment, then decomposes it.",
+      "userFocus": "Treats the store owner (low app time, high stakes per order) as the user and notes the distributor rep as another stakeholder.",
+      "prioritisation": "Argues for share of wallet or weekly active ordering stores over raw GMV.",
+      "metrics": "Defines population and window and adds fill rate and credit default as guardrails.",
+      "communication": "Keeps the metric simple enough to explain to a store owner."
+    },
+    "commonPitfalls": [
+      "GMV as the North Star",
+      "Ignores credit risk",
+      "No fill-rate guardrail",
+      "Counts app downloads"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "met-107-f1",
+        "probes": "prioritisation",
+        "text": "GMV is growing fast. Why would you not use it as the North Star?"
+      },
+      {
+        "id": "met-107-f2",
+        "probes": "metrics",
+        "text": "Credit drives orders but also defaults. How does your metric handle that?",
+        "triggerIf": {
+          "missingAny": [
+            "credit",
+            "default",
+            "guardrail",
+            "risk"
+          ]
+        }
+      },
+      {
+        "id": "met-107-f3",
+        "probes": "userFocus",
+        "text": "Which stores are you optimising for first, and why?"
+      },
+      {
+        "id": "met-107-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. Does the North Star still hold?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the company decides to stop offering credit this year"
+      ],
+      "market": [
+        "the same product launches for pharmacies instead of kiranas"
+      ]
+    },
+    "tags": [
+      "india",
+      "b2b",
+      "kirana"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "met-108",
+    "topic": "metrics",
+    "subtype": "north_star",
+    "difficulty": "hard",
+    "timeboxMin": 12,
+    "prompt": "Payments on your UPI app earn no revenue. What North Star would you pick, and how does it connect to a business that pays for itself?",
+    "context": {
+      "setup": "You're the head of product at a UPI app that plans to monetise through lending and merchant tools.",
+      "hiddenFacts": [
+        "Peer-to-peer and merchant UPI payments carry zero MDR today.",
+        "The app makes money from credit lines, insurance distribution and merchant subscriptions.",
+        "Users who use the app for 4 or more payments a month are 5 times as likely to take a credit product (illustrative).",
+        "Regulation caps any single app's share of UPI volume."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "north_star",
+      "inputs",
+      "guardrail",
+      "tradeoff"
+    ],
+    "expectedStructure": [
+      "Separate the goal (reach and trust) from the money (adjacent products)",
+      "Pick a north star that leads monetisation, for example monthly users with 4 or more payments",
+      "Inputs: activation, merchant acceptance, payment success rate",
+      "Counter-metrics: credit delinquency, payment success rate, regulator constraints",
+      "How the north star connects to revenue per user over time"
+    ],
+    "rubricHints": {
+      "structure": "Connects the north star to revenue through a stated causal chain.",
+      "userFocus": "Distinguishes consumers, merchants and credit-eligible users.",
+      "prioritisation": "Explains why transaction count or share is not the north star given the share cap.",
+      "metrics": "Habit threshold plus a guardrail on success rate and delinquency, with a leading versus lagging view.",
+      "communication": "Defends the choice without hedging."
+    },
+    "commonPitfalls": [
+      "Share of UPI volume as the North Star",
+      "Revenue as the North Star",
+      "No link between engagement and monetisation",
+      "Ignores risk metrics for lending"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "met-108-f1",
+        "probes": "prioritisation",
+        "text": "Why is share of UPI volume the wrong North Star for you?"
+      },
+      {
+        "id": "met-108-f2",
+        "probes": "metrics",
+        "text": "Which metric leads revenue, and which one lags it? How would you prove the link?"
+      },
+      {
+        "id": "met-108-f3",
+        "probes": "metrics",
+        "text": "How would you stop growth in lending from damaging the payments experience?",
+        "triggerIf": {
+          "missingAny": [
+            "guardrail",
+            "success rate",
+            "default",
+            "counter"
+          ]
+        }
+      },
+      {
+        "id": "met-108-f4",
+        "probes": "structure",
+        "text": "Now suppose {variant}. Does your North Star change?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the regulator caps market share at 30% and you are at 28%"
+      ],
+      "user": [
+        "the main growth segment is small merchants, not consumers"
+      ]
+    },
+    "tags": [
+      "india",
+      "fintech",
+      "upi",
+      "north-star"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "met-109",
+    "topic": "metrics",
+    "subtype": "ab_test_readout",
+    "difficulty": "hard",
+    "timeboxMin": 12,
+    "prompt": "An A/B test of a new checkout page on a fashion e-commerce app shows +4% conversion but −6% average order value. Do you ship it?",
+    "context": {
+      "hiddenFacts": [
+        "The test ran 7 days, including a sale weekend; roughly 200k users per arm.",
+        "Conversion lift is significant (p about 0.01); the order value drop is significant (p about 0.04).",
+        "Revenue per visitor is roughly −2% if the candidate asks or computes it.",
+        "The new page removed the 'add ₹300 more for free shipping' nudge.",
+        "Return-rate data is not yet available because it lags 30 days."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "inputs",
+      "guardrail",
+      "tradeoff"
+    ],
+    "expectedStructure": [
+      "Clarify the goal metric (revenue per visitor, profit, new buyers)",
+      "Combine conversion and order value into revenue per visitor",
+      "Check test validity: duration, sale weekend, novelty, sample ratio",
+      "Diagnose the order value drop (removed free-shipping nudge)",
+      "Decide with conditions: do not ship as is; restore the nudge and retest, or ship to a segment"
+    ],
+    "rubricHints": {
+      "structure": "Checks validity before interpreting results.",
+      "userFocus": "Notes new versus repeat buyers may react differently.",
+      "prioritisation": "Makes a clear decision with conditions instead of 'it depends'.",
+      "metrics": "Combines conversion and AOV into revenue per visitor and mentions margin or returns.",
+      "communication": "States the decision first, then the reason."
+    },
+    "commonPitfalls": [
+      "Ships because conversion is up",
+      "Never checks test validity",
+      "No decision",
+      "Ignores returns"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "met-109-f1",
+        "probes": "metrics",
+        "text": "Put the two numbers together. Is the business better or worse off per visitor?",
+        "triggerIf": {
+          "missingAny": [
+            "revenue per",
+            "rpv",
+            "per visitor",
+            "multiply",
+            "overall revenue"
+          ]
+        }
+      },
+      {
+        "id": "met-109-f2",
+        "probes": "structure",
+        "text": "The test ran over a sale weekend. Does that worry you? What would you check?"
+      },
+      {
+        "id": "met-109-f3",
+        "probes": "prioritisation",
+        "text": "Your VP wants a yes or no today. What's your call and what's the condition?"
+      },
+      {
+        "id": "met-109-f4",
+        "probes": "metrics",
+        "text": "Suppose {variant}. Does your decision change?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the company's goal this quarter is acquiring first-time buyers, not revenue"
+      ],
+      "user": [
+        "the lift comes entirely from new users; repeat users show no change"
+      ]
+    },
+    "tags": [
+      "experimentation",
+      "e-commerce",
+      "india"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "met-110",
+    "topic": "metrics",
+    "subtype": "ab_test_readout",
+    "difficulty": "medium",
+    "timeboxMin": 12,
+    "prompt": "A new push notification strategy lifts app opens 12% but uninstalls rise from 0.8% to 1.2% a week. Do you roll it out?",
+    "context": {
+      "setup": "You're the PM for engagement at a shopping app.",
+      "hiddenFacts": [
+        "The test had two arms of 500k users each and ran for 14 days.",
+        "Both opens and uninstalls changes are statistically significant.",
+        "Extra notifications are mostly 'price drop' alerts on items users viewed once.",
+        "Orders per user are up 1.5% in the treatment arm, not significant."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "guardrail",
+      "tradeoff",
+      "target"
+    ],
+    "expectedStructure": [
+      "Clarify the goal: orders, not opens",
+      "Treat uninstalls as the cost side and value a lost user",
+      "Compare lifetime value lost against the order gain",
+      "Segment: who uninstalls (light users?) and who responds",
+      "Decision: partial rollout with frequency caps, retest"
+    ],
+    "rubricHints": {
+      "structure": "Frames the decision as cost versus benefit with a goal metric.",
+      "userFocus": "Segments heavy and light users and notes that lost users cost long-term value.",
+      "prioritisation": "Chooses a decision and names the condition to flip it.",
+      "metrics": "Argues opens are a proxy; uses orders per user and retention as the real outcomes.",
+      "communication": "Clear recommendation with one-line reasoning."
+    },
+    "commonPitfalls": [
+      "Celebrates the lift in opens",
+      "Treats uninstalls as noise",
+      "No segmentation",
+      "No decision"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "met-110-f1",
+        "probes": "metrics",
+        "text": "Opens are up. Why might that number mislead you here?"
+      },
+      {
+        "id": "met-110-f2",
+        "probes": "prioritisation",
+        "text": "Which would you pick as the deciding metric, and what threshold flips your decision?"
+      },
+      {
+        "id": "met-110-f3",
+        "probes": "userFocus",
+        "text": "Which users are uninstalling, and does that change the plan?"
+      },
+      {
+        "id": "met-110-f4",
+        "probes": "metrics",
+        "text": "Suppose {variant}. What do you decide?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "you can only run the test for 5 more days"
+      ],
+      "user": [
+        "the uninstalls are concentrated among your highest-spending users"
+      ]
+    },
+    "tags": [
+      "india",
+      "experimentation",
+      "ecommerce"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "met-111",
+    "topic": "metrics",
+    "subtype": "ab_test_readout",
+    "difficulty": "easy",
+    "timeboxMin": 10,
+    "prompt": "A new onboarding flow improves day-1 retention from 40% to 41.5%, with a p-value of 0.2. What do you do?",
+    "context": {
+      "setup": "You're the PM for onboarding at a language-learning app.",
+      "hiddenFacts": [
+        "Each arm had 6,000 users; the test ran for 5 days.",
+        "Pre-test calculation showed about 30,000 users per arm were needed to detect a 1.5 point lift.",
+        "The new flow has one fewer screen and a shorter sign-up.",
+        "Shipping the new flow costs one engineer for two weeks."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "guardrail",
+      "target"
+    ],
+    "expectedStructure": [
+      "Say what the result does and does not show: not significant, underpowered",
+      "Check sample size and runtime against the pre-test plan",
+      "Options: extend the test, ship on a cheaper criterion, or drop",
+      "Name the secondary metrics to check (completion, D7)",
+      "Decision with a reason"
+    ],
+    "rubricHints": {
+      "structure": "Reads the result before deciding.",
+      "userFocus": "Considers which new-user segment the flow helps.",
+      "prioritisation": "Picks extend, ship or drop with a stated criterion.",
+      "metrics": "Explains underpowered versus no effect and names a minimum detectable effect.",
+      "communication": "No jargon the listener cannot follow."
+    },
+    "commonPitfalls": [
+      "Declares a win from the lift",
+      "Declares it failed because p is above 0.05",
+      "Ignores sample size",
+      "No next step"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "met-111-f1",
+        "probes": "metrics",
+        "text": "Does a p-value of 0.2 mean the new flow does not work?"
+      },
+      {
+        "id": "met-111-f2",
+        "probes": "prioritisation",
+        "text": "The change is cheap to ship. Does that change your decision?"
+      },
+      {
+        "id": "met-111-f3",
+        "probes": "metrics",
+        "text": "Which other metric would you check before deciding?",
+        "triggerIf": {
+          "missingAny": [
+            "d7",
+            "completion",
+            "secondary",
+            "guardrail"
+          ]
+        }
+      },
+      {
+        "id": "met-111-f4",
+        "probes": "metrics",
+        "text": "Suppose {variant}. What do you do now?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the team can run the test for only three more days"
+      ],
+      "user": [
+        "the lift appears only among users who sign up through ads"
+      ]
+    },
+    "tags": [
+      "experimentation",
+      "onboarding",
+      "stats"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "met-112",
+    "topic": "metrics",
+    "subtype": "ab_test_readout",
+    "difficulty": "medium",
+    "timeboxMin": 12,
+    "prompt": "A 3-day test of a new 'Buy now, pay later' option on checkout shows +8% conversion. The team wants to ship tomorrow. Do you agree?",
+    "context": {
+      "setup": "You're the PM for checkout at a fashion marketplace in India.",
+      "hiddenFacts": [
+        "The test ran Thursday to Saturday over a salary-day weekend.",
+        "Only 50,000 users per arm; about 6% of treatment users chose the new option.",
+        "Default rate on the lender's pay-later product is unknown for this audience.",
+        "Return rate is 25% for fashion; pay-later buyers return more in other categories."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "guardrail",
+      "tradeoff",
+      "target"
+    ],
+    "expectedStructure": [
+      "Challenge test validity: three days, salary weekend, novelty effect",
+      "Define the real success metric: profit after returns and defaults",
+      "Segment by who chose pay later",
+      "Name what you would need before shipping: a longer run, default and return data",
+      "Decision: staged rollout with guardrails"
+    ],
+    "rubricHints": {
+      "structure": "Starts from validity, then metric, then decision.",
+      "userFocus": "Looks at which customers use pay later and their risk.",
+      "prioritisation": "Chooses a staged rollout with a stated criterion.",
+      "metrics": "Brings in returns and default rate as guardrails and states what counts as success after 30 days.",
+      "communication": "Disagrees politely and concretely."
+    },
+    "commonPitfalls": [
+      "Ships on conversion alone",
+      "Ignores the salary weekend",
+      "Does not mention defaults or returns",
+      "No decision"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "met-112-f1",
+        "probes": "structure",
+        "text": "What about this test makes you hesitate to trust +8%?"
+      },
+      {
+        "id": "met-112-f2",
+        "probes": "metrics",
+        "text": "Which two numbers would you want before you say yes?",
+        "triggerIf": {
+          "missingAny": [
+            "return",
+            "default",
+            "margin",
+            "guardrail"
+          ]
+        }
+      },
+      {
+        "id": "met-112-f3",
+        "probes": "prioritisation",
+        "text": "If you must decide today, what is the smallest safe step?"
+      },
+      {
+        "id": "met-112-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. Does your recommendation change?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the lender takes 100% of default risk but charges you a higher fee"
+      ],
+      "market": [
+        "the test ran in a Tier-3 town audience with low credit history"
+      ]
+    },
+    "tags": [
+      "india",
+      "ecommerce",
+      "fintech",
+      "experimentation"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "met-113",
+    "topic": "metrics",
+    "subtype": "metric_tradeoff",
+    "difficulty": "hard",
+    "timeboxMin": 12,
+    "prompt": "Your quick-commerce company can cut average delivery time from 14 to 10 minutes, but cost per order rises ₹12. How do you decide?",
+    "context": {
+      "setup": "You're the PM for fulfilment at a quick-commerce company in Mumbai and Bengaluru.",
+      "hiddenFacts": [
+        "Average order value is ₹480 and contribution margin per order is about ₹25 (illustrative).",
+        "Faster delivery needs more dark stores and riders on standby.",
+        "In past tests, each minute saved raised orders per customer by about 1% (illustrative).",
+        "Customer survey: 70% say 'under 15 minutes' is fast enough."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "north_star",
+      "guardrail",
+      "tradeoff",
+      "target"
+    ],
+    "expectedStructure": [
+      "Clarify the objective: growth, margin or retention",
+      "Quantify both sides: margin per order versus frequency gain",
+      "Segment: who values 10 minutes (urgent needs) versus 14",
+      "Find the threshold where the investment breaks even",
+      "Decide, choose a pilot, and name the guardrail"
+    ],
+    "rubricHints": {
+      "structure": "Frames a break-even rather than a vague trade-off.",
+      "userFocus": "Splits urgent-need orders from planned grocery orders.",
+      "prioritisation": "Makes a call with conditions and a pilot.",
+      "metrics": "Defines contribution margin per customer per month and a delivery-time guardrail.",
+      "communication": "Shows the arithmetic aloud."
+    },
+    "commonPitfalls": [
+      "Says faster is always better",
+      "Ignores the ₹12 cost",
+      "No break-even logic",
+      "No pilot"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "met-113-f1",
+        "probes": "metrics",
+        "text": "Do the numbers: how much would orders per customer need to rise to cover ₹12?",
+        "triggerIf": {
+          "missingAny": [
+            "break",
+            "margin",
+            "frequency"
+          ]
+        }
+      },
+      {
+        "id": "met-113-f2",
+        "probes": "prioritisation",
+        "text": "If you could speed up only some orders, which ones and why?"
+      },
+      {
+        "id": "met-113-f3",
+        "probes": "metrics",
+        "text": "What guardrail makes sure the pilot does not hide a loss?"
+      },
+      {
+        "id": "met-113-f4",
+        "probes": "prioritisation",
+        "text": "Suppose {variant}. What do you decide?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the company must reach profitability in 12 months"
+      ],
+      "market": [
+        "the city is Lucknow, with lower order density"
+      ]
+    },
+    "tags": [
+      "india",
+      "quick-commerce",
+      "unit-economics"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "met-114",
+    "topic": "metrics",
+    "subtype": "metric_tradeoff",
+    "difficulty": "medium",
+    "timeboxMin": 12,
+    "prompt": "Daily active users on a ride-hailing app are up 10%, but support tickets per ride are up 25%. How do you think about it?",
+    "context": {
+      "setup": "You're the PM for rider experience at a ride-hailing company.",
+      "hiddenFacts": [
+        "The DAU rise came from a new 'airport rides' campaign in two cities.",
+        "Most added tickets are about driver cancellations and fare disputes on airport rides.",
+        "Cost per ticket is about ₹60 (illustrative); average take per ride is about ₹40.",
+        "Ratings for airport rides dipped from 4.6 to 4.3."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "north_star",
+      "guardrail",
+      "tradeoff"
+    ],
+    "expectedStructure": [
+      "Clarify what counts: DAU, tickets per ride, per-segment",
+      "Locate the added tickets (airport cohort, cause)",
+      "Compare the value of added users against the support cost",
+      "Decide whether to keep, fix or pause the campaign",
+      "Guardrail metrics and a threshold"
+    ],
+    "rubricHints": {
+      "structure": "Segments before judging the trade-off.",
+      "userFocus": "Separates new airport riders from regulars.",
+      "prioritisation": "Chooses to fix the cause before scaling and says why.",
+      "metrics": "Uses tickets per ride and contribution per ride by cohort; names a threshold.",
+      "communication": "Keeps the explanation short."
+    },
+    "commonPitfalls": [
+      "Treats DAU as the goal",
+      "Ignores per-ride cost",
+      "No segmentation",
+      "No threshold"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "met-114-f1",
+        "probes": "metrics",
+        "text": "Is cost per ticket higher or lower than what you earn per ride? Does that change your view?"
+      },
+      {
+        "id": "met-114-f2",
+        "probes": "prioritisation",
+        "text": "Would you pause the campaign, fix it, or scale it? Pick one."
+      },
+      {
+        "id": "met-114-f3",
+        "probes": "metrics",
+        "text": "What threshold on tickets per ride would make you pause?"
+      },
+      {
+        "id": "met-114-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. How does your view change?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "user": [
+        "the extra tickets come from first-time riders who later become regulars"
+      ],
+      "constraint": [
+        "you cannot hire more support agents this quarter"
+      ]
+    },
+    "tags": [
+      "india",
+      "mobility",
+      "support"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "met-115",
+    "topic": "metrics",
+    "subtype": "metric_tradeoff",
+    "difficulty": "hard",
+    "timeboxMin": 12,
+    "prompt": "A marketplace wants to raise the seller commission from 8% to 10%. Buyer-side metrics are healthy. What do you look at before deciding?",
+    "context": {
+      "setup": "You're the PM for seller experience at an Indian online marketplace for handmade goods.",
+      "hiddenFacts": [
+        "Roughly 120,000 active sellers; the top 5% of sellers produce 40% of GMV (illustrative).",
+        "Competitors charge between 5% and 12%.",
+        "Seller churn last year was 22%; many sellers also list elsewhere.",
+        "Buyers do not see seller fees; price is set by sellers."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "guardrail",
+      "tradeoff",
+      "target"
+    ],
+    "expectedStructure": [
+      "Clarify the goal: revenue or profitability",
+      "Segment sellers by size and multi-homing",
+      "Estimate revenue gain against likely GMV loss",
+      "Name leading indicators: listing activity, response time, seller NPS",
+      "Phased rollout with a test and a stop condition"
+    ],
+    "rubricHints": {
+      "structure": "Frames a net-revenue calculation with explicit assumptions.",
+      "userFocus": "Differentiates top sellers, long-tail sellers and buyers.",
+      "prioritisation": "Recommends a segmented or phased rollout over a flat increase.",
+      "metrics": "Defines net take (commission income less GMV lost) and lists leading indicators and a stop threshold.",
+      "communication": "States the recommendation first."
+    },
+    "commonPitfalls": [
+      "Looks only at buyer metrics",
+      "Ignores seller multi-homing",
+      "No test plan",
+      "Flat rollout with no stop condition"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "met-115-f1",
+        "probes": "metrics",
+        "text": "Which early signal would show that sellers are leaving before GMV drops?"
+      },
+      {
+        "id": "met-115-f2",
+        "probes": "prioritisation",
+        "text": "You can raise it for only one seller segment. Which one?"
+      },
+      {
+        "id": "met-115-f3",
+        "probes": "userFocus",
+        "text": "Buyers don't see commission. Why still care about them?"
+      },
+      {
+        "id": "met-115-f4",
+        "probes": "prioritisation",
+        "text": "Suppose {variant}. What do you recommend?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "a competitor has just cut its commission to 5%"
+      ],
+      "user": [
+        "the top 100 sellers threaten to leave if the rate rises"
+      ]
+    },
+    "tags": [
+      "india",
+      "marketplace",
+      "pricing"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  },
+  {
+    "id": "met-116",
+    "topic": "metrics",
+    "subtype": "metric_tradeoff",
+    "difficulty": "easy",
+    "timeboxMin": 10,
+    "prompt": "Your app's daily active users rose 10% this month, but revenue per user fell 8%. Is this good or bad?",
+    "context": {
+      "setup": "You're the PM for a freemium fitness app.",
+      "hiddenFacts": [
+        "A cricket-season campaign brought in many free users.",
+        "Paying subscribers are flat in absolute number.",
+        "Ad revenue per free user is a tenth of subscription revenue per paying user (illustrative).",
+        "Total revenue is up about 1%."
+      ]
+    },
+    "coverage": [
+      "goal",
+      "north_star",
+      "tradeoff"
+    ],
+    "expectedStructure": [
+      "Clarify the company goal this quarter",
+      "Compute total revenue: DAU up, ARPU down",
+      "Segment new free users against paying users",
+      "Check retention and conversion of the new cohort",
+      "Conclude with the metric you would track and why"
+    ],
+    "rubricHints": {
+      "structure": "Computes total revenue before judging.",
+      "userFocus": "Separates the campaign cohort from existing users.",
+      "prioritisation": "Chooses a decision metric and says why.",
+      "metrics": "Looks at conversion and retention of the new cohort rather than raw revenue per user.",
+      "communication": "One clear takeaway."
+    },
+    "commonPitfalls": [
+      "Calls it good because DAU rose",
+      "Calls it bad because ARPU fell",
+      "Ignores cohort mix",
+      "No decision metric"
+    ],
+    "followUpSeeds": [
+      {
+        "id": "met-116-f1",
+        "probes": "metrics",
+        "text": "Total revenue is up 1%. Does that settle it?"
+      },
+      {
+        "id": "met-116-f2",
+        "probes": "prioritisation",
+        "text": "Which number would you show the CEO, and why?"
+      },
+      {
+        "id": "met-116-f3",
+        "probes": "userFocus",
+        "text": "Is the new cohort different from your usual users? How would you check?"
+      },
+      {
+        "id": "met-116-f4",
+        "probes": "structure",
+        "text": "Suppose {variant}. How does your view change?",
+        "isVariantSlot": true
+      }
+    ],
+    "variants": {
+      "constraint": [
+        "the company must show profitability next quarter"
+      ],
+      "user": [
+        "the new cohort is mostly students who never intend to pay"
+      ]
+    },
+    "tags": [
+      "india",
+      "subscription",
+      "mix-shift"
+    ],
+    "source": "curated",
+    "contentVersion": 1
+  }
+]

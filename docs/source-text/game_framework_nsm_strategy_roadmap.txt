@@ -1,0 +1,367 @@
+===== ppt/notesSlides/notesSlide1.xml =====
+Open on your feet. Two hours, and this is the session where you talk least.
+Say it plainly at the top: "Today is mostly you working. I teach for about forty-five minutes in total. The rest is two exercises and a vote." That expectation changes how the room sits.
+The session has two halves that look unrelated and are not. The first is the organisation around your product: you are responsible for an outcome and have authority over almost nobody who produces it. The second is the choice your product makes. The bridge is the same idea twice - decide, then explain the trade to whoever lost.
+Ninety seconds, no more. If you are behind at the start of a workshop session you never recover it, and the workshop is the point.
+===== ppt/notesSlides/notesSlide2.xml =====
+Leave this on screen for the full fifteen minutes. Fill the first row live from one team's answer so the format is unambiguous, then step back.
+Use the time to diagnose rather than to teach. Two things are worth noting privately as you walk: which teams cannot state a user goal without describing their own feature, and which teams have no monetise action anywhere in the grid. Both are findings you can use in Session 9 when GTM and monetisation come up.
+At the twelve-minute mark, tell the room to stop writing and pick the row they would defend. That instruction primes the second workshop without giving away that the North Star will come out of it.
+===== ppt/notesSlides/notesSlide3.xml =====
+Leave this on screen for the full fifteen minutes. Fill the first row live from one team's answer so the format is unambiguous, then step back.
+Use the time to diagnose rather than to teach. Two things are worth noting privately as you walk: which teams cannot state a user goal without describing their own feature, and which teams have no monetise action anywhere in the grid. Both are findings you can use in Session 9 when GTM and monetisation come up.
+At the twelve-minute mark, tell the room to stop writing and pick the row they would defend. That instruction primes the second workshop without giving away that the North Star will come out of it.
+===== ppt/notesSlides/notesSlide4.xml =====
+Leave this on screen for the full fifteen minutes. Fill the first row live from one team's answer so the format is unambiguous, then step back.
+Use the time to diagnose rather than to teach. Two things are worth noting privately as you walk: which teams cannot state a user goal without describing their own feature, and which teams have no monetise action anywhere in the grid. Both are findings you can use in Session 9 when GTM and monetisation come up.
+At the twelve-minute mark, tell the room to stop writing and pick the row they would defend. That instruction primes the second workshop without giving away that the North Star will come out of it.
+===== ppt/notesSlides/notesSlide5.xml =====
+Leave this on screen for the full fifteen minutes. Fill the first row live from one team's answer so the format is unambiguous, then step back.
+Use the time to diagnose rather than to teach. Two things are worth noting privately as you walk: which teams cannot state a user goal without describing their own feature, and which teams have no monetise action anywhere in the grid. Both are findings you can use in Session 9 when GTM and monetisation come up.
+At the twelve-minute mark, tell the room to stop writing and pick the row they would defend. That instruction primes the second workshop without giving away that the North Star will come out of it.
+===== ppt/notesSlides/notesSlide6.xml =====
+Leave this on screen for the full fifteen minutes. Fill the first row live from one team's answer so the format is unambiguous, then step back.
+Use the time to diagnose rather than to teach. Two things are worth noting privately as you walk: which teams cannot state a user goal without describing their own feature, and which teams have no monetise action anywhere in the grid. Both are findings you can use in Session 9 when GTM and monetisation come up.
+At the twelve-minute mark, tell the room to stop writing and pick the row they would defend. That instruction primes the second workshop without giving away that the North Star will come out of it.
+===== ppt/notesSlides/notesSlide7.xml =====
+Leave this on screen for the full fifteen minutes. Fill the first row live from one team's answer so the format is unambiguous, then step back.
+Use the time to diagnose rather than to teach. Two things are worth noting privately as you walk: which teams cannot state a user goal without describing their own feature, and which teams have no monetise action anywhere in the grid. Both are findings you can use in Session 9 when GTM and monetisation come up.
+At the twelve-minute mark, tell the room to stop writing and pick the row they would defend. That instruction primes the second workshop without giving away that the North Star will come out of it.
+===== ppt/notesSlides/notesSlide8.xml =====
+Leave this on screen for the full fifteen minutes. Fill the first row live from one team's answer so the format is unambiguous, then step back.
+Use the time to diagnose rather than to teach. Two things are worth noting privately as you walk: which teams cannot state a user goal without describing their own feature, and which teams have no monetise action anywhere in the grid. Both are findings you can use in Session 9 when GTM and monetisation come up.
+At the twelve-minute mark, tell the room to stop writing and pick the row they would defend. That instruction primes the second workshop without giving away that the North Star will come out of it.
+===== ppt/notesSlides/notesSlide9.xml =====
+Leave this on screen for the full fifteen minutes. Fill the first row live from one team's answer so the format is unambiguous, then step back.
+Use the time to diagnose rather than to teach. Two things are worth noting privately as you walk: which teams cannot state a user goal without describing their own feature, and which teams have no monetise action anywhere in the grid. Both are findings you can use in Session 9 when GTM and monetisation come up.
+At the twelve-minute mark, tell the room to stop writing and pick the row they would defend. That instruction primes the second workshop without giving away that the North Star will come out of it.
+===== ppt/notesSlides/notesSlide10.xml =====
+Leave this on screen for the full fifteen minutes. Fill the first row live from one team's answer so the format is unambiguous, then step back.
+Use the time to diagnose rather than to teach. Two things are worth noting privately as you walk: which teams cannot state a user goal without describing their own feature, and which teams have no monetise action anywhere in the grid. Both are findings you can use in Session 9 when GTM and monetisation come up.
+At the twelve-minute mark, tell the room to stop writing and pick the row they would defend. That instruction primes the second workshop without giving away that the North Star will come out of it.
+===== ppt/notesSlides/notesSlide11.xml =====
+Leave this on screen for the full fifteen minutes. Fill the first row live from one team's answer so the format is unambiguous, then step back.
+Use the time to diagnose rather than to teach. Two things are worth noting privately as you walk: which teams cannot state a user goal without describing their own feature, and which teams have no monetise action anywhere in the grid. Both are findings you can use in Session 9 when GTM and monetisation come up.
+At the twelve-minute mark, tell the room to stop writing and pick the row they would defend. That instruction primes the second workshop without giving away that the North Star will come out of it.
+===== ppt/slides/slide1.xml =====
+Assignment Template
+GAME Framework, NSM, Product Strategy & Roadmap  
+ISB
+Software Product Management
+Indian School of Business
+INSTRUCTOR
+Prof Chandrashekhar V
+Team - Personal Interview Practice Companion (PM mock interviewer)
+Section - 
+PG & Names of Students - Kartik Vashist · Geetanjan Roy · Aditya Firoda · Ananya Agarwal · Keerthana Gottipati
+===== ppt/slides/slide2.xml =====
+Personal Interview Practice Companion
+2
+Goal — in their words
+Action
+Metric (per what, per when)
+What would you Evaluate ?
+“Tell me honestly what’s weak in my answer for this role.” (P1 · 18 of 24)
+Completes a mock → reads the feedback → re-attempts with the fix
+% of completed mocks whose feedback is read and rated “specific & honest” (per mock, weekly)
+Is the feedback trusted and acted on? Guardrail: AI scores calibrated against senior mocks
+“Let me practise whenever I’m free, without booking anyone.” (P4 · 11 of 24)
+Starts a mock on demand and finishes it; comes back the same week
+Mocks completed per weekly active user; % of new users doing a 2nd mock within 7 days
+Is the mock real enough to finish? Drop-off by voice vs text; reply latency
+“Show me if I’m getting better and what to fix next.” (P3 · 12 of 24)
+Opens the progress tracker; acts on a nudge; practises the weakest topic
+% of users whose weakest-topic score rises over 14 days; nudge → mock within 48 h
+Does seeing progress bring people back? Riskiest goal: stated more than shown
+Short description of the product Idea you are working on -
+An always-available PM mock interviewer for ISB PGP students in placement season. Candidates take voice or text mocks drawn from curated PM resources and their own casebooks (product design, RCA, metrics, guesstimates, strategy, tech concepts), get strict, rubric-based feedback at the end of every mock, and see their scores tracked topic by topic, with nudges for neglected topics. Unlike general AI, it doesn't praise and forget; unlike peers, it needs no booking. The MVP serves Ishita (the mock-heavy PM aspirant); Rohan (the short-notice multi-tracker) follows in Phase 2.
+===== ppt/slides/slide3.xml =====
+Goal 1 - Honest, role-aware feedback
+3
+Goal — in their words
+Action
+Metric (per what, per when)
+What would you evaluate
+“Tell me honestly what’s weak in my answer, for a PM role, so I can fix it before the real round.”
+Persona: Ishita, the mock-heavy candidate
+JTBD 1 · Problem P1 · raised by 18 of 24
+“AI tools are a bit submissive”
+• Completes a full mock: the question plus follow-ups
+• Opens the end-of-mock feedback: five rubric scores and 3 fixes quoting her words
+• Rates it: “Was this specific and honest?”
+• Re-attempts the question or a variant to apply a fix
+Feedback read rate
+% of completed mocks whose feedback is opened to the fixes · per mock, weekly
+Feedback trust score
+% of mocks rated 4–5 on “specific and honest” · per mock, weekly
+Fix-applied rate
+% of mocks followed by a re-attempt within 72 h · per user, weekly
+Fix uplift
+Avg score change on the flagged dimension, attempt vs re-attempt · per re-attempt
+• Keep fix uplift: it shows the feedback was understood and used, not just read
+• Read rate alone is a vanity check: opening is not trusting
+• Guardrail, calibration: on a sample, AI scores within ±1 of a senior or alumni mock. Too lenient repeats the ChatGPT problem; too harsh and users quit
+• Guardrail: feedback within 2 min
+• Each week, ask 5 users what they would change in the feedback
+Why do you think this is a Goal for the User ?
+Honest feedback was the most common pain: 18 of 24 candidates raised it. General AI “is generally like, yeah, you’re doing good”, peers flatter or aren’t free, and interviewers never say why a round went wrong. Candidates lose rounds on answers that felt fine, and pay for strict prompts, a case bot or ₹50,000 coaching to get it. If our feedback isn’t trusted, nothing else in the product matters.
+===== ppt/slides/slide4.xml =====
+Goal 2 - Practise whenever I’m free
+4
+Goal — in their words
+Action
+Metric (per what, per when)
+What would you evaluate
+“I want to practise a real-feeling PM interview whenever I have a free hour, without waiting for a peer or senior.”
+Personas: Ishita, Vikram
+JTBD 4 · Problem P4 · raised by 11 of 24
+Seniors booked “15 days in advance”
+• Picks a topic and voice or text, then starts at once, with no booking
+• Answers the question and every follow-up to the end
+• Practises from her own casebook or a modified case variant
+• Comes back for another mock the same week
+Mock completion rate
+Mocks finished ÷ mocks started · per session, weekly
+Mocks per active user
+Completed mocks per weekly active user · per user, per week (target 3+)
+Second-mock rate
+% of first-time users completing a 2nd mock within 7 days · per weekly cohort (MVP pass: 40%)
+Time to first question
+Seconds from opening the app to the first question · per session
+• Keep second-mock rate: it is the MVP test’s decision metric and the earliest read on habit
+• Split completion by voice vs text and by topic to see where mocks break
+• Guardrail: voice reply under ~5 s (vs ~1 min on the paid bot)
+• Don’t count empty volume: a mock counts only if all follow-ups are answered
+• Not a goal: replacing human mocks; peer mocks should continue
+Why do you think this is a Goal for the User ?
+Practice stalls when no one is free: 11 of 24 raised it, and seniors are booked “15 days in advance” for a 20-minute slot. AI voice feels artificial, with about a minute’s lag on a paid case bot. Candidates do several mocks a week in placement season, so practice that is there when they are is what turns one good session into a habit.
+===== ppt/slides/slide5.xml =====
+Goal 3 - See whether I’m improving
+5
+Goal — in their words
+Action
+Metric (per what, per when)
+What would you evaluate
+“Show me which mistakes keep coming back and whether I’m improving, so I know what to fix next and when I’m ready.”
+Personas: Ishita, Rohan
+JTBD 3 · Problem P3 · raised by 12 of 24
+“I should reflect more often”
+• Opens the progress tracker after a mock
+• Sees her weakest topic highlighted
+• Acts on a nudge: a topic left for 7 days, or unread feedback
+• Takes her next mock on the weakest topic
+• (Monetise) Says she would pay to keep her history
+Tracker engagement
+% of weekly active users who open the tracker · weekly
+Nudge conversion
+% of nudges followed by a mock within 48 h · per nudge, weekly
+Weak-topic follow-through
+% of next mocks taken on the highlighted topic · per user, weekly
+Improvement
+% of users whose weakest-topic score rises ≥1 point in 14 days · fortnightly
+Willingness to pay
+% saying yes to “₹X a month to keep your history?” after mock 5
+• Key test: do tracker users come back more than non-users? If not, P3 is a nice-to-have and JD tailoring (P2) becomes the hook
+• Improvement is what users want, but it lags and is noisy: read it per fortnight, not per day
+• Guardrail: nudge mute or opt-out rate; nagging hurts retention
+• History is the most natural paid feature, so this is where we first test monetisation
+Why do you think this is a Goal for the User ? 
+Feedback is spread across people and tools and nothing adds it up: “you give me 10 minutes of feedback, I note four or five lines”. 12 of 24 raised it and keep manual error logs. Knowing the recurring weakness tells them what to practise next and when they are ready. Only one candidate showed this in behaviour, so it is our riskiest goal and we test it alongside P1.
+===== ppt/slides/slide6.xml =====
+North Star Metric for your Product 
+6
+Goal — in their words
+Action
+Metric (per what, per when)
+Evaluate
+“Get honest, detailed feedback on a real PM mock as often as I need, and know I’m getting better.”
+The value moment
+A mock finished and its feedback read. That one event delivers all three goals: practice on demand (P4), honest feedback (P1), and a new data point in the tracker (P3).
+Completes a mock interview (voice or text, all follow-ups answered)
+AND
+opens its feedback to the fixes
+NSM: Weekly Reviewed Mocks
+PM mocks completed with feedback reviewed, per week, across all users
+Inputs that move it
+• Breadth: weekly active candidates
+• Depth: reviewed mocks per active candidate per week (target 3+)
+• Frequency: 2nd mock within 7 days (≥40%)
+• Quality: % of feedback rated 4–5 on “specific and honest”
+Why this one
+• Measures value delivered, not visits: a mock without read feedback is the ChatGPT experience
+• Leads outcomes: frequent mockers improve, convert offers and are the ones who will pay
+• The team can move it every week
+Rejected
+Sign-ups/WAU (no value), offers won (late, outside our control), average score (inflated by lenient AI)
+Guardrails
+Score calibration · minimum mock length · voice latency
+North Star: Weekly Reviewed Mocks. Illustrative scale: ~135 beachhead PM aspirants × 3 mocks a week ≈ 400 reviewed mocks a week this term.
+===== ppt/slides/slide7.xml =====
+Strategy – Why do you think your solution will win ? 
+7
+We win on the gap no option fills today: honest feedback, on demand, that remembers.
+Where we play
+Now: ISB PGP students preparing for PM interviews in placement season (~135 first users this term)
+Next: consulting and GM aspirants with the same pain (~650), on the same engine
+Later: working professionals switching roles (Vikram), other B-schools
+What would make us lose
+General AI adds memory and a strict mode. Our answer: a PM-specific rubric calibrated against senior mocks, and campus distribution it won’t chase.
+How we win against what they use today
+Strict by default
+Rubric built in (structure, user focus, prioritisation, metrics, communication). General AI is lenient unless prompted hard: “I don’t know what the right prompt is”
+Remembers
+Every mock adds up into topic scores. ChatGPT loses context by the 2nd–3rd case; error logs lose most feedback
+Always available
+Voice or text, no booking. Seniors are booked “15 days in advance”
+One trusted PM library
+Curated questions, case variants and your own casebooks, instead of scattered material
+Why it gets harder to copy
+• History as switching cost: a season of scored mocks and weak topics stays with us
+• Calibration data: each senior-vs-AI comparison sharpens the rubric
+• Campus density: spreads through section and PM-prep WhatsApp groups; one cohort, one season
+• Phase 2 case-buddy matching adds a peer network that a general chatbot doesn’t have
+===== ppt/slides/slide8.xml =====
+What is your MVP Scope ? 
+8
+Success test: at least 40% of first-time users complete a second mock within 7 days.
+In scope: MVP1 (must ship)
+1. Topic and mode: 6 PM topics (product design, RCA, metrics, guesstimates, strategy, tech concepts); voice or text, switchable mid-session; 15+ questions per topic
+2. Own uploads: questions or casebooks, visible only to the user
+3. Full mock: follow-ups that respond to the answer; case variants that change the user, market or constraint
+4. Feedback within 2 min: 1–5 score with a reason on 5 dimensions, plus 3 fixes quoting the user’s words
+5. Progress tracker: score trend per topic, weakest topic highlighted
+6. Home dashboard: nudge when a topic is unpractised for 7 days or feedback is unread
+Out of scope
+Phase 2: case-buddy matching (P4); JD and company tailoring (P2, Rohan)
+Later: consulting, GM and finance tracks; payments
+Not building: video or body-language analysis; resume and application tools; writing answers for the user; live in-mock coaching; replacing human mocks
+How we build and test it
+Prototype on an LLM in a prototyping tool, seeded with a curated PM question set. Nudges sent by the team on WhatsApp (Wizard of Oz). 20 PM aspirants outside our circle, 14 days, ₹0.
+Tracked from day one
+Events behind the NSM and goal metrics:
+• mock_started / mock_completed
+• feedback_opened / feedback_rated
+• question_reattempted
+• tracker_viewed
+• nudge_sent / nudge_acted
+These give Weekly Reviewed Mocks, second-mock rate, feedback trust and fix uplift without any extra build.
+===== ppt/slides/slide9.xml =====
+Why do you believe that your MVP scope is sufficiently useful for your Consumer ? 
+9
+Useful enough means they come back without being asked: a second mock within 7 days.
+It does the top job end to end
+A full mock plus strict feedback solves P1, the most common pain (18 of 24), on first use. No prompt setup needed.
+It replaces a patchwork they already pay for
+Today they combine strict prompts, a paid case bot, manual error logs and booking seniors. Spend seen: ChatGPT Go (~₹400 a month), Claude (~₹25,000 a year), a ₹50,000 coaching package. The MVP does feedback, practice and memory in one place.
+It fits how they prep
+Several mocks a week, 1–2 hours a day around classes: one 20–30 minute mock fits a free slot.
+It is narrow enough to be good
+PM only: “for product there are four or five types of questions”. One library can be curated well, and 5 of our 24 candidates target PM.
+What we left out doesn’t block the job
+• JD tailoring mainly helps Rohan, our Phase 2 persona
+• Buddy matching complements peer mocks, it isn’t needed to practise
+• Video wasn’t asked for; realism (8 of 24) is covered by voice
+We will know fast
+If fewer than 40% come back for a second mock within 7 days, we test JD and company tailoring (P2) as the stronger hook.
+===== ppt/slides/slide10.xml =====
+What are the broad themes on your Roadmap ? 
+10
+Throughout: feedback quality and calibration · voice latency · privacy of uploaded casebooks.
+NOW · MVP1, this term
+Trustworthy PM practice
+• Voice/text PM mocks with follow-ups and case variants
+• Strict rubric feedback with fixes
+• Progress tracker and nudges
+• Spot-check AI scores against senior mocks
+Problems: P1, P3, P4 · Ishita
+Measured by: second-mock rate, feedback trust, Weekly Reviewed Mocks
+NEXT · Phase 2
+Prep for this role at this company
+• JD- and company-based question sets
+• Short-notice prep plan for an interview 2–3 days out
+• Case-buddy matching with peers
+• Standing senior/alumni calibration panel
+Problems: P2, P4 · Rohan
+Measured by: reviewed mocks in the 3 days before an interview
+LATER
+Beyond PM, beyond campus
+• Consulting, GM and finance tracks on the same engine
+• Working professionals (Vikram)
+• Other B-schools; placement-office partnerships
+• Premium tier: full history, unlimited voice
+Segments: new · monetisation
+Measured by: paid conversion, weekly active candidates
+===== ppt/slides/slide11.xml =====
+What is your Backlog of features / capabilities ? 
+11
+Won’t build: video or body-language analysis · resume and application tools · writing answers for the user.
+#
+Feature / capability
+Problem · persona
+Metric it moves
+Priority
+1
+PM mock interview, voice or text, with follow-ups
+P4 · Ishita
+Mock completion rate
+Must · MVP1
+2
+End-of-mock rubric feedback + 3 fixes
+P1 · Ishita
+Feedback trust score
+Must · MVP1
+3
+Curated PM library with case variants
+P1, P4
+Mocks per active user
+Must · MVP1
+4
+Upload own questions or casebooks
+P4 · Ishita
+Mocks per active user
+Must · MVP1
+5
+Progress tracker by topic
+P3
+Tracker engagement
+Must · MVP1
+6
+Home dashboard nudges
+P3
+Nudge conversion
+Must · MVP1
+7
+Feedback rating + event tracking
+All
+NSM instrumentation
+Must · MVP1
+8
+One-tap retry of a question with the fix
+P1
+Fix uplift
+Should · MVP1 if time
+9
+JD- and company-based tailoring
+P2 · Rohan
+Pre-interview mocks
+Should · Phase 2
+10
+Case-buddy matching with peers
+P4
+Weekly active candidates
+Should · Phase 2
+11
+Standing senior/alumni calibration panel
+P1
+Score calibration
+Should · Phase 2
+12
+Consulting, GM and finance tracks
+New segments
+Weekly active candidates
+Could · Later
+13
+Premium tier and payments
+Monetisation
+Paid conversion
+Could · Later

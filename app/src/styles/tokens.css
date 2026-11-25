@@ -1,0 +1,116 @@
+/* Redpen design tokens — the ONLY place colour hex values may appear.
+   Source: docs/MASTER_PLAN.md §2.2. Components use these via Tailwind utilities
+   (bg-surface, text-secondary, …) or var(--token). */
+
+:root {
+  color-scheme: light;
+  /* neutrals & surfaces */
+  --bg-canvas: #F5F5F7;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F2F2F4;
+  --bg-elevated: #FFFFFF;
+  --bg-hover: rgba(0, 0, 0, .04);
+  --bg-pressed: rgba(0, 0, 0, .08);
+  --bg-selected: #EAF1FC;
+  --border: #E5E5EA;
+  --border-strong: #D1D1D6;
+  --text-primary: #1D1D1F;
+  --text-secondary: #5E5E66;
+  --text-interviewer: #3A3A3F;
+  --text-tertiary: #86868B;
+  --text-disabled: #AEAEB2;
+
+  /* accent & semantic */
+  --accent: #0A5FD6;
+  --accent-fill: #0A5FD6;
+  --accent-fill-hover: #0852BA;
+  --accent-fill-pressed: #07479F;
+  --accent-subtle: #EAF1FC;
+  --on-accent: #FFFFFF;
+  --nudge-bg: #FFF4E0;
+  --nudge-border: #F3D9A6;
+  --nudge-text: #8A5300;
+  --danger: #C0362C;
+  --danger-subtle: #FBEAE8;
+  --live: #D92D20;
+  --positive-text: #0F6B5E;
+
+  /* score scale 1–5: fill / tint / text-on-tint */
+  --score-1: #C2410C; --score-1-tint: #F6E4DD; --score-1-text: #9A3412;
+  --score-2: #E39A3B; --score-2-tint: #FBF1E4; --score-2-text: #83560F;
+  --score-3: #C9C3B8; --score-3-tint: #F7F7F5; --score-3-text: #57534E;
+  --score-4: #3A9A8A; --score-4-tint: #E3F1EF; --score-4-text: #0F6B5E;
+  --score-5: #0F5E57; --score-5-tint: #DDE8E7; --score-5-text: #0B4A44;
+
+  /* charts */
+  --chart-muted: #C7C7CC;
+
+  /* voice orb (calm, not purple) */
+  --orb-core: #1D1D1F;
+  --orb-listen: #0A5FD6;
+  --orb-glow: rgba(10, 95, 214, .18);
+
+  /* elevation */
+  --shadow-1: 0 0 0 1px var(--border), 0 1px 2px rgba(0, 0, 0, .04);
+  --shadow-2: 0 0 0 1px rgba(0, 0, 0, .06), 0 4px 16px rgba(0, 0, 0, .08);
+  --shadow-3: 0 0 0 1px rgba(0, 0, 0, .06), 0 24px 64px rgba(0, 0, 0, .18);
+  --scrim: rgba(0, 0, 0, .32);
+
+  /* type */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI Variable Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Source Serif 4", "New York", ui-serif, Georgia, serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* motion */
+  --dur-fast: 100ms;
+  --dur-base: 150ms;
+  --dur-moderate: 200ms;
+  --dur-slow: 250ms;
+  --dur-slower: 400ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-enter: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --ease-exit: cubic-bezier(0.3, 0, 0.8, 0.15);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg-canvas: #0E0E10;
+  --bg-surface: #1C1C1E;
+  --bg-subtle: #26262A;
+  --bg-elevated: #232326;
+  --bg-hover: rgba(255, 255, 255, .06);
+  --bg-pressed: rgba(255, 255, 255, .10);
+  --bg-selected: rgba(90, 162, 255, .14);
+  --border: #2E2E32;
+  --border-strong: #3A3A3F;
+  --text-primary: #F5F5F7;
+  --text-secondary: #A1A1A8;
+  --text-interviewer: #D1D1D6;
+  --text-tertiary: #7C7C82;
+  --text-disabled: #55555A;
+  --accent: #5AA2FF;
+  --accent-fill: #2A6FD6;
+  --accent-fill-hover: #3479E0;
+  --accent-fill-pressed: #2462C2;
+  --accent-subtle: rgba(90, 162, 255, .14);
+  --nudge-bg: #2B2418;
+  --nudge-border: #4A3B1F;
+  --nudge-text: #F2B84B;
+  --danger: #FF6B5E;
+  --danger-subtle: rgba(255, 107, 94, .14);
+  --live: #FF5A4E;
+  --positive-text: #7CD3C3;
+  --score-1: #E8693A; --score-1-tint: #412A23; --score-1-text: #F59A75;
+  --score-2: #F0B45A; --score-2-tint: #423729; --score-2-text: #F3C27A;
+  --score-3: #6B675F; --score-3-tint: #2A2A2A; --score-3-text: #C2BDB2;
+  --score-4: #4FB8A6; --score-4-tint: #253836; --score-4-text: #7CD3C3;
+  --score-5: #9BE3D4; --score-5-tint: #33403F; --score-5-text: #B5EEE2;
+  --chart-muted: #48484D;
+  --orb-core: #F5F5F7;
+  --orb-listen: #5AA2FF;
+  --orb-glow: rgba(90, 162, 255, .22);
+  --shadow-1: 0 0 0 1px var(--border);
+  --shadow-2: 0 0 0 1px rgba(255, 255, 255, .08), 0 8px 24px rgba(0, 0, 0, .5);
+  --shadow-3: 0 0 0 1px rgba(255, 255, 255, .08), 0 24px 64px rgba(0, 0, 0, .6);
+  --scrim: rgba(0, 0, 0, .56);
+}

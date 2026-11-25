@@ -1,0 +1,192 @@
+===== ppt/notesSlides/notesSlide1.xml =====
+Open on your feet. Two hours, and this is the session where you talk least.
+Say it plainly at the top: "Today is mostly you working. I teach for about forty-five minutes in total. The rest is two exercises and a vote." That expectation changes how the room sits.
+The session has two halves that look unrelated and are not. The first is the organisation around your product: you are responsible for an outcome and have authority over almost nobody who produces it. The second is the choice your product makes. The bridge is the same idea twice - decide, then explain the trade to whoever lost.
+Ninety seconds, no more. If you are behind at the start of a workshop session you never recover it, and the workshop is the point.
+===== ppt/notesSlides/notesSlide2.xml =====
+What is the Customer / consumer problem you are going after ? 
+===== ppt/notesSlides/notesSlide3.xml =====
+What is the Customer / consumer problem you are going after ? 
+===== ppt/notesSlides/notesSlide4.xml =====
+What 
+===== ppt/notesSlides/notesSlide5.xml =====
+What is the Customer / consumer problem you are going after ? 
+===== ppt/notesSlides/notesSlide6.xml =====
+Which are the Consumer Personas you are building for 
+===== ppt/notesSlides/notesSlide7.xml =====
+What is the Customer / consumer problem you are going after ? 
+===== ppt/notesSlides/notesSlide8.xml =====
+
+===== ppt/notesSlides/notesSlide9.xml =====
+What is the Customer / consumer problem you are going after ? 
+===== ppt/notesSlides/notesSlide10.xml =====
+Use the divider as a breath. Twenty-three minutes of teaching, then they work.
+The line on the right of this slide sets up the block. Most of this room will not be product managers. Almost all of them will spend their careers accountable for results produced by people they cannot instruct - consulting, banking, family business, general management. Product management is simply the job where that condition is most naked, which is why it earns twenty minutes of an MBA elective.
+Four moves in the block: what you actually control; how product organisations are shaped and why the same person thrives in one shape and fails in another; what each function needs from you; and what to do when the disagreement does not resolve.
+Foreshadow the ending now so it does not feel like a swerve: in a five-person team with no hierarchy, the tie-breaker at eleven at night is whoever is most stubborn. The block closes by making them fix that.
+===== ppt/notesSlides/notesSlide11.xml =====
+
+===== ppt/notesSlides/notesSlide12.xml =====
+
+===== ppt/notesSlides/notesSlide13.xml =====
+
+===== ppt/notesSlides/notesSlide14.xml =====
+
+===== ppt/notesSlides/notesSlide15.xml =====
+
+===== ppt/notesSlides/notesSlide16.xml =====
+
+===== ppt/notesSlides/notesSlide17.xml =====
+
+===== ppt/notesSlides/notesSlide18.xml =====
+
+===== ppt/notesSlides/notesSlide19.xml =====
+
+===== ppt/notesSlides/notesSlide20.xml =====
+
+===== ppt/notesSlides/notesSlide21.xml =====
+
+===== ppt/notesSlides/notesSlide22.xml =====
+
+===== ppt/notesSlides/notesSlide23.xml =====
+
+===== ppt/notesSlides/notesSlide24.xml =====
+
+===== ppt/notesSlides/notesSlide25.xml =====
+
+===== ppt/slides/slide1.xml =====
+Assignment Template
+SWPM – Solution hypothesis & validation, MVP and feature prioritization (Rationale), Metrics and Road ahead  
+ISB
+Software Product Management
+Indian School of Business, Hyderabad
+INSTRUCTORS
+Prof Chandrashekhar V
+Team 
+Section 
+Team Members
+Names & PG ID's
+===== ppt/slides/slide2.xml =====
+Instructions on how to submit this assignment 
+2
+How to use the deck and instructions for the final graded assignment 
+The deck has 10 sections where you need to fill the details in all of those areas / aspects. 
+The entire team creates a Teams meeting. They record the meeting and present the Slides to each other ( entire team is on the call). 
+The Teams meeting captures two important components 
+A walk through demo of your product with voice over ( e.g. one team member is sharing the UI manifestation of the product and that individual / team are presenting the context of what is happening on the screen). 
+A walkthrough of the slides. All team members should collectively present atleast one section of the deck.
+===== ppt/slides/slide3.xml =====
+Instructions on how to submit this assignment .. contd 
+3
+How to use the deck and instructions for the final graded assignment 
+The Slide deck and the shared version of the Teams meeting should be submitted as a part of the submission of the assignment. The shared recording and the deck link should be accessible to Profs and TA. 
+Constraints – Stick to a maximum of 10 minutes for the deck and 4–5-minute walk through of the product. No hosted product is required. You can run the product in your localhost / disk and record the product demo. Don’t make it completely stubbed, some features need to work end-to-end. Focus on the entire customer journey of onboarding, parts of product where are getting value (activation) and any potential hooks that you might use, to bring them back to your product. 
+All team members need to contribute to the submission. 
+Use the same order of sections as provided in this deck. However, one can change the style/layout.
+===== ppt/slides/slide4.xml =====
+What problem are you addressing ? 
+01
+===== ppt/slides/slide5.xml =====
+Problem you are addressing / who did you speak too ? 
+5
+Provide an elaborate description of what Consumer problem you are solving, how important is that problem for the consumer, etc. 
+Some aspects you want this paragraph/slide to cover 
+Who are your early adopters / innovators? How did you find them?
+Add any supporting data (interview conversations etc.) in appendix, which will be checked and used for grading. Add additional supporting data (including demography, interview questions, answers etc.) in appendix. Appendix will be checked and used for grading.
+Litmus test – Someone reading the deck should be convinced that you thought long and hard about the problem, you built a hypothesis about what specific problem or class of problems you wanted to solve for the consumer and what was the core of your hypothesis ( What problem and how ). Use as many slides as you deem appropriate. 
+===== ppt/slides/slide6.xml =====
+Customer Personas 
+02
+===== ppt/slides/slide7.xml =====
+Customer personas 
+7
+Articulate and show the Customer personas that you are solving for 
+List your top personas
+Any detailed persona representations that you want to attach or paste here. 
+Who are your early adopters / innovators? How did you find them?
+Add any supporting data (interview conversations etc.) in appendix, which will be checked and used for grading
+===== ppt/slides/slide8.xml =====
+Who are your competitors or how do the customers solve the problem today ? Is there a clear set of tools , behaviors that help people solve the problem today ? 
+03
+===== ppt/slides/slide9.xml =====
+Current Solutions / Competitors / Existing behaviors 
+9
+What do the Customers do today & what solutions do they user (if any) 
+Competition - What existing solutions do target customers currently rely upon?
+Include information on the qualities that set your product or service apart from other entities or alternatives in its market 
+Add most important supporting data here. Add additional supporting data (including demography, interview questions etc.) in appendix, which will be checked and used for grading.
+===== ppt/slides/slide10.xml =====
+What is your proposed solution ? 
+04
+===== ppt/slides/slide11.xml =====
+Proposed solution 
+11
+What are the contours of the Solution space 
+Validated solution hypotheses statements
+How did you validate these hypotheses?
+Add most important supporting data here
+Add additional supporting data (including demography, interview questions etc.) in appendix, which will be checked and used for grading.
+===== ppt/slides/slide12.xml =====
+What is your customer narrative  ?
+12
+Describe the key interactions that your primary personas will take through the product’s user interface with the greatest frequency 
+Narrative should depict your user interface wireframes / mocks/ etc. The more the merrier. Where ever pasting images, provide commentary on when the user would encounter those screens and what the customer is expected to do on those screens 
+===== ppt/slides/slide13.xml =====
+What is your MVP 1 ?
+05
+===== ppt/slides/slide14.xml =====
+Goals and Non-Goals for your MVP 
+14
+Goals
+Identify the goals that you want to achieve. P0 goals need to be met when this feature/solution is released in MVP1. P1 goals are desirable but may be cut to meet schedule deadlines or for other reasons, and can go in later MVPs..
+Non-Goals
+Non-goals are things you are explicitly not doing or supporting. This does not mean that you are actively trying to prevent them from occurring – it simply means that you are not actively working toward enabling them during this release
+===== ppt/slides/slide15.xml =====
+What is included and excluded from your MVP 1 ? Why ? 
+15
+Record your screen to discuss the below aspects of your MPV/product 
+Present the features in a table with columns presenting 1) Feature name; 2) Core functionality, 3) Telemetry 4) Error cases. Also add UI visuals if available
+How did you validate your MVP1? How did you share your MVP1? 
+What metric did you use? What did you learn? 
+Is there some features / capabilities that you choose to exclude ? Why ? Why did you include what you have included in the product ? 
+===== ppt/slides/slide16.xml =====
+How would you iterate after MVP 1 ? 
+06
+===== ppt/slides/slide17.xml =====
+How would you iterate after MVP 1 ? Provide a roadmap for atleast two more iterations of your Product MVP 
+17
+Discuss your product roadmap for at least two more MVPs (MVP 2, MVP 3)
+Add release metrics per MVP for your roadmap 
+How and where did you draw the line for the MVP to be Minimum and also Viable ?
+===== ppt/slides/slide18.xml =====
+How would you assess (Metrics, customer check ins ) to assess if you are solving the problem the consumers had  ?
+07
+===== ppt/slides/slide19.xml =====
+How would you assess if you are making progress on solving the Consumer problem ?
+19
+What Metrics would you capture ? 
+What aspects of the problem and solution space would you validate and how ? 
+===== ppt/slides/slide20.xml =====
+Pre-mortem – What might be some reasons why your product fails to get consumers to use your product / find value in your product … etc 
+08
+===== ppt/slides/slide21.xml =====
+Pre-mortem ( why might your MVP fail ? ) 
+21
+What might be some reasons that your product fails ? 
+For each of those failure reasons, what can you do , to mitigate the chances of failure ?
+===== ppt/slides/slide22.xml =====
+GTM – How will you find your users and take it to the market ? 
+09
+===== ppt/slides/slide23.xml =====
+GTM
+23
+How will you find the users who are closes to the persona for whom you are building the product ? 
+What steps would be there in your GTM plan ? 
+===== ppt/slides/slide24.xml =====
+How will you make money ? What are some early monetization thoughts you have ? 
+10
+===== ppt/slides/slide25.xml =====
+What is your business model ? What might be some early hypothesis on how to make money for your product ? 
+25
+How do you plan to make money for your product ? 
+What are some early thoughts on revenue sources etc .. 

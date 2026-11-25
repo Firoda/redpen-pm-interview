@@ -1,0 +1,1015 @@
+Assignment 1: Personas and Problem Hypotheses
+Software Product Management · PGP Co'27 Term 5 · Individual Assignment
+Submitted by: Aditya Firoda · Date: 8 November 2026
+
+Product scenario
+Product: an interview preparation tool that helps working professionals get ready for job interviews
+when they move to a new company or a new function.
+Research question: how do working professionals prepare for interviews today, and where does that
+preparation break down?
+Method: five short, semi-structured interviews (about 5–10 minutes each) with mid-career
+professionals in finance, product, engineering, consulting and strategy. Four of the five have also
+interviewed candidates, so they spoke from both sides of the table. Audio, verbatim transcripts and
+coded responses are in the Appendix.
+What I found: the hardest part of preparing is not effort but direction. People do not know what a
+specific role will test, they cannot get trustworthy feedback while working full-time, and the volume
+of scattered material makes many give up.
+
+Summary
+ Output                   Result
+
+ Persona 1                Rahul, the Comfortable Long-Tenure Professional: years at one company, skills
+                          untested by internal moves, overwhelmed when he tries to prepare.
+
+ Persona 2                Sneha, the Function Switcher: moving into PM or consulting, does not know what
+                          the new function tests, has no expert feedback.
+
+ Persona 3                Karan, the Breadth-First Generalist: multi-industry career, startup interviews are a
+                          black box, nothing carries over between job hunts.
+
+ Hypothesis 1             Switchers are most frustrated about working out what a role will test, because
+                          material is generic and formats are a black box.
+
+ Hypothesis 2             People preparing alone are most frustrated about getting trustworthy feedback,
+                          because they have no partners from the target role.
+
+ Hypothesis 3             Long-tenure professionals are most frustrated about preparing consistently, because
+                          material is scattered and overwhelming.
+
+ Hypothesis 4             Generalists are most frustrated about presenting their experience as the best fit,
+                          because nothing carries over between job hunts.
+Section 1.1: Personas
+I grouped my interview notes into themes (Appendix A.1.4) and built three personas from them.
+Each persona combines the interviewees listed under it. The names are made up; the quotes are
+what the interviewees actually said.
+
+ Persona 1: Rahul Mehta, the Comfortable Long-Tenure Professional
+ Name                        Rahul Mehta (fictional composite)
+
+ Tag line / Quote            “I'm good at my job. I just haven't faced an outside interview in years.”
+                             “Expedia was kept us pretty comfortable.” (Manraj)
+                             “Not very confident.” (Manraj, on senior system design and behavioural rounds
+                             outside his company)
+
+ Profile                     Late 20s, 4–6 years at the same company. Senior engineer or first-time manager in a
+                             large firm in India. Grew through internal moves rather than interviews.
+
+ Key goals and motivations    • Move to a stronger company or bigger role (e.g. FAANG-level), where “big
+                                 salary packages” make the effort worth it.
+                              • Show senior-level depth in interviews, not just correct answers.
+                              • Prepare without putting the current job at risk.
+ Environment operating in     • Full-time, demanding job; preparation happens only in evenings and weekends.
+                              • Internal growth is decided by track record, internal job postings (IJP) or
+                                 rotational programmes, so core interview skills are rarely tested.
+                              • Last external interview was a campus or referral process years ago, in a
+                                 different hiring market (e.g. the 2021 hiring boom).
+                              • Senior external loops now test DSA, low- and high-level system design, and
+                                 behavioural depth.
+
+ Challenges                   • Interview skills have not been used since joining; confidence for outside rounds
+                                 is low.
+                              • The amount of material is overwhelming: he started preparing and dropped it
+                                 midway.
+                              • Comfort and inertia make it easy to postpone.
+                              • Resources are spread across many sites and courses, with no single plan.
+ Tools currently used        LeetCode for coding practice; YouTube channels (e.g. Gaurav Sen) and paid courses
+                             for system design; online lists of expected questions; the internal job portal; advice
+                             from managers and seniors.
+
+ What he needs from a        One structured plan per round type (DSA, system design, behavioural) that fits into
+ solution                    evenings, shows progress and tests senior-level depth.
+
+ Built from                  Manraj (Senior SWE, Expedia) and Jinendra (GM, Vodafone Idea); supported by
+                             Dhanush (internal move to PM).
+Persona 2: Sneha Rao, the Function Switcher
+Name                        Sneha Rao (fictional composite)
+
+Tag line / Quote            “I didn't know what I didn't know until the interview was almost here.”
+                            “It was something that completely missed my radar during my preparation.”
+                            (Dhanush)
+                            “I never knew that I am ready for it.” (Pritish)
+
+Profile                     Mid-to-late 20s, 3–5 years of experience. Moving from operations, analytics or
+                            engineering into product management or consulting while still employed.
+
+Key goals and motivations    • Break into a new function where her past work does not speak for itself.
+                             • Learn what the new function's interviews actually test (product sense,
+                                guesstimates, cases, structuring).
+                             • Get feedback from people who know the target role, and feel ready before the
+                                day.
+
+Environment operating in     • Prepares alone around a full-time job; colleagues are not from the target
+                                function.
+                             • Interview dates are set by the company, and rounds follow each other quickly.
+                             • Each function has its own formats, e.g. “diagnose your favourite product” for
+                                PM, or a pharma case solved in Excel for consulting.
+
+Challenges                   • Unknown unknowns: whole question types never appear in her prep.
+                             • Feedback comes from non-experts (e.g. non-product seniors) or from generic
+                                AI.
+                             • No case or practice partners while employed.
+                             • No signal of readiness; confidence comes only from clearing rounds.
+                             • Structuring answers clearly took 4–5 weeks of practice.
+Tools currently used        Free YouTube videos; ChatGPT as a stand-in case partner; LinkedIn outreach to
+                            current employees; free material found on Google; seniors and alumni (on campus);
+                            plans to use Exponent next time.
+
+What she needs from a       A map of what the target function tests, realistic practice partners on demand, and
+solution                    expert-quality feedback with a clear readiness signal.
+
+Built from                  Dhanush (Financial Operations to PM, Goldman Sachs) and Pritish (manufacturing
+                            analytics to consulting, Blue Matter); supported by Manraj (engineering to PM
+                            ambition).
+ Persona 3: Karan Shah, the Breadth-First Generalist
+ Name                          Karan Shah (fictional composite)
+
+ Tag line / Quote              “Every job hunt is chaos, and half of it starts from scratch.”
+                               “To be honest, it is to some extent black box.” (Vinay, on startup interviews)
+                               Interview prep in one word: “Chaos.” (Vinay)
+
+ Profile                       Early 30s, 7–9 years across several industries (banking, EV, supply chain SaaS, airline
+                               tech). Works in strategy, revenue or pricing roles, mostly at startups. Holds a
+                               professional credential (CFA).
+
+ Key goals and motivations      • Win specialised roles in new industries.
+                                • Present a non-linear career as a strength, not a risk.
+                                • Prepare quickly for each new, differently run process.
+ Environment operating in       • Startup hiring: intro call, role-specific take-home, submission review, founder
+                                   round, then HR.
+                                • Every company tests a different skill set, and little about the process is public.
+                                • Interviewers push back on frequent job changes.
+ Challenges                     • Startup processes are a black box; he cannot tell what will be asked.
+                                • Parts of every job hunt restart from scratch; he keeps no story bank or past
+                                   questions.
+                                • Broad, shallow profile fits only some specialised roles.
+                                • Researching a new industry and role for each take-home takes time.
+ Tools currently used          Company websites and job descriptions; the take-home brief itself; his own past
+                               experience. No dedicated prep tool (“Not really, although that is a good idea”).
+
+ What he needs from a          A role decoder that turns a job description into likely rounds and skills, plus a
+ solution                      reusable story bank that carries over between job hunts.
+
+ Built from                    Vinay (Revenue Manager, Mystifly; 8 years across roles); supported by Jinendra's
+                               interviewer view (candidates must research the specific role).
+
+
+
+How the personas map to the interviews
+ Persona                           Interviewees                   Main themes (from affinity diagram)
+
+ 1. Rahul, Long-Tenure             Manraj, Jinendra (+            3. Internal moves leave skills untested · 4.
+ Professional                      Dhanush)                       Overwhelm and scattered resources
+
+ 2. Sneha, Function Switcher       Dhanush, Pritish (+            1. Don't know what to prepare · 2. No reliable
+                                   Manraj)                        feedback · 5. No readiness signal
+
+ 3. Karan, Breadth-First           Vinay (+ Jinendra)             1. Don't know what to prepare · 5. No memory
+ Generalist                                                       between job hunts · 6. Positioning my own story
+Section 1.2: Problem Hypotheses
+From the coded transcripts (marked J, P and G in Appendix A.1.3) I identified four jobs-to-be-done.
+The table lists the pains and gains for each, and the hypotheses follow the class template.
+                 JTBD 1: Work out what      JTBD 2: Get                JTBD 3: Keep preparing      JTBD 4: Present my
+                 a specific role and        trustworthy feedback       alongside a full-time       past experience as the
+                 company will test, and     on my answers and          job without getting         best fit for the role
+                 what to prepare            know when I am ready       overwhelmed
+
+ Type of         Function switchers and     Professionals preparing    Long-tenure                 Generalists with non-
+ customer        generalists moving to a    alone while employed,      professionals preparing     linear careers and
+                 new company, industry      especially function        for external interviews     function switchers
+                 or function (Personas 2,   switchers (Persona 2)      (Persona 1)                 (Personas 3, 2)
+                 3)
+
+ Pains            • Whole question           • No case or practice      • Dropped prep              • Broad profile is
+                      types missed               partners                   midway:                     hard to explain
+                      (“missed my                                           overwhelming
+                                             • Feedback from                                        • Interviewers push
+                      radar”)
+                                                 non-experts or         • Resources                     back on job
+                  • Startup processes            generic AI                 scattered across            switches
+                      are a “black box”                                     LeetCode, courses,
+                                             • “I never knew that                                   • No story bank kept
+                                                                            YouTube
+                  • Generic online               I am ready”                                            between job hunts
+                      question lists
+                                             • “Not very                • Some prep restarts
+                                                                            from scratch each
+                  • Industry and role            confident” for
+                                                                            time
+                      research for each          senior rounds
+                      take-home                                         • Prep described as
+                                                                            “Chaos”
+
+ Gains            • A prep map built         • Realistic mocks          • One structured            • A reusable bank of
+                      from the job               with expert-quality        plan per round              stories and
+                      description:               feedback                   type                        answers
+                      rounds, question
+                                             • Several                  • Small daily steps         • Experience
+                      types, skills
+                                                 viewpoints, not            with visible                mapped to the
+                  • Insider context              one                        progress                    role's needs and
+                      from people who                                                                   transferable skills
+                                             • AI for early             • Fits into short
+                      did the role
+                                                 practice, humans           windows (e.g. “2        • Practice for “why
+                  • Less time wasted             near the day               evenings”)                  did you switch?”
+                      on the wrong
+                                             • A clear readiness
+                      topics
+                                                 signal
+
+ Evidence        Dhanush, Vinay,            Pritish, Dhanush,          Manraj, Vinay, Pritish (3   Vinay, Jinendra,
+                 Jinendra (3 of 5)          Manraj (3 of 5)            of 5)                       Dhanush (3 of 5)
+
+
+
+
+Problem Hypothesis 1
+The mid-career professionals switching to a new function, company or industry are most frustrated
+about working out what a specific role will test and what to prepare because preparation material is
+generic and scattered, and the real round formats and question types stay a “black box” until they
+are in the interview.
+Evidence: Dhanush missed a core PM question type; Vinay calls startup processes a black box;
+Jinendra, as an interviewer, sees candidates fail because they never research the specific role.
+How to test it: Ask 10 more switchers to list the rounds and question types they expect for a target
+job, then compare with the real process. Hypothesis holds if most miss at least one round type.
+Problem Hypothesis 2
+The working professionals preparing on their own while employed full-time are most frustrated
+about getting trustworthy feedback on their answers and knowing when they are ready because they
+have no practice partners or people from the target role, so they rely on non-expert colleagues or
+generic AI and never get a clear readiness signal.
+Evidence: Pritish had no case partners and relied on ChatGPT; Dhanush's feedback came from non-
+product seniors; Manraj is “not very confident” for senior rounds.
+How to test it: Run AI mock interviews with feedback for 10 users, then compare their self-rated
+readiness with an expert's rating. A large gap supports the hypothesis.
+
+Problem Hypothesis 3
+The long-tenure professionals (4+ years at one company, promoted internally) are most frustrated
+about preparing consistently for external interviews alongside their job because internal moves never
+tested their interview skills, and the volume of scattered material feels overwhelming, so they start
+preparing and then drop it.
+Evidence: Manraj, Jinendra and Dhanush all moved internally on track record; Manraj started and
+dropped prep because it felt overwhelming.
+How to test it: Survey professionals who tried to switch: how many started preparing and stopped,
+and why. Hypothesis holds if overwhelm or lack of structure is a top-two reason.
+
+Problem Hypothesis 4
+The breadth-first generalists with non-linear careers are most frustrated about presenting their
+experience as the best fit for a specialised role because nothing carries over between job hunts (no
+story bank) and every startup process tests a different skill set.
+Evidence: Vinay finds his broad profile hard to explain and keeps no stories or past questions;
+Jinendra's one-line advice is “know what you did and position yourself as the best fit”.
+How to test it: Offer a story-bank prototype to 5 generalists; measure whether they reuse it across
+two applications.
+Priority: Hypotheses 1 and 2 are the strongest. Each was raised unprompted by at least three
+interviewees, and they point to the product's core: decoding what a role tests, then giving realistic
+practice with feedback. Hypotheses 3 and 4 shape engagement features (structured plans, story
+bank).
+Appendix
+A.1 Personas
+A.1.1 How I selected interview candidates
+I looked for people likely to face an important job interview in the next one to two years, and picked
+them to cover different situations rather than one type of user.
+ • Target user: working professionals with roughly 4–8 years of experience, the core market for the
+   product.
+ • Variety of functions: finance, product management, software engineering, consulting and
+   strategy.
+ • Variety of company types: a telecom company, an investment bank, a global tech company, a
+   boutique consulting firm and startups.
+ • Variety of career paths: internal movers (promoted or moved within one company) and external
+   switchers (across companies, functions or industries).
+ • Both sides of the table: four of the five have interviewed candidates, so they could describe
+   what interviewers look for as well as how candidates prepare.
+ • One degree of separation: all were reached through my ISB and professional network. None is a
+   close friend or family member.
+ • Excluded: students. I replaced a planned student interview with a senior software engineer to
+   keep the focus on working professionals.
+
+
+A.1.2 Who I interviewed
+ Interviewee    Role                   Company and industry          Experience      Education               Has interviewed
+                                                                                                             others?
+
+ 1. Jinendra    General Manager,       Vodafone Idea ·               ~6 years, one   Chartered               Yes: campus and
+                Corporate Finance      Telecom                       company         Accountant (ICAI        lateral hiring
+                                                                                     campus)
+
+ 2. Dhanush     Product Manager,       Goldman Sachs ·               ~4–5 years,     Campus hire (degree     No
+                internal platform      Investment banking            one company     not discussed)
+
+ 3. Vinay       Revenue Manager        Mystifly · Airline / travel   ~8 years, 4+    Biomedical              Yes: strategy
+                                       tech                          companies       engineering; CFA (all   roles
+                                                                                     three levels)
+
+ 4. Manraj      Senior Software        Expedia Group · Travel        ~4.5 years,     Campus placement        Yes: developer
+                Engineer               tech                          one company     (degree not             hiring
+                                                                                     discussed)
+
+ 5. Pritish     Data Analytics         Blue Matter Consulting ·      ~4.5 years,     B.Tech, Metallurgical   Yes
+                Consultant (former)    Life sciences consulting      two             and Materials
+                                                                     companies       Engineering, NIT
+                                                                                     Rourkela
+
+
+Career paths: Jinendra: young leadership programme, then corporate finance, then an internal move to manager.
+Dhanush: Financial Operations for 3.5 years, then an internal move to PM. Vinay: banking, then startups in EV,
+supply chain SaaS (Fleetx) and flight distribution. Manraj: referral hire in April 2021, then Expedia's rotational PM
+programme. Pritish: Hindalco (data analytics, ~2 years), then Blue Matter (~2.5 years).
+All interviewees work in India. Age and gender were not recorded.
+A.1.3 Audio recordings and transcripts
+Audio recordings (shared folder): SWPM Assignment 1 – Product Interviews
+Note on transcription accuracy: the transcripts below are reproduced verbatim from automatic
+speech-to-text and have not been corrected. They contain transcription errors, such as misheard
+names (“Jininder” for Jinendra, “Ganesh” for Dhanush, “Pratish” for Pritish), companies (“Google
+Sex” for Goldman Sachs, “Pletex” for Fleetx, “Mr. Fly” or “Mystic Lion” for Mystifly, “duck industries”
+for Hindalco Industries) and terms (“IGP” for IJP, “late code” for LeetCode). Please refer to the audio
+recordings in the folder above for the exact wording. Speaker labels were added afterwards, and one
+interviewer's note is marked in brackets.
+Coding key (Appendix A.2): responses are marked inline at the end of the relevant phrase.
+[P] Pain [J] Job [G] Gain [Q] Quote
+
+Interview 1: Jinendra, General Manager (Corporate Finance), Vodafone Idea
+Aditya: Okay, hi Jininder, thanks for giving me five minutes. I'm doing a product management assignment on how
+people prepare for it interviews. Is it okay if I record this? There are no right answers. I mainly want to hear your
+own experience.
+Jinendra: Yeah, yeah, sure, completely fine.
+Aditya: Yeah. To start with, you joined Vodafone right after your CA, what was how, what was your 1st role and how
+did you grow from there to general management? Like, and maybe if you can touch upon this, what does your role
+today cover?
+Jinendra: Yeah, surely. So basically, I joined in their young leadership program and for a couple of initial quarter, I
+got routed into different different functions, which included on ground sales also. So after that, after that rotation of
+one year, I, it's been the last 5 years since I'm part of corporate finance. So I'm largely handling the financial
+reporting projections and few researching activities.
+Aditya: That's interesting. And thinking back to when you joined Vodafone after CA, how did you get that 1st job?
+Was it like a campus thing referral or applying directly?
+Jinendra: So... So basically it was through Institutes campus. So for example, for CAs, ICAI organises the campus and
+from there multiple companies come. So I applied in Vodafone idea and got it from there.
+Aditya: And what was the interview? Like, how did you prepare, like, as a just freshly graduated CA?
+Jinendra: Correct. So it had 3 steps. So basically, 1st we need to apply with the resume. After resume a shortlist,
+there was a video interview round before there was a couple of behavioural questions. And after that short listing, it
+was the physical interview on the placement day, which had a 2 round, which one was more of technical for the
+corporate finance role, and 2nd one was behavioural HR role. So how I prepared is that I refer a lot of online sources
+in terms of what are the questions expected. [J] I have gone through my work experience in more detail, whatever I
+had done in the training. So I got hands on that. [J]
+Aditya: Makes sense. And now coming back to your most recent move into GM role, was there like an interview or
+assignment or was it more of on the basis of your track record? And like, could you tell me a bit about how did you
+go about preparing and how much time could you actually give it?
+Jinendra: Okay, so I would say on the job moments are slightly different. So basically, there is a process internally
+under essay, internal job posting, IGP. So basically whenever there are interval opportunities within the company,
+these get posted on the hotel, the company's hotel. And then Over is interested, they can apply. So in my case, it
+was the same vertical of corporate finals. So a large part of the job, I mean, large part of this moment was based on
+my performance. So my seniors and their seniors, everyone knew about my performance. So that largely drove my
+moment and obviously there was some HR around because it was a moment from individual contributor to a team
+management. So they tested my fitment from Manager's key point of view.
+Aditya: Makes sense. And have you taken any kind of interviews for candidate throughout your career?
+Jinendra: Yes, so after getting to the GM role, my role also included handling the team and managing the team. So
+whenever there was an attrition, I, you know, planned the overall hiring process, so I also participated in two, 3
+campus recruitment activities where, and apart from that also we used to take literal hirings. So I used to shortlist
+CVs, take technical interviews. Then I used to pass it on to HR for the HR round.
+Aditya: And how would you say was preparing an internal move different from preparing for that like outside move,
+let's say the campus recruitment?
+Jinendra: So, I would say it's a largely difference of proving yourself. So whenever the moment is internal, uh, the
+larger role is your performance, which you did. So even if you're moving on the same team, your team knows how
+you did. Okay. Even if you're moving across the functions, they can easily cross-check with your teams without. So
+your performance is the main driver, and obviously the figment to the new role is the 2nd driver. But the external
+hiring process is quite different. So basically you need to still establish that you are fit and you need to prove your
+performance. So that's slightly longer and more complicated process, I would say. [P]
+Aditya: Makes sense. And what would you say is the most common mystics you see even from like strong candidates
+here?
+Jinendra: Uh, from uh, external, you know, yeah, external moves. So... So usually the kind of mistakes I have seen is
+that the candidate doesn't prepare. So basically they keep on hunting at multiple places. And then don't really get
+into the mode of getting a job. For example, I have seen a lot of candidates who were applying for whatever one
+idea, corporate finance, and they haven't gone through what finance looks like for waterfall idea. So it really shows
+that they are maybe just trying randomly and they are not serious about getting the job. [P] [Q] So knowing what
+you did in your job in and out and understanding more about the role in the company in which you are going, these
+are the 2 non-negotiable factor for any look at one. [J] [Q]
+Aditya: Makes sense. And today, if someone gave you a prep coach for your like next big move, but you only had like
+2 evenings, what would you want from it? Like, imagine the scenario of 2 week, 2 evenings before, like 2 days before
+the actual interview.
+Jinendra: Okay, so one thing which I would really focus on is that what are the, you know, the job, the next
+responsibility? What they're looking from me? So basically there would be certain expectation from the candidate
+who would be taking over that job. So I need to be very clear on that whether it's the leadership, it's a technical
+aspect. What are the requirement of the job? And how I, what kind of transferrable skills I have. [J] So these are the
+things which I would be well aware of in terms of preparation point of view, I would say I would try to understand in
+and out about the job. I'll talk to any president of people who have done that job to get more idea about it. [G]
+Aditya: Makes sense. And have you ever like, let's say if you had to make a move, would you be willing to pay for any
+kind of coach, CV writer, or a course? Do you think those are worth it?
+Jinendra: Yeah, I believe whenever in my journey also, if I'm not confident enough or if I say if I don't have enough
+resources in terms of time or in terms of network to know more about it, [P] I'll definitely go for it because the
+marginal utility is definitely there. [G] [Q] What I believe that they may not add value what you expect, but they're
+definitely ahead value. So there is no harm. No harm is being created. So I usually go for whatever the resources are
+there.
+Aditya: Makes sense. Thank you. If you had to sum up this interview prep in one sentence, what would it be and is
+there anyone else? Do you think I should talk to?
+Jinendra: So basically, it would be that know what you did and position yourself that how best fit you would be for
+the job. [J] [Q] And yeah, that's it.
+Aditya: Thank you.
+
+
+
+Interview 2: Dhanush, Product Manager, Goldman Sachs
+Aditya: Uh, So, I, uh, Dhanush, for giving me 5 minutes. I'm doing this for my assignment on how people prepare for
+job interviews. Is it okay if I record this?
+Dhanush: Hi, absolutely.
+Aditya: There are no right answers there. I mean, we just want to know about your experience. A little bit context,
+Dhanush is currently working as a product manager in Goldman Sachs. So there is one thing that I want to know is
+what do you work on as a PM at Goldman Sachs? and is it more of an internal platform or maybe like a client spacing
+product?
+Dhanush: So I work on an internal platform. So Goldman Sachs has a lot of services that it provides to its customers
+and to facilitate that. We have a lot of internet tools that we build. So I work on one such tool that enables clients to
+transfer assets such as cash, options, equities, to other banks.
+Aditya: Makes sense. And how did you go about landing this role? Was it like a campus hiring literal or an internal
+move?
+Dhanush: It was an internal move. So I joined Goman Sachs as campus hire in the financial operations division. And
+then after 3.5 years, I found an opportunity in the same division in the same lot of vertical and it decided to make
+the move.
+Aditya: And how many rounds were there and what was like each one testing, if you could tell me a bit about that?
+Dhanush: Um, I had 3 rounds. Two of them were managerial and technical rounds, not technical per se, but like
+more behavioural and the 3rd one is with the MD. And that was also just behavioural. So I didn't have any, um, go
+PM technical rounds that I was tested on in during the internet move. [P]
+Aditya: Makes sense. And could you walk me a bit through how did you go about repairing what was like a typical
+prep day looking for you? for this role or maybe the previous role which which you were landed.
+Dhanush: Yeah. So for the, let me talk a little bit over the previous world because that includes some insights that I
+got from my seniors. So Google Sex comes to higher from our college quite often for internships. So it takes around
+30, 40 people for internships and all of these guys are our seniors who come back to college, right? So this happens
+in 2nd year and I call our seniors are still available in audio. So most of us just reach out to our seniors to get some
+feedback on how to prepare, how to go about it, what are the types of questions that will come our way, and also
+having some mock interviews, so maybe. [J] So typically we, our day would be just us spending time with our seniors
+trying to figure out how to crack these interviews. [J] For the PM role, I mostly focussed on resume prep, focussed
+on ensuring that my story is coherent and I'm able to pitch that across to the other side very quickly. [J] [Q]
+Aditya: Makes sense. And just one thing, which round or question did I, during the actual interview, did you feel
+least prepared for? And what actually ended up happening in that? Maybe this can be 2 goldman sacks or maybe
+some other interview where you actually didn't make the cut. So any of them works.
+Dhanush: The question I was least prepared for, and fortunately, did not come my way. My interview was diagnose
+your product, a favourite product at that point in time.
+Aditya: Ah, that's a good important question in product. Yeah. So, okay, that that that is something that you will
+least prepare for. Could it be because you didn't have the lack of resources? or was it because of lack of time? or is
+this something that you completely missed your radar at the time?
+Dhanush: Because it was something that completely missed my radar during my preparation that time. [P] [Q]
+Aditya: Okay, so fine. Finding out the right set of resources and what exactly needs to be prepared was a problem
+for you. And do you interview PM candidates now?
+Dhanush: No, no, I don't.
+Aditya: Okay. Fine, that's fair. So while preparing, how did you know if your answers were any good? Like, who gave
+you the feedback on how useful did you find actually?
+Dhanush: I used to run it by some other people, but these are non-product folks. [P] I used to run by my seniors in
+my team who I'd mentioned that I'm looking for a move. And these are people who have been interviewing other
+folks for quite some time. So they helped me structure my answers in a better way. [G]
+Aditya: And if you were to like switch companies, let's say next year, what would you make prep? What would you
+make to prep faster and less stressful than maybe the last time when you were trying?
+Dhanush: Yes, I came across exponent. I was explaining to something that I will definitely use because it has a very
+structured way of going through interview preparation. [G] [Q] So that's something I'll definitely consider. And I
+would also give importance to mock into this. [G]
+Aditya: Thank you. Thank you, Ganesh, for taking the time to give me these really insightful answers.
+
+
+
+Interview 3: Vinay, Revenue Manager, Mystifly
+Aditya: Hi Vinay, so today I'm taking the interview of Vinay, who is currently a revenue manager at Fleetex. Uh, so,
+uh, Hi, Vinay, could I just record this uh, audio clip?
+Vinay: Yeah, sure, you go ahead.
+Aditya: Yeah, thank you. So whenever you had a lot of roles throughout your career, could you just give me a quick
+tour of your career so far, just the main headline, highlights of this, maybe the role and what have you worked on?
+Vinay: So I completed my undergraduation in biopomical engineering. I worked in back and for 3 years. During that
+time, I realised that finances are an important skill, and therefore I executed all three levels of CFA. Both that, I
+worked in a few startups in the electric vehicle space. Uh, supply ginsas, as well as uh, flights distribution, space.
+Aditya: Makes sense. And like across all those, obviously you would have gone through a lot of hiring possesses in
+these like 7 or 8 years as the preparing bought easier with each one or does every job hurt still be like starting from
+scratch?
+Vinay: Yeah. I think there are certain aspects that get transferred to a next job search, whereas certain things are
+new for every role or every company that one applies to. So for certain things you need to start from scratch, [P]
+whereas some other things get transferred from visage or previous role.
+Aditya: Makes sense. And do you keep anything from one job hunt to another, like maybe no stories or list of past
+questions?
+Vinay: Not really, although that is a good idea. [P] [Q]
+Aditya: Makes sense. Yeah. So could you take me through a recent switch that you might have done, maybe once
+the interview set, what did you go about doing preparation? How many hours did it actually ended up taking?
+Vinay: So during my switch from Pletex to Mr. Fly, this was a new industry for me. Mr. Fly operates the airline.
+Thanks. The industry was new, and so was the role, because this was revenue management, which is essentially a
+specialised pricing role. Uh, which required me to do a lot of research on the industry itself on what the company
+does, as well as what the role required. [J]
+Aditya: So, in terms of that, what did the rounds look like for this goal at Mystic Lion? And like, was there some kind
+of like founder chats or maybe a case or a take home take home assignment?
+Vinay: Yeah, as far as I remember, uh, I had an initial interview, post which I had a take home assignment that was
+specific to the kind of role that uh, the company was hiring for, post that there was another round to discuss the
+submission of my case, and that was followed by a founder interview. Subsequently followed by NHR interview.
+Aditya: Ah, the negotiating baggage part. What's the hardest part for someone with your profile? Like, uh, how do
+you go about explaining why you moved trying different roles into one story? Or is this something else?
+Vinay: Yeah, I think it's slightly hard for me to explain. Give the kind of we need experience that I have. So a lot of
+rules require specialised skill set, which means that they are mostly looking for candidates that come with a specific
+background. Whereas my role is slight uh, slightly uh, It covers more breadth and relatively lesser depth for a given
+rule. Which makes my profile suitable only to certain kind of roles. [P]
+Aditya: And does that mean that interview sometimes pushes back? Why did you go about doing a job change?
+Vinay: Yes.
+Aditya: And how did how did you actually handle handle it? So I am, um, maybe some silly instance where you, she
+said something and then how did you go about it?
+Vinay: So usually I am very honest about my job switches. I try to explain the exact reason why I made a switch. [J]
+Aditya: So, in terms of the interview, you obviously have worked at really large companies and then you have also
+worked at startup. Is how is like interviewing at a startup different from a large company? And like, how do you go
+about, yeah, maybe answer that and then maybe we can talk a bit about the other question.
+Vinay: In my experience, although when I interviewed for a large company, this was a long time back. But at least in
+my experience, startups require a lot of accountability in terms of the project that you are doing. It requires a lot of
+ownership. So that is one of the qualities that they are looking for. The other thing that they're looking for is ability
+to, uh, fail and hydrate fast because that is what startups are about. And also about the thought process and ability
+to think from multiple perspectives, not just from a specific functional perspective. So any project that you do, how
+that impacts, the other functions of the company, and essentially the revenue topline and other metrics that the
+company measures. Whereas in a larger company, it is mostly restricted to the kind of role that you are doing
+without considering the impact that it might have. Otherwise, because the functions are pretty big and they work in.
+Yeah.
+Aditya: Actually that's a really useful insight. How do you go about preparing when the process is in structure?
+Maybe because in startups they're just starting out. They don't have like really well-defined processes as such. So
+how do you go about preparing for such type of rules?
+Vinay: I think the interview process.
+Aditya: Yeah, it's particularly in the interview process because you don't know what is the breadth of things that
+they can ask. Maybe a larger company would have a limited set of things that they will possibly ask in a specific
+round.
+Vinay: To be honest, it is To some extent, it is black box. You are not aware of what a what all a company can ask for.
+[P] [Q] You can only uh, do your best in terms of uh, Knowing your past experience and reading about the company
+and the GD well and preparing accordingly, [J] but there is no uh, like it's not as well defined as you would expect for
+a large company because Any role in a large company requires certain set of skill sets. Which you are already aware,
+and therefore you prepare accordingly, but in a startup, that skill set can vary. [P]
+Aditya: One thing that I would probably, like, now that switching it up, obviously you are gone to multiple
+companies, but and you have been on the side of interviewer, interviewee. But now from the interviewer side, have
+you hired for any kind of teams and like what do candidates for like, let's say strategy rules that you have worked in?
+Usually get wrong.
+Vinay: I have been involved in a few hirings, and one of the major things that strategy that candidates interviewing
+for strategy rules get wrong is, uh, having a reality check of certain aspects or certain strategies that the thing can be
+implemented, but actually cannot be implemented in reality. [P] So that understanding comes from judgement and
+experience, and the context that the company updates and makes sense.
+Aditya: So context and you would say the broader reality, feasibility of this.
+Vinay: Feasibility. I would say execution, having execution experience, helps you own that judgement skill,
+Aditya: and what would you say if something was there that could cut your prep time for your next move in half?
+What would it have to do? Like if you had a tool, what is that thing that you were probably looking for from that to?
+Vinay: A tool that helps me understand what that role requires, what the skill sets are, and the material that I need
+to prepare in order to be ready for that interview. [G] [Q]
+Aditya: And if you had to sum up interview prep in maybe one sentence, what would it?
+Vinay: Chaos. [P] [Q]
+Aditya: Chaos. That's one word, but I will take it. Thank you and I for your time.
+Vinay: Thank you.
+
+
+
+Interview 4: Manraj, Senior Software Engineer, Expedia Group
+Aditya: Hi, so today we are taking the interview of Manraj, who is a senior software engineer in Expedia, so, uh, Hi
+Manraj, can I go ahead and record this interview?
+Manraj: Yes, please.
+Aditya: Yeah. So I I looked at your resume and how you have been working. So Expedia has been your only company.
+How did you get in? Was it through campus or something else and how long was that? Like how long ago was that?
+Manraj: So I joined Expedia in April 2021 and I joined it via a reference.
+Aditya: Yeah. Oh, okay. And during that time, like have you interviewed any candidates there if for any level? Oh,
+okay. So how was your experience in that? Oh, experience was good?
+Manraj: Basically, our team was hiring a few developers and in one of us and 2 or 3 times I was in the interview loop.
+So I interviewed quite a few students and eventually we were able to select one in both the loops. So experience
+was generally good. We basically tested their pudding and algorithm skills were the same.
+Aditya: Ah, okay. So in terms of how did you go out? I'm just trying to look at more from your last job search, use it,
+obviously told me that it was a referral. Can you take me back to when you actually prepared for Experia? What did
+you do? How long did the preparation take?
+Manraj: Right. So very interesting story. Basically, I caught into some other company after my campus placements,
+but because of some reasons, I didn't join them and instead joined Expedia group, because it was a sudden and a
+rush decision, I had to really get going with my preparation, et cetera. Uh, All in all, I spent a good 3 months on the
+DS and Aurora, which is data structures and algorithm preparation, [J] but saying that I also want to add that I had
+good fundamentals, which I had developed over the last year. So with those fundamentals, I was able to get this
+particular job in 3 months, right, Expedo group.
+Aditya: Okay, so the strong fundamentals help you and that's why you were able to reduce your preparation time.
+Manraj: It is one and second, I would also say that 2021, there was a... Yeah, there was a boom in hiring, so that also
+helped me.
+Aditya: You are quite honest in that. One thing that have you ever thought about interviewing elsewhere, like right
+now you have been working for such a long time at Expedia. Is that is that thought ever crossed your mind?
+Manraj: Yes, it did. And that is something which motivated me to get into ISB as well. because I wanted to switch my
+job rules and ISB is the best way I felt to do it. And I don't know if you would include it, but ISB interviewed an
+interview in itself, right? So, yeah.
+Aditya: Okay. And so in terms of, let's say, I'm talking more towards, let's say, changing a job. Maybe it might have
+crossed your mind during the 5 years or 4 years you have worked there. What kind of things stopped you? Was it
+like, is it in terms of like you were getting too much job satisfaction in the job or was it like the interview process was
+something that kind of holded you back?
+Manraj: So it's, uh, I don't really think that the interview thing intimidated me. I don't I'm not really scared of
+working hard, I feel. But the 2nd part I feel is a little true. Expedia was kept us pretty comfortable. [P] [Q] So
+obviously I got a little comfortable, but at the same time it wasn't that I was intimidated by the whole process. My
+reason was more around the feeling that the role that I want to get into, I wasn't able to. I tried to do the same,
+which led me to make an internal switch to a rotational product manager program at Expedia itself. So that
+happened. But all in all, I feel that the normal interviews weren't really giving me an entry into the role that I
+wanted. [P] [Q] So that is something which stopped me. Although I try to do the same.
+Aditya: That's quite interesting. But coming from the point of view, maybe this is just a thought experiment. If you
+had to start interviewing like next one, let's say, uh, you want to move out of uh, Xpedia, what is the thing that
+would worry you the most?
+Manraj: So after Expedia, I would want to get into an even better company, companies like Fan, and the interview
+process for some of these companies does tend to get a little intimidating, [P] but along with that comes big salary
+packages. [G] So that is an incentive. So in order to prepare for these interviews, you have to follow a very structural
+process. [J] At these senior roles, when you apply for these companies, you have to be very clear about your data
+structures and algorithm skills, which is level one. And apart from that, there is system design skills also which have
+to be old. Both low level design and high level design. [J] So in order to do this, I would definitely go on to for data
+structures and algorithms, I would go on to some of these websites like late code, et cetera, to practice my coding
+skills. [J] And for system design, et cetera. I would go on and purchase a few courses maybe or go on YouTube and
+find some open source videos. Like there's one by Gaurav said, [J] look at those and eventually travel, give my
+interviews.
+Aditya: Okay. That's interesting. I think that that also tells me that the resources are scattered across the web. Like
+for everything, every different aspect that you covered. So let's say system design or maybe behavioural thing or
+maybe data structures. So how confident do you feel you are today in terms of this senior level system design or
+behavioural rounds outside the expedia's way of doing things because they, you would say that.
+Manraj: Not very confident. [P] [Q]
+Aditya: makes sense. Have you started preparing at any point during your work in Expedia and then kind of dropped
+it ever? Has that ever happened? So like you thought about going for a switch, you actually started the preparation
+and then you kind of stopped it in the middle as that happened.
+[Interviewer's note: Manraj's answer to this question was not captured clearly in the recording. In the conversation
+he said he did start preparing to switch, but dropped it midway because the interview preparation felt
+overwhelming.] [P] [Q]
+Aditya: Okay. So in terms of the internal moves or promotions at Expedia, were you involved in any kind of
+interviews and how did you go about preparing those?
+Manraj: For the internal roles?
+Aditya: Yes.
+Manraj: The ones that I was interviewing?
+Aditya: Yeah. No, no. You interviewed for any kind of internal role or a job switch here. How was the process like
+inside Expedia?
+Manraj: For when I applied to Expedo?
+Aditya: No, no. Inside Expedia, uh, in terms of, let's say, switching to different, different team or maybe a better
+position.
+Manraj: Right. So in my case, I went for a additional product manager program. So these Expedia group gives you
+these votational programs which are 6 months programs in which you can work in a separate team apart from your
+own team for 20 to 30% of your time and you are under a different vertical under a different manager for that
+particular assignment. So in this also, you have a connect with the engineering manager or the leader, and you tell
+them about your skills, abilities, and where you want to go and how that role can help you do it, and if there is
+fitment, they take you in that particular role and you know, you can do the same. So that is something which helps
+me.
+Aditya: And broadly, one thing that I'm still, I'm not I'm going back again to the interview of how you went into
+Expedia. What were the set of signals you would say that made you a strong hire within the like the 1st 10 minutes
+of any kind of round or interview that you came to? So what is the thing that you attribute was like a key success
+factor for you when you went to the intervene? It can be anything, maybe there is a different way of how you were
+able to approach questions or maybe it can be from the perspective of let, let's say you were able to connect well
+with the interviewers. Maybe you had a stronger understanding of the product of what experience.
+Manraj: I think when I enjoyed Expedia, it was my interview rounds were more based on whether or not I can put
+the right solution and get to an answer in a systematic way. So showing critical and systematic thinking was
+something which was very important, but now that I've grown in the role, I feel that more understanding the
+nuances is something which is more important and these are small things which separate candidates. And knowing
+an answer is not enough. [Q] These nuances and getting into the deep technicalities of the architecture is something
+which will help you stand.
+Aditya: Thank you for your time, Manraj, that was really insightful.
+Manraj: Thank you.
+
+
+
+Interview 5: Pritish, Data Analytics Consultant, Blue Matter Consulting
+Aditya: Hi Pratish, thanks for taking the time. I know consulting schedules can be really unpredictable. So in terms of
+before I go about taking your interview, do I have your consent to record this video? This is record this audio? Okay,
+great. So, uh, Priti issue of work worked in blue matter consulting. Tell me a bit about your journey so far, like just
+the headers of what is it that you did before in terms of like just the jobs that you've done?
+Pritish: So, like, I am a BT graduate from United Alkali, Mechanological, and Materials engineering, those that I'll join
+in duck industries limited, which is a manufacturing company. O there, I worked for 2 years as an assistant manager
+in data analytics. Basically, the work of a junior data scientist was that I went into, do mental considering, and
+worked over there for 2.5 years as a shit culture.
+Aditya: That's an interesting career move. How did you, so I'm just thinking from that perspective of moving from
+Hindalco to somewhere like consulting, that's, I think, worlds apart. So going back to when you actually did your
+consulting interviews, what is the thing? Can you walk me through that? Like how many weeks or months did it
+take? How many hours a day you actually prepared for this?
+Pritish: So I was in the consulting domain. I was in their offshore team, basically handles all the analytics and data
+oriented things, all the works around that. So since my function was remaining the same, I was coming from a junior
+data scientist to, and I was going to Palma consenting their data and it is so low. So that was, that was an easy
+transition for me. However, few of the soft skills like problems are being structuring out the problem in a manner so
+that the onshoot team or the front-end client also understands. Those things are something which took me around 4
+to 5 weeks to prepare or to sharpen them. [J] So how I did it is your question, right?
+Aditya: Yeah, yeah.
+Pritish: So for that, I basically like looked at a few of the free YouTube videos which are available. That was my
+primary resource. [J] The 2nd thing was I did, I reached out to a few of the employees who were already working in
+do metal consulting and from them I got to understand how the interview process is. [J] So basically LinkedIn and
+YouTube is my go to tools for all the materials and few of the materials that I already have from, let's say, from
+Google or free resources, which are available on Google, those are the things. You treat these 3 tools.
+Aditya: Okay. And in terms of like the blue matter rounds, how were they different from like, let's say generalist
+consulting? Was there any kind of difference there that you saw?
+Pritish: Yes, since the role was more of data, it is oriented, right? So the focus was more on the tools that I am like
+familiar with, let's say, X and Python and all those. More of the technical part, technical aspects of the consenting
+and not the core consenting part, which test more of case studies, then problem solving skills or business acumen,
+not from those angle, but from the angle of technical tools, familiarity.
+Aditya: That's interesting. And were there any kind of guesstimates, mental match or exhibit trading rounds?
+Pritish: Yeah, there were mixed in total, there were 3 rounds. So the 1st round was about all those sort of problems
+of being puzzles and everything. And the 2nd round was a mere guesstimate round, and the 3rd round was a case
+study which I need to solve on an Excel. So based on all my knowledge on the pharma domain, I had to solve that
+entire case in that textile sheet, which was provided to me.
+Aditya: That's interesting that you mentioned case rounds. In terms of case-round, they can be really challenging.
+How did you go about like, how did you practice it with? Then did you practice it with some case partners and were
+they really reliable or what was the type of feedback that you get from a?
+Pritish: No, since I was already in a job at Hindalco, then back then. So I did not have any case partners, who us to
+say. [P] I was completely relying on ChatGPT at that time. [J] [Q] Yeah, ChatGPT was relevant, so I was laying on that.
+and was looking to all the YouTube free videos case studies, which are available over there. So those are the only 2
+modes, whichevers, relying on to prepare for their strength.
+Aditya: And how did you know that you were finally ready for the interview? You can tell me that if you friend, like,
+even at the time of interviews, you were not feeling very strong.
+Pritish: So I never knew that I am ready for it, [P] [Q] but I was being qualified next round and next round. So that
+was giving me some sort of confidence that maybe I'm doing the right thing. So, and also the dates were not under
+my control [P] because it says job switch, which I am talking about. So even whenever you get selected on the 1st
+round, then you move to the next round.
+Aditya: Okay, that's something that's always out. Sorry, your control. And what would you say is the hardest part of
+the interview? Is it like the structuring or the maths or maybe the fit questions considering, let's say you have
+something different? What would you say was the difficult part for you?
+Pritish: So for me, I would say that maybe structuring out the answer, which is very much required for a consulting
+job, structuring our outdoor thoughts in a clear and concise way so that so that the person sitting in front of you
+understands it completely. That is a skill that is very much required. And I think that was one of the key pinpoint area
+back then when I was trying to switch. [P] But eventually that comes with practice. However, if you do case studies
+with humans, then or with anybody of yours, then that helps a lot in developing the skill in a short duration of time.
+[G]
+Aditya: That's a really interesting insight. And what would you say, like, based on your preparation, separates a
+strong candidate from an average one? I'm guessing that you have also taken a few of interviews as well.
+Pritish: Yeah, so, so for a strong versus an average candidate, right? I think the one thing that matters a lot is the
+extent of practice you have done and also the extent, not only just practice, but the right practice. As in, when I say
+right practice, if you are a person who has done, let's say, 50 rounds of case script or interviews with human versus
+50 rounds of case frame with AI or with just yourself, self-preparation. Then that makes a lot of difference because
+you get to know your feedback directly from a horse's mouth [Q] rather than figuring out what I was doing wrong or
+what I was doing right, when you self-repare or you just prepare with, let's say, ChatGPT or something. Because at
+some point of time at the end of the day, a human is the person who is judging you, right? So human judgement is
+really important in such cases. [G]
+Aditya: And do you think there are any kind of really some mistakes that will prepared candidates still end up
+making? Anything that you have seen from your experience intervened now, it can be very domain specific thing as
+well.
+Pritish: Yeah, maybe I would say for consulting, if it's not a generic consulting form, it's a boutique concerning on a
+specific practice area, then a person's or a candidate's knowledge about that particular domain plays an important
+role that could be a differentiator. [J] A person who had already worked in the same woman or who was a good
+knowledge about their domain in any way perform well. That is one thing. And the 2nd thing at the day of the
+interview at that particular incident, how does the luck factor place or how does that particular candidate performs
+by keeping his mind under his control? That is also another thing that plays a part. So these 2 factors.
+Aditya: Okay? And we know that so many AI agents and now we are moving into this AI 1st world. Would you still
+think that would you trust AI to run a case with you and give feedback now that their models are improved? What's
+your stance on that?
+Pritish: Now that the models has improved, I would say that for the initial level of practising, as in, in the initial level
+of practice, before your DD of the interview, I would really recommend to practice with an AI because that will build
+the initial level of confidence for you. [G] [Q] However, going near to the D day when, before your interviews, I
+would really recommend to practice with humans and not be just single human, but with multiple people, because
+multiple people will give you judgements from different POVs, so that will help near the D day. [G]
+Aditya: Ah, so a different perspective always helps in making the making a good nuance and a better answer for
+preparation. Uh, thank you for your time, uh, Pratish. This was really insightful for me.
+Pritish: Thanks, thanks.
+
+
+
+A.1.4 Affinity mapping: finding patterns to build the personas
+I wrote one note per notable response, grouped the notes into themes, and then grouped
+interviewees whose notes clustered together into personas. I ended up with 24 notes in six themes.
+Clustering interviewees by shared themes gave three groups: those whose skills were untested by
+internal moves (Manraj, Jinendra), those switching function (Dhanush, Pritish) and the multi-industry
+generalist (Vinay). These became Personas 1, 2 and 3.
+Key: JN = Jinendra, DH = Dhanush, VN = Vinay, MR = Manraj, PR = Pritish.
+
+ Theme                      Interview notes grouped under it                              Feeds into
+
+ 1. I don't know what to     • DH: “Diagnose a product” completely missed my radar        Personas 2, 3;
+ prepare (3 of 5)                                                                         Hypothesis 1
+                             • VN: startup interviews are a black box
+                             • JN: candidates don't research the specific role
+                             • VN: wants a tool that says what the role needs
+ 2. No reliable feedback     • PR: no case partners, so relied on ChatGPT                 Persona 2; Hypothesis 2
+ (3 of 5)
+                             • DH: feedback came from non-product seniors
+                             • PR: human feedback “from the horse's mouth”
+                                matters
+                             • DH: next time, Exponent and mock interviews
+ 3. Internal moves leave     • JN: GM move decided on track record (IJP)                  Persona 1; Hypothesis 3
+ skills untested (3 of 5)
+                             • DH: moved to PM with no core PM rounds
+                             • MR: joined the rotational PM programme through a
+                                conversation
+                             • MR: “not very confident” about rounds outside
+                                Expedia
+
+ 4. Overwhelm and            • MR: started preparing, dropped it as it felt               Persona 1; Hypothesis 3
+ scattered resources (3         overwhelming
+ of 5)
+                             • MR: LeetCode, paid courses and YouTube
+                             • PR: YouTube, LinkedIn, Google and ChatGPT
+                             • VN: interview prep in one word: “Chaos”
+ 5. No readiness signal,     • PR: “I never knew that I am ready”                         Personas 2, 3;
+ no memory (2 of 5)                                                                       Hypotheses 2, 4
+                             • VN: keeps no stories or past questions
+                             • VN: some things restart from scratch each time
+                             • PR: interview dates not in my control
+ 6. Positioning my own       • JN: know what you did, position yourself as the best fit   Persona 3; Hypothesis 4
+ story (3 of 5)
+                             • DH: story must be coherent and quick to pitch
+                             • VN: broad profile is hard to explain
+                             • JN: map transferable skills to the role
+A.2 Problem Hypothesis: coded interview responses
+I marked every response that informed the JTBD table directly in the transcripts in A.1.3. The index
+below lists each marked response with its code, so every pain, job, gain and quote can be traced
+back to the interview.
+
+Marks per interview
+ Interviewee                 P: Pains                J: Jobs                  G: Gains                  Q: Quotes
+
+ Jinendra                    3                       5                        2                         4
+
+ Dhanush                     3                       3                        3                         3
+
+ Vinay                       7                       3                        1                         4
+
+ Manraj                      5                       5                        1                         5
+
+ Pritish                     4                       5                        4                         4
+
+ Total                       22                      21                       11                        20
+
+
+
+Index of marked responses (verbatim)
+ Code             Interviewee       Marked response (verbatim)
+
+ P (Pain)         Jinendra          “So basically you need to still establish that you are fit and you need to prove your
+                                    performance. So that's slightly longer and more complicated process, I would say.”
+
+ P (Pain), Q      Jinendra          “So it really shows that they are maybe just trying randomly and they are not serious
+ (Quote)                            about getting the job.”
+
+ P (Pain)         Jinendra          “Yeah, I believe whenever in my journey also, if I'm not confident enough or if I say if I
+                                    don't have enough resources in terms of time or in terms of network to know more
+                                    about it,”
+
+ P (Pain)         Dhanush           “So I didn't have any, um, go PM technical rounds that I was tested on in during the
+                                    internet move.”
+
+ P (Pain), Q      Dhanush           “Because it was something that completely missed my radar during my preparation
+ (Quote)                            that time.”
+
+ P (Pain)         Dhanush           “I used to run it by some other people, but these are non-product folks.”
+
+ P (Pain)         Vinay             “I think there are certain aspects that get transferred to a next job search, whereas
+                                    certain things are new for every role or every company that one applies to. So for
+                                    certain things you need to start from scratch,”
+
+ P (Pain), Q      Vinay             “Not really, although that is a good idea.”
+ (Quote)
+
+ P (Pain)         Vinay             “Whereas my role is slight uh, slightly uh, It covers more breadth and relatively lesser
+                                    depth for a given rule. Which makes my profile suitable only to certain kind of roles.”
+
+ P (Pain), Q      Vinay             “To be honest, it is To some extent, it is black box. You are not aware of what a what
+ (Quote)                            all a company can ask for.”
+
+ P (Pain)         Vinay             “Which you are already aware, and therefore you prepare accordingly, but in a
+                                    startup, that skill set can vary.”
+
+ P (Pain)         Vinay             “…and one of the major things that strategy that candidates interviewing for strategy
+                                    rules get wrong is, uh, having a reality check of certain aspects or certain strategies
+                                    that the thing can be implemented, but actually cannot be implemented in reality.”
+Code                 Interviewee   Marked response (verbatim)
+
+P (Pain), Q          Vinay         “Chaos.”
+(Quote)
+
+P (Pain), Q          Manraj        “But the 2nd part I feel is a little true. Expedia was kept us pretty comfortable.”
+(Quote)
+
+P (Pain), Q          Manraj        “But all in all, I feel that the normal interviews weren't really giving me an entry into
+(Quote)                            the role that I wanted.”
+
+P (Pain)             Manraj        “So after Expedia, I would want to get into an even better company, companies like
+                                   Fan, and the interview process for some of these companies does tend to get a little
+                                   intimidating,”
+
+P (Pain), Q          Manraj        “Not very confident.”
+(Quote)
+
+P (Pain), Q          Manraj        “[Interviewer's note] Started preparing to switch, but dropped it midway because the
+(Quote)                            preparation felt overwhelming.”
+
+P (Pain)             Pritish       “No, since I was already in a job at Hindalco, then back then. So I did not have any case
+                                   partners, who us to say.”
+
+P (Pain), Q          Pritish       “So I never knew that I am ready for it,”
+(Quote)
+
+P (Pain)             Pritish       “So that was giving me some sort of confidence that maybe I'm doing the right thing.
+                                   So, and also the dates were not under my control”
+
+P (Pain)             Pritish       “And I think that was one of the key pinpoint area back then when I was trying to
+                                   switch.”
+
+J (Job)              Jinendra      “I have gone through my work experience in more detail, whatever I had done in the
+                                   training. So I got hands on that.”
+
+J (Job)              Jinendra      “So how I prepared is that I refer a lot of online sources in terms of what are the
+                                   questions expected.”
+
+J (Job), Q (Quote)   Jinendra      “So knowing what you did in your job in and out and understanding more about the
+                                   role in the company in which you are going, these are the 2 non-negotiable factor for
+                                   any look at one.”
+
+J (Job)              Jinendra      “What are the requirement of the job? And how I, what kind of transferrable skills I
+                                   have.”
+
+J (Job), Q (Quote)   Jinendra      “So basically, it would be that know what you did and position yourself that how best
+                                   fit you would be for the job.”
+
+J (Job)              Dhanush       “So most of us just reach out to our seniors to get some feedback on how to prepare,
+                                   how to go about it, what are the types of questions that will come our way, and also
+                                   having some mock interviews, so maybe.”
+
+J (Job)              Dhanush       “So typically we, our day would be just us spending time with our seniors trying to
+                                   figure out how to crack these interviews.”
+
+J (Job), Q (Quote)   Dhanush       “For the PM role, I mostly focussed on resume prep, focussed on ensuring that my
+                                   story is coherent and I'm able to pitch that across to the other side very quickly.”
+
+J (Job)              Vinay         “Uh, which required me to do a lot of research on the industry itself on what the
+                                   company does, as well as what the role required.”
+
+J (Job)              Vinay         “So usually I am very honest about my job switches. I try to explain the exact reason
+                                   why I made a switch.”
+
+J (Job)              Vinay         “You can only uh, do your best in terms of uh, Knowing your past experience and
+                                   reading about the company and the GD well and preparing accordingly,”
+Code                 Interviewee   Marked response (verbatim)
+
+J (Job)              Manraj        “Uh, All in all, I spent a good 3 months on the DS and Aurora, which is data structures
+                                   and algorithm preparation,”
+
+J (Job)              Manraj        “So in order to prepare for these interviews, you have to follow a very structural
+                                   process.”
+
+J (Job)              Manraj        “And apart from that, there is system design skills also which have to be old. Both low
+                                   level design and high level design.”
+
+J (Job)              Manraj        “So in order to do this, I would definitely go on to for data structures and algorithms, I
+                                   would go on to some of these websites like late code, et cetera, to practice my coding
+                                   skills.”
+
+J (Job)              Manraj        “I would go on and purchase a few courses maybe or go on YouTube and find some
+                                   open source videos. Like there's one by Gaurav said,”
+
+J (Job)              Pritish       “Those things are something which took me around 4 to 5 weeks to prepare or to
+                                   sharpen them.”
+
+J (Job)              Pritish       “So for that, I basically like looked at a few of the free YouTube videos which are
+                                   available. That was my primary resource.”
+
+J (Job)              Pritish       “The 2nd thing was I did, I reached out to a few of the employees who were already
+                                   working in do metal consulting and from them I got to understand how the interview
+                                   process is.”
+
+J (Job), Q (Quote)   Pritish       “So I did not have any case partners, who us to say. I was completely relying on
+                                   ChatGPT at that time.”
+
+J (Job)              Pritish       “…maybe I would say for consulting, if it's not a generic consulting form, it's a boutique
+                                   concerning on a specific practice area, then a person's or a candidate's knowledge
+                                   about that particular domain plays an important role that could be a differentiator.”
+
+G (Gain)             Jinendra      “I'll talk to any president of people who have done that job to get more idea about it.”
+
+G (Gain), Q          Jinendra      “Yeah, I believe whenever in my journey also, if I'm not confident enough or if I say if I
+(Quote)                            don't have enough resources in terms of time or in terms of network to know more
+                                   about it, I'll definitely go for it because the marginal utility is definitely there.”
+
+G (Gain)             Dhanush       “And these are people who have been interviewing other folks for quite some time. So
+                                   they helped me structure my answers in a better way.”
+
+G (Gain), Q          Dhanush       “I was explaining to something that I will definitely use because it has a very structured
+(Quote)                            way of going through interview preparation.”
+
+G (Gain)             Dhanush       “So that's something I'll definitely consider. And I would also give importance to mock
+                                   into this.”
+
+G (Gain), Q          Vinay         “A tool that helps me understand what that role requires, what the skill sets are, and
+(Quote)                            the material that I need to prepare in order to be ready for that interview.”
+
+G (Gain)             Manraj        “So after Expedia, I would want to get into an even better company, companies like
+                                   Fan, and the interview process for some of these companies does tend to get a little
+                                   intimidating, but along with that comes big salary packages.”
+
+G (Gain)             Pritish       “However, if you do case studies with humans, then or with anybody of yours, then
+                                   that helps a lot in developing the skill in a short duration of time.”
+
+G (Gain)             Pritish       “Because at some point of time at the end of the day, a human is the person who is
+                                   judging you, right? So human judgement is really important in such cases.”
+
+G (Gain), Q          Pritish       “…has improved, I would say that for the initial level of practising, as in, in the initial
+(Quote)                            level of practice, before your DD of the interview, I would really recommend to
+                                   practice with an AI because that will build the initial level of confidence for you.”
+
+G (Gain)             Pritish       “…near to the D day when, before your interviews, I would really recommend to
+ Code                 Interviewee        Marked response (verbatim)
+
+                                         practice with humans and not be just single human, but with multiple people, because
+                                         multiple people will give you judgements from different POVs, so that will help near
+                                         the D day.”
+
+ Q (Quote)            Manraj             “…thinking was something which was very important, but now that I've grown in the
+                                         role, I feel that more understanding the nuances is something which is more important
+                                         and these are small things which separate candidates. And knowing an answer is not
+                                         enough.”
+
+ Q (Quote)            Pritish            “Then that makes a lot of difference because you get to know your feedback directly
+                                         from a horse's mouth”
+
+
+
+
+How the codes became the JTBD table
+ JTBD (Section 1.2)                 Coded responses it is built from
+
+ 1. Work out what a role will       J: “what are the questions expected” (Jinendra) · P: “completely missed my radar”
+ test                               (Dhanush) · P: “what all a company can ask for” (Vinay) · G: “the material that I need to
+                                    prepare in order to be ready” (Vinay)
+
+ 2. Get trustworthy feedback        P: “I did not have any case partners” (Pritish) · P: “these are non-product folks”
+ and know when ready                (Dhanush) · P: “I never knew that I am ready” (Pritish) · G: “human judgement is really
+                                    important” (Pritish)
+
+ 3. Keep preparing without          P: dropped prep midway as overwhelming (Manraj) · J: LeetCode, courses, YouTube
+ being overwhelmed                  (Manraj) · P: “Chaos” (Vinay) · G: “a very structured way of going through interview
+                                    preparation” (Dhanush)
+
+ 4. Present my experience as        P: “suitable only to certain kind of roles” (Vinay) · J: “how best fit you would be for the
+ the best fit                       job” (Jinendra) · J: “my story is coherent” (Dhanush) · J: “transferrable skills” (Jinendra)
+
